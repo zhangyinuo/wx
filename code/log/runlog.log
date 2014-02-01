@@ -1,0 +1,6 @@
+Sat Feb 1 17:01:18 CST 2014 ERR to touch !
+Sat Feb 1 17:01:18 CST 2014 /diska/sys_dev/wx/wx/code/sub/check_sub.php_12:ERR init_ftok  !
+Sat Feb 1 17:10:51 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_18:Could not query:Access denied for user 'jingchun.zhang'@'localhost' (using password: NO)
+Sat Feb 1 17:18:34 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_18:Could not query:Access denied for user 'jingchun.zhang'@'localhost' (using password: NO)
+Sat Feb 1 17:21:49 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_18:Could not query:Access denied for user 'jingchun.zhang'@'localhost' (using password: NO)
+Sat Feb 1 17:21:49 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_19::
