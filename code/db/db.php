@@ -39,11 +39,22 @@ function get_db()
 
 function registe_user_2_db($bizname, $wx_username, $time, $dblink)
 {
-	if (check_is_exist_wx_username($bizname, $wx_username))
+	if (check_is_exist_wx_username($bizname, $wx_username, $dblink) === true)
 	{
 		runlog(__FILE__."_".__LINE__.":"."check_is_exist_wx_username:".$bizname.":".$wx_username);
 		return;
 	}
+
+	$username = "";
+	$passwd = "";
+
+	if (get_biz_info($bizname, $username, $passwd) === false)
+	{
+		runlog(__FILE__."_".__LINE__.":"."get_biz_info:".$bizname.":".$wx_username);
+		return;
+	}
+
+	$fid = "";
 }
 
 ?>
