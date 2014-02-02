@@ -37,7 +37,24 @@ function get_db()
 	return $dblink;
 }
 
-function registe_user_2_db($bizname, $wx_username, $time, $dblink)
+function check_is_exist_wx_username($bizname, $wx_username, $dblink)
+{
+	$result = mysql_query("select fakeid from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
+	if ($result === false)
+	{
+		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
+		return $flag;
+	}
+	$
+	while($row=mysql_fetch_array($result)) 
+	{
+		$flag = true;
+		break;
+	}
+	mysql_free_result($result);
+}
+
+function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 {
 	if (check_is_exist_wx_username($bizname, $wx_username, $dblink) === true)
 	{
@@ -48,13 +65,28 @@ function registe_user_2_db($bizname, $wx_username, $time, $dblink)
 	$username = "";
 	$passwd = "";
 
-	if (get_biz_info($bizname, $username, $passwd) === false)
+	if (get_biz_info($bizname, $username, $passwd, $dblink) === false)
 	{
 		runlog(__FILE__."_".__LINE__.":"."get_biz_info:".$bizname.":".$wx_username);
 		return;
 	}
 
+	if (strlen($msg) === 0)
+	{
+		if (refresh_fid_biz($bizname, $wx_username, $username, $passwd, $dblink) === false)
+			runlog(__FILE__."_".__LINE__.":"."refresh_fid_biz err:".$bizname.":".$wx_username);
+		return;
+	}
+
 	$fid = "";
+
+	if (get_fid_by_msg($fid, $username, $passwd, $msg) === false)
+	{
+		runlog(__FILE__."_".__LINE__.":"."get_biz_info:".$bizname.":".$wx_username);
+		return;
+	}
+
+	insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink);
 }
 
 ?>

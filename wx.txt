@@ -1,0 +1,18 @@
+id, 自增序列号;
+bizname,企业代号�关联队列两端;
+fakeid, 伪ID；;
+nickname,花名;
+订阅类型;
+订阅地区;
+modtime, 修改时间;
+status, '0' : unconfirm '1': confirm1 '2': match; '3': unsub
+accept_open, '1' :YES '0' : NO
+accept_other '1':YES '0' :NO
+chatflag '1':YES '0':NO
+chat_expire NULL 'yyyymmddHHMMSS'
+wx_username 微信名称;
+最后位置;
+
+
+
+
