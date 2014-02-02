@@ -45,13 +45,21 @@ function check_is_exist_wx_username($bizname, $wx_username, $dblink)
 		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
 		return $flag;
 	}
-	$
+	$flag = "";
 	while($row=mysql_fetch_array($result)) 
 	{
-		$flag = true;
+		$flag = $row[0];
 		break;
 	}
 	mysql_free_result($result);
+
+	if (strlen($flag) > 0)
+	{
+		$result = mysql_query("update wx_userinfo set status = '2' where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
+		return true;
+	}
+
+	return false;
 }
 
 function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
