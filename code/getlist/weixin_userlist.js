@@ -1,10 +1,10 @@
 var page = require('webpage').create(),
+    system = require('system'),
     host = 'https://mp.weixin.qq.com',
     server = 'https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN',
-    system = require('system'),
-    msglist = 'https:/mp.weixin.qq.com/cgi-bin/singlesendpage?tofakeid=fakeval&t=message/send&action=index&token=tokenval&lang=zh_CN';
+    //userlist = 'https://mp.weixin.qq.com/cgi-bin/contactmanagepage?t=wxm-friend&token=tokenval&lang=zh_CN&pagesize=1000&pageidx=0&type=0&groupid=0',
+    userlist = 'https://mp.weixin.qq.com/cgi-bin/contactmanage?t=user/index&pagesize=100&pageidx=0&type=0&groupid=0&token=tokenval&lang=zh_CN',
     data = 'username=Username&pwd=passwd&f=json&imgcode=';
-    //data = 'username=danezhang77@gmail.com&pwd=f8a4724578222780266930e86a3125b0&f=json&imgcode=';
 
 phantom.cookiesEnabled = true;
 
@@ -14,7 +14,6 @@ page.onConsoleMessage = function(msg) {
 
 data = data.replace(/Username/g, system.args[1]);
 data = data.replace(/passwd/g, system.args[2]);
-msglist = msglist.replace(/fakeval/g, system.args[3]);
 page.open(host, function(r1) {
 	if(r1 !== 'success') {
 		console.log('Unable to open host');
@@ -32,22 +31,28 @@ page.open(host, function(r1) {
 				var ptn = /.*token=(\d+).*/;
 				var mts = ptn.exec(cnt);
 				if(mts != null) {
-					msglist = msglist.replace(/tokenval/g, mts[1]);
-					//console.log(msglist);
-					page.open(msglist, function(s1) {
+					userlist = userlist.replace(/tokenval/g, mts[1]);
+					//console.log(userlist);
+					page.open(userlist, function(s1) {
 						if(s1 !== 'success') {
-							console.log('Unable to get msglist!');
-						} 
-						else {
-						console.log(page.content);
-						phantom.exit();
+							console.log('Unable to get userlist!');
+							phantom.exit();
+						} else {
+							//console.log(page.content);
+							page.evaluate(function() {      
+								for(i = 0; i < wx.cgiData.friendsList.length; i++)
+								{
+									console.log(wx.cgiData.friendsList[i].id);    
+								}
+							});
+							phantom.exit();
 						}
 					});
 				}
 			}
 		});
+
+
 	}
 });
-
-
 

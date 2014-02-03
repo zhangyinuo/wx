@@ -3,6 +3,7 @@
 $ROOTDIR=dirname(__FILE__)."/../";
 
 require_once($ROOTDIR."log/log.php");
+require_once($ROOTDIR."getlist/getlist.php");
 
 function get_db()
 {
@@ -62,6 +63,19 @@ function check_is_exist_wx_username($bizname, $wx_username, $dblink)
 	return false;
 }
 
+function insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink)
+{
+	$curtime = date("YmdHis");
+	$sql = "replace into wx_userinfo values(NULL, '$bizname', '$fid', 'NULL', 'NULL', 'NULL', '$curtime', '1', '1', '1', '1', NULL, '$wx_username', 'NULL', NULL)";
+	$result = mysql_query($sql, $dblink);
+	if ($result === false)
+	{
+		runlog("insert error ".$wx_username.":".$bizname.":".mysql_error());
+		return false;
+	}
+	return true;
+}
+
 function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 {
 	if (check_is_exist_wx_username($bizname, $wx_username, $dblink) === true)
@@ -88,13 +102,32 @@ function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 
 	$fid = "";
 
-	if (get_fid_by_msg($fid, $username, $passwd, $msg) === false)
+	if (get_fid_by_msg($fid, $username, $passwd, $msg, $time, $dblink, $bizname) === false)
 	{
-		runlog(__FILE__."_".__LINE__.":"."get_biz_info:".$bizname.":".$wx_username);
+		runlog(__FILE__."_".__LINE__.":"."get_fid_by_msg:".$bizname.":".$wx_username);
 		return;
 	}
 
 	insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink);
+}
+
+function is_exist_fakeid($dblink, $fid, $bizname)
+{
+	$result = mysql_query("select count(1) from wx_userinfo where fakeid = '$fid' and bizname = '$bizname' ", $dblink);
+	if ($result === false)
+	{
+		runlog(__FILE__.":".__LINE__."query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
+		return $flag;
+	}
+	$count = 0;
+	while($row=mysql_fetch_array($result)) 
+	{
+		$count = $row[0];
+		break;
+	}
+	mysql_free_result($result);
+
+	return $count;
 }
 
 ?>

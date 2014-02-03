@@ -13,8 +13,12 @@ if ($dblink === false)
 	die("Could not query:" . mysql_error());
 }
 
-$v = get_biz_info("self_test", "", "", $dblink);
+$username = "";
+$passwd = "";
 
-echo "$v\n";
+get_biz_info("self_test", $username, $passwd, $dblink);
+
+echo "$username $passwd\n";
+
 ?>
 

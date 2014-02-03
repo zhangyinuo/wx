@@ -8,7 +8,6 @@ function init_bizinfo($dblink)
 {
 	global $bizinfo;
 
-	runlog(__FILE__.":".__LINE__);
 	$result = mysql_query("select bizname, username, passwd, status from open_biz", $dblink);
 	if ($result === false)
 	{
@@ -22,16 +21,35 @@ function init_bizinfo($dblink)
 	}
 	mysql_free_result($result);
 	$initflag = 1;
-	runlog(__FILE__.":".__LINE__);
 }
 
-function get_biz_info($bizname, $username, $passwd, $dblink)
+function get_biz_info($bizname, &$username, &$passwd, $dblink)
 {
 	global $bizinfo;
-	init_bizinfo($dblink);
-	if ($bizinfo[$bizname] === false)
+	$v = $bizinfo[$bizname];
+	if (strlen($v) < 10)
+	{
 		init_bizinfo($dblink);
+		$v = $bizinfo[$bizname];
+	}
 
-	return $bizinfo[$bizname];
+	$pos = strpos($v, "|");
+	if ($pos === false)
+	{
+		runlog("ERR info $v!");
+		return false;
+	}
+
+	$username = substr($v, 0, $pos);
+
+	$pos1 = strpos($v, "|", $pos+1);
+	if ($pos1 === false)
+	{
+		runlog("ERR info $v!");
+		return false;
+	}
+
+	$passwd = substr($v, $pos+1, $pos1 - $pos -1);
+	return true;
 }
 ?>

@@ -1,0 +1,78 @@
+<?php 
+$ROOTDIR=dirname(__FILE__)."/../";
+
+require_once($ROOTDIR."log/log.php");
+require_once($ROOTDIR."db/db.php");
+
+function is_match($content, $time, $infile)
+{
+	$needle = $time;
+	runlog ("$time $content\n");
+	$result = file_get_contents($infile);
+	$result = stristr($result, "wx.cgiData = ");
+	$result = substr($result, strlen("wx.cgiData = "), -1);
+	$result = stristr($result, "{\"msg_item\":");
+	$result = substr($result, strlen("{\"msg_item\":"), -1);
+	$endpos = stripos($result, "}]}}");
+	$result = substr($result, 0, $endpos+2);
+	$arr = json_decode($result, 1);
+	foreach ($arr as $subarr)
+	{
+		if (strcmp($subarr["content"], $content))
+			continue;
+		if (strcmp($subarr["date_time"], $time))
+			continue;
+		return true;
+	}
+	return false;
+}
+
+function get_fid_by_msg(&$rfid, $username, $passwd, $content, $time, $dblink, $bizname)
+{
+	global $ROOTDIR;
+	$userlist = $ROOTDIR."/getlist/userlist";
+	$pexe = $ROOTDIR."/getlist/phantomjs";
+	$listjs = $ROOTDIR."/getlist/weixin_userlist.js";
+	$fidjs = $ROOTDIR."/getlist/weixin_fid.js";
+
+	$fp = popen("$pexe $listjs $username $passwd > $userlist", "r");
+	if ($fp)
+		pclose($fp);
+
+	runlog("$pexe $listjs $username $passwd > $userlist");
+	runlog(__FILE__.":".__LINE__);
+	$f = 0;
+	$handle = @fopen($userlist, "r");
+	if ($handle) {
+		while (!feof($handle)) {
+			$buffer = fgets($handle, 4096);
+			$fid = substr($buffer, 0, -1);
+			if (is_numeric ($fid) === false)
+				continue;
+			if (strlen($fid) < 3)
+				continue;
+			if (is_exist_fakeid($dblink, $fid, $bizname) >= 1 )
+				continue;
+			$dstfile = "/tmp/".$fid.$bizname.".wx";
+			runlog("popen $pexe $fidjs $username $passwd $fid > $dstfile");
+			$fp = popen("$pexe $fidjs $username $passwd $fid > $dstfile", "r");
+			if ($fp)
+				pclose($fp);
+			if(is_match($content, $time, $dstfile) === true)
+			{
+				$f = 1;
+				unlink($dstfile);
+				$rfid = $fid;
+				break;
+			}
+			unlink($dstfile);
+		}
+		fclose($handle);
+	}
+	if ($f === 1)
+		return true;
+	return false;
+}
+
+?>
+

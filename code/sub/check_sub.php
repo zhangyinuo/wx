@@ -27,13 +27,16 @@ while (1)
 		$bizname = "";
 		$wx_username = "";
 		$time = "";
+		$msg = "";
 
-		if (parse_msg_from_queue($message, $bizname, $wx_username, $time) === false)
+		if (parse_msg_from_queue($message, $bizname, $wx_username, $time, $msg) === false)
 		{
 			runlog(__FILE__."_".__LINE__.":"."parse_msg_from_queue err: ".$message);
 			continue;
 		}
-		registe_user_2_db($bizname, $wx_username, $time, $dblink);
+		echo "$message\n";
+		echo "$bizname $wx_username $time $msg\n";
+		registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg);
 	}
 
 	mysql_ping($dblink);

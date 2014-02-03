@@ -1,4 +1,10 @@
-Sun Feb 2 19:02:42 CST 2014 /diska/sys_dev/wx/wx/code/bizinfo/bizinfo.php:11
-Sun Feb 2 19:02:42 CST 2014 query fakeid from wx_username bizname is null:Table 'wx.bizinfo' doesn't exist
-Sun Feb 2 19:05:22 CST 2014 /diska/sys_dev/wx/wx/code/bizinfo/bizinfo.php:11
-Sun Feb 2 19:05:22 CST 2014 /diska/sys_dev/wx/wx/code/bizinfo/bizinfo.php:25
+Mon Feb 3 14:28:11 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_userlist.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 > /diska/sys_dev/wx/wx/code/queue/..//getlist/userlist
+Mon Feb 3 14:28:11 CST 2014 /diska/sys_dev/wx/wx/code/getlist/getlist.php:43
+Mon Feb 3 14:28:11 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 > /tmp/1576855082self_test.wx
+Mon Feb 3 14:28:13 CST 2014 1391347447 faint
+
+Mon Feb 3 14:28:13 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 > /tmp/2480456500self_test.wx
+Mon Feb 3 14:28:15 CST 2014 1391347447 faint
+
+Mon Feb 3 14:30:25 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_83:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Mon Feb 3 14:30:50 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_83:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
