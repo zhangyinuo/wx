@@ -1,10 +1,72 @@
-Mon Feb 3 14:28:11 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_userlist.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 > /diska/sys_dev/wx/wx/code/queue/..//getlist/userlist
-Mon Feb 3 14:28:11 CST 2014 /diska/sys_dev/wx/wx/code/getlist/getlist.php:43
-Mon Feb 3 14:28:11 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 > /tmp/1576855082self_test.wx
-Mon Feb 3 14:28:13 CST 2014 1391347447 faint
+Mon Feb 3 19:39:01 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_userlist.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 > /diska/sys_dev/wx/wx/code/queue/..//getlist/userlist
+Mon Feb 3 19:39:01 CST 2014 /diska/sys_dev/wx/wx/code/getlist/getlist.php:43
+Mon Feb 3 19:39:01 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 > /tmp/1576855082self_test.wx
+Mon Feb 3 19:39:36 CST 2014 1389934986 就上回说的那几个就可以了
 
-Mon Feb 3 14:28:13 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 > /tmp/2480456500self_test.wx
-Mon Feb 3 14:28:15 CST 2014 1391347447 faint
+Mon Feb 3 19:39:36 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1640744702 > /tmp/1640744702self_test.wx
+Mon Feb 3 19:39:38 CST 2014 1389934986 就上回说的那几个就可以了
 
-Mon Feb 3 14:30:25 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_83:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
-Mon Feb 3 14:30:50 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_83:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Mon Feb 3 19:39:38 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2904839921 > /tmp/2904839921self_test.wx
+Mon Feb 3 19:40:17 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:17 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1813068464 > /tmp/1813068464self_test.wx
+Mon Feb 3 19:40:19 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:19 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 797202561 > /tmp/797202561self_test.wx
+Mon Feb 3 19:40:20 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:20 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 924863340 > /tmp/924863340self_test.wx
+Mon Feb 3 19:40:22 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:22 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1073640162 > /tmp/1073640162self_test.wx
+Mon Feb 3 19:40:24 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:24 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1821068721 > /tmp/1821068721self_test.wx
+Mon Feb 3 19:40:26 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:26 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 637139102 > /tmp/637139102self_test.wx
+Mon Feb 3 19:40:28 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:28 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2241497182 > /tmp/2241497182self_test.wx
+Mon Feb 3 19:40:30 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:30 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2075523403 > /tmp/2075523403self_test.wx
+Mon Feb 3 19:40:32 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:32 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2811823381 > /tmp/2811823381self_test.wx
+Mon Feb 3 19:40:33 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:33 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2797139629 > /tmp/2797139629self_test.wx
+Mon Feb 3 19:40:35 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:35 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2638953981 > /tmp/2638953981self_test.wx
+Mon Feb 3 19:40:37 CST 2014 1389934986 就上回说的那几个就可以了
+
+Mon Feb 3 19:40:37 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_115:get_fid_by_msg:self_test:oMj31t3Tz3vmrRWg-XDouMZnXR9M
+Mon Feb 3 20:10:14 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_userlist.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 > /diska/sys_dev/wx/wx/code/queue/..//getlist/userlist
+Mon Feb 3 20:10:14 CST 2014 /diska/sys_dev/wx/wx/code/getlist/getlist.php:43
+Mon Feb 3 20:10:14 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 > /tmp/1576855082self_test.wx
+Mon Feb 3 20:10:16 CST 2014 1391428056 哈哈
+
+Mon Feb 3 20:10:16 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1640744702 > /tmp/1640744702self_test.wx
+Mon Feb 3 20:10:18 CST 2014 1391428056 哈哈
+
+Mon Feb 3 20:10:18 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_118:get_fid_by_msg:self_test:oMj31t_D7Ldphe-KM60gAeDLgL9sfid=1640744702
+Mon Feb 3 20:14:36 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_userlist.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 > /diska/sys_dev/wx/wx/code/queue/..//getlist/userlist
+Mon Feb 3 20:14:36 CST 2014 /diska/sys_dev/wx/wx/code/getlist/getlist.php:43
+Mon Feb 3 20:14:36 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 > /tmp/1576855082self_test.wx
+Mon Feb 3 20:14:38 CST 2014 1391347447 faint
+
+Mon Feb 3 20:14:38 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 > /tmp/2480456500self_test.wx
+Mon Feb 3 20:14:39 CST 2014 1391347447 faint
+
+Mon Feb 3 20:14:39 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_118:get_fid_by_msg:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYofid=2480456500
+Mon Feb 3 20:19:20 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_userlist.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 > /diska/sys_dev/wx/wx/code/queue/..//getlist/userlist
+Mon Feb 3 20:19:20 CST 2014 /diska/sys_dev/wx/wx/code/getlist/getlist.php:43
+Mon Feb 3 20:19:20 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 > /tmp/1576855082self_test.wx
+Mon Feb 3 20:19:22 CST 2014 1391428056 哈哈
+
+Mon Feb 3 20:19:22 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1640744702 > /tmp/1640744702self_test.wx
+Mon Feb 3 20:20:03 CST 2014 1391428056 哈哈
+
+Mon Feb 3 20:20:03 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_118:get_fid_by_msg:self_test:oMj31t_D7Ldphe-KM60gAeDLgL9sfid=1640744702

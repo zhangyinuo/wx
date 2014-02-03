@@ -35,6 +35,13 @@ function get_db()
 		die("Could set names gbk:" . mysql_error());
 	}
 
+	$result = mysql_query("set autocommit = 1;", $dblink);
+	if ($result === false)
+	{
+		runlog(__FILE__."_".__LINE__.":"."Could set autocommit:" . mysql_error());
+		die("Could set autocommit:" . mysql_error());
+	}
+
 	return $dblink;
 }
 
@@ -66,7 +73,7 @@ function check_is_exist_wx_username($bizname, $wx_username, $dblink)
 function insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink)
 {
 	$curtime = date("YmdHis");
-	$sql = "replace into wx_userinfo values(NULL, '$bizname', '$fid', 'NULL', 'NULL', 'NULL', '$curtime', '1', '1', '1', '1', NULL, '$wx_username', 'NULL', NULL)";
+	$sql = "replace into wx_userinfo values(NULL, '$bizname', '$fid', '$wx_username', 'NULL', 'NULL', '$curtime', '1', '1', '1', '1', NULL, '$wx_username', 'NULL', NULL)";
 	$result = mysql_query($sql, $dblink);
 	if ($result === false)
 	{
@@ -95,6 +102,7 @@ function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 
 	if (strlen($msg) === 0)
 	{
+		return;
 		if (refresh_fid_biz($bizname, $wx_username, $username, $passwd, $dblink) === false)
 			runlog(__FILE__."_".__LINE__.":"."refresh_fid_biz err:".$bizname.":".$wx_username);
 		return;
@@ -107,6 +115,7 @@ function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 		runlog(__FILE__."_".__LINE__.":"."get_fid_by_msg:".$bizname.":".$wx_username);
 		return;
 	}
+	runlog(__FILE__."_".__LINE__.":"."get_fid_by_msg:".$bizname.":".$wx_username."fid=".$fid);
 
 	insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink);
 }
