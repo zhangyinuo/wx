@@ -22,6 +22,7 @@ class wechatCallbackapiTest
 
 		//valid signature , option
 		if($this->checkSignature()){
+			$this->responseMsg();
 			return true;
 		}
 		else
