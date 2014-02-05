@@ -135,5 +135,24 @@ function is_exist_fakeid($dblink, $fid, $bizname)
 	return $count;
 }
 
+function get_fid_by_bizname_wx_username($bizname, $wx_username, $dblink)
+{
+	$result = mysql_query("select fakeid from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
+	if ($result === false)
+	{
+		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
+		return $flag;
+	}
+	$flag = "";
+	while($row=mysql_fetch_array($result)) 
+	{
+		$flag = $row[0];
+		break;
+	}
+	mysql_free_result($result);
+
+	return $flag;
+}
+
 ?>
 

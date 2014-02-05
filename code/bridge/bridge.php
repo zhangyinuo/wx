@@ -14,11 +14,25 @@ if (init_q($upq, $up_queue_file, "p") === false)
 	exit;
 }
 
+$downq = "";
+if (init_q($downq, $down_queue_file, "p") === false)
+{
+	runlog(__FILE__."_".__LINE__.":"."ERR init_ftok $down_queue_file !");
+	exit;
+}
+
 $dblink= get_db();
 if ($dblink === false)
 {
 	runlog(__FILE__."_".__LINE__.":"."Could not query:" . mysql_error());
 	die("Could not query:" . mysql_error());
+}
+
+function do_rsp_fid($msg, $fid, $username, $passwd)
+{
+	global $downq;
+	$retmsg = $username."&&".$passwd."&&".$fid."&&".$msg;
+	msg_send($downq, 1, $retmsg);
 }
 
 $type = 0;
@@ -43,18 +57,32 @@ while (1)
 			continue;
 		}
 
+		$username = "";
+		$passwd = "";
+
+		if (get_biz_info($bizname, $username, $passwd, $dblink) === false)
+		{
+			runlog(__FILE__."_".__LINE__.":"."get_biz_info:".$bizname.":".$wx_username);
+			continue;
+		}
+
 		$cmd = substr($msg, 0, 1);
 		switch ($cmd)
 		{
+		case '1':
 		case '2':
 		case '3':
 		case '4':
 		case '5':
 			$rspstr = get_content($bizname, $cmd);
-
+			do_rsp_fid($rspstr, $fid, $username, $passwd);
+			break;
 
 		default:
-			do_de($from, $to);
+			do_rsp_fid("您需要的功能很快开发", $fid, $username, $passwd);
+			$rspstr = get_content($bizname, 1);
+			do_rsp_fid($rspstr, $fid, $username, $passwd);
+			break;
 		}
 	}
 
