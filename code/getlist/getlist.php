@@ -74,5 +74,35 @@ function get_fid_by_msg(&$rfid, $username, $passwd, $content, $time, $dblink, $b
 	return false;
 }
 
+function refresh_fid_biz($bizname, $wx_username, $username, $passwd, $dblink)
+{
+	global $ROOTDIR;
+	$userlist = $ROOTDIR."/getlist/userlist";
+	$pexe = $ROOTDIR."/getlist/phantomjs";
+	$listjs = $ROOTDIR."/getlist/weixin_userlist.js";
+
+	$fp = popen("$pexe $listjs $username $passwd > $userlist", "r");
+	if ($fp)
+		pclose($fp);
+
+	$handle = @fopen($userlist, "r");
+	if ($handle) {
+		while (!feof($handle)) {
+			$buffer = fgets($handle, 4096);
+			$fid = substr($buffer, 0, -1);
+			if (is_numeric ($fid) === false)
+				continue;
+			if (strlen($fid) < 3)
+				continue;
+			if (is_exist_fakeid($dblink, $fid, $bizname) >= 1 )
+				continue;
+			insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink, '0');
+			break;
+		}
+		fclose($handle);
+	}
+	return true;
+}
+
 ?>
 

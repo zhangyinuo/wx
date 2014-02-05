@@ -47,7 +47,7 @@ function get_db()
 
 function check_is_exist_wx_username($bizname, $wx_username, $dblink)
 {
-	$result = mysql_query("select fakeid from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
+	$result = mysql_query("select status from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
 	if ($result === false)
 	{
 		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
@@ -61,19 +61,13 @@ function check_is_exist_wx_username($bizname, $wx_username, $dblink)
 	}
 	mysql_free_result($result);
 
-	if (strlen($flag) > 0)
-	{
-		$result = mysql_query("update wx_userinfo set status = '2' where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
-		return true;
-	}
-
-	return false;
+	return $flag;
 }
 
-function insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink)
+function insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink, $status)
 {
 	$curtime = date("YmdHis");
-	$sql = "replace into wx_userinfo values(NULL, '$bizname', '$fid', '$wx_username', 'NULL', 'NULL', '$curtime', '1', '1', '1', '1', NULL, '$wx_username', 'NULL', NULL)";
+	$sql = "replace into wx_userinfo values(NULL, '$bizname', '$fid', '$wx_username', 'NULL', 'NULL', '$curtime', '$status', '1', '1', '1', NULL, '$wx_username', 'NULL', NULL)";
 	$result = mysql_query($sql, $dblink);
 	if ($result === false)
 	{
@@ -85,7 +79,8 @@ function insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink)
 
 function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 {
-	if (check_is_exist_wx_username($bizname, $wx_username, $dblink) === true)
+	$status = check_is_exist_wx_username($bizname, $wx_username, $dblink);
+	if ($status === '1' || $status === '2')
 	{
 		runlog(__FILE__."_".__LINE__.":"."check_is_exist_wx_username:".$bizname.":".$wx_username);
 		return;
@@ -102,7 +97,8 @@ function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 
 	if (strlen($msg) === 0)
 	{
-		return;
+		if ($status === '0')
+			return;
 		if (refresh_fid_biz($bizname, $wx_username, $username, $passwd, $dblink) === false)
 			runlog(__FILE__."_".__LINE__.":"."refresh_fid_biz err:".$bizname.":".$wx_username);
 		return;
@@ -117,7 +113,7 @@ function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 	}
 	runlog(__FILE__."_".__LINE__.":"."get_fid_by_msg:".$bizname.":".$wx_username."fid=".$fid);
 
-	insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink);
+	insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink, '1');
 }
 
 function is_exist_fakeid($dblink, $fid, $bizname)

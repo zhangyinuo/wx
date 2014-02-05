@@ -5,6 +5,8 @@ $ROOTDIR=dirname(__FILE__)."/../";
 require_once($ROOTDIR."log/log.php");
 
 $sub_queue_file = $ROOTDIR."ftok/sub_queue_self_test";
+$up_queue_file = $ROOTDIR."ftok/up_queue_self_test";
+$down_queue_file = $ROOTDIR."ftok/down_queue_self_test";
 
 function init_q(&$q, $file, $p)
 {
@@ -44,6 +46,31 @@ function parse_msg_from_queue($msg, &$bizname, &$wx_username, &$time, &$retmsg)
 		$time = substr($msg, $pos1 + 2, $pos2 - $pos1 - 2);
 		$retmsg = substr($msg, $pos2 + 2);
 	}
+	return true;
+}
+
+function parse_msg_from_queue2($msg, &$bizname, &$wx_username, &$time, &$retmsg, &$expire)
+{
+	if (parse_msg_from_queue($msg, $bizname, $wx_username, $time, $retmsg) === false)
+	{
+		runlog(__FILE__.":".__LINE__);
+		return false;
+	}
+
+	if (strlen($retmsg) === 0)
+	{
+		runlog(__FILE__.":".__LINE__);
+		return false;
+	}
+
+	$pos = strpos($retmsg, "&&", 0);
+	if ($pos === false)
+	{
+		runlog(__FILE__.":".__LINE__);
+		return false;
+	}
+	$expire = substr($retmsg, $pos+2);
+	$retmsg = substr($retmsg, 0, $pos);
 	return true;
 }
 
