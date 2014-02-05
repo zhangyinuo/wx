@@ -118,13 +118,13 @@ function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 
 function is_exist_fakeid($dblink, $fid, $bizname)
 {
-	$result = mysql_query("select count(1) from wx_userinfo where fakeid = '$fid' and bizname = '$bizname' ", $dblink);
+	$result = mysql_query("select status from wx_userinfo where fakeid = '$fid' and bizname = '$bizname' ", $dblink);
 	if ($result === false)
 	{
 		runlog(__FILE__.":".__LINE__."query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
 		return $flag;
 	}
-	$count = 0;
+	$count = -1;
 	while($row=mysql_fetch_array($result)) 
 	{
 		$count = $row[0];

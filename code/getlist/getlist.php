@@ -94,7 +94,7 @@ function refresh_fid_biz($bizname, $wx_username, $username, $passwd, $dblink)
 				continue;
 			if (strlen($fid) < 3)
 				continue;
-			if (is_exist_fakeid($dblink, $fid, $bizname) >= 1 )
+			if (is_exist_fakeid($dblink, $fid, $bizname) >= 0 )
 				continue;
 			insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink, '0');
 			break;
@@ -109,6 +109,8 @@ function send_msg_by_fid($username, $passwd, $fid, $msg)
 	global $ROOTDIR;
 	$pexe = $ROOTDIR."/getlist/phantomjs";
 	$sendjs = $ROOTDIR."/getlist/weixin_send.js";
+
+	$msg = $msg."\n".date('l dS \of F Y h:i:s A');
 
 	runlog("$pexe $sendjs $username $passwd $fid $msg");
 	$fp = popen("$pexe $sendjs $username $passwd $fid '$msg'", "r");
