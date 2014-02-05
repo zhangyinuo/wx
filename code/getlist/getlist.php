@@ -104,5 +104,17 @@ function refresh_fid_biz($bizname, $wx_username, $username, $passwd, $dblink)
 	return true;
 }
 
+function send_msg_by_fid($username, $passwd, $fid, $msg)
+{
+	global $ROOTDIR;
+	$pexe = $ROOTDIR."/getlist/phantomjs";
+	$sendjs = $ROOTDIR."/getlist/weixin_send.js";
+
+	runlog("$pexe $sendjs $username $passwd $fid $msg");
+	$fp = popen("$pexe $sendjs $username $passwd $fid '$msg'", "r");
+	if ($fp)
+		pclose($fp);
+}
+
 ?>
 

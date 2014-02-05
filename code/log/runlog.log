@@ -19,3 +19,60 @@ Wed Feb 5 15:13:20 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exis
 Wed Feb 5 15:14:05 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
 Wed Feb 5 15:46:20 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
 Wed Feb 5 15:48:50 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Wed Feb 5 20:41:00 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Wed Feb 5 20:41:55 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 您需要的功能很快开发
+Wed Feb 5 20:41:57 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 回复相应数字代号，获取相关信息：
+1,今日推荐;
+2,会员服务;
+3,订房服务;
+4,地理信息;
+5,产品信息;
+
+回复以下字母代码，开始和其他人聊天，禁止政治及色情信息，以及其他本国法律禁止信息
+
+u:更新聊天名称(不更新采用本平台分配的用户名，可能不同于微信名称)
+o:群聊(o:发言内容)
+s:私聊(s:其他用户名称:发言内容)
+
+以上: 都是英文半角字符
+
+Wed Feb 5 20:43:30 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Wed Feb 5 20:43:46 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 您需要的功能很快开发
+Wed Feb 5 20:43:48 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 回复相应数字代号，获取相关信息：
+1,今日推荐;
+2,会员服务;
+3,订房服务;
+4,地理信息;
+5,产品信息;
+
+回复以下字母代码，开始和其他人聊天，禁止政治及色情信息，以及其他本国法律禁止信息
+
+u:更新聊天名称(不更新采用本平台分配的用户名，可能不同于微信名称)
+o:群聊(o:发言内容)
+s:私聊(s:其他用户名称:发言内容)
+
+以上: 都是英文半角字符
+
+Wed Feb 5 20:44:10 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Wed Feb 5 20:44:14 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 会员服务:
+1,会员享受折扣价住宿;
+2,定期开展会员活动;
+3,优先向会员推荐新产品;
+4,详细信息请登录以下网址:http://www.google.com.hk;
+
+Wed Feb 5 20:44:35 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Wed Feb 5 20:44:41 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 订房服务:
+请登录以下网址:http://www.baidu.com 开始订房
+
+Wed Feb 5 20:44:55 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Wed Feb 5 20:45:02 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 地理信息:
+本店地址:广州市滨江东路123号.电话13900000000
+
+
+Wed Feb 5 20:45:25 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Wed Feb 5 20:45:33 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 产品信息:
+1,住宿服务;
+2,商务会议;
+3,上午度假;
+4,更详细的产品信息，请登陆我们的网址了解:http://www.qq.com
+
