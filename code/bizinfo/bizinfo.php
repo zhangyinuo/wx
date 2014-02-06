@@ -23,6 +23,10 @@ function init_bizinfo($dblink)
 	$initflag = 1;
 }
 
+function get_fids_by_bizname($bizname, $dblink)
+{
+}
+
 function get_biz_info($bizname, &$username, &$passwd, $dblink)
 {
 	global $bizinfo;

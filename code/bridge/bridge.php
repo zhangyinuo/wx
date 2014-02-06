@@ -78,6 +78,28 @@ while (1)
 			do_rsp_fid($rspstr, $fid, $username, $passwd);
 			break;
 
+		case 'o':
+		case 'O':
+			break;
+		case 'u':
+		case 'U':
+			$nickname= "";
+			$error = "";
+		   	$f = substr($msg, 1, 1);
+			if ($f === ':')
+			{
+				$nickname = substr($msg, 2);
+				$error = do_update_nick_name($bizname, $fid, $nickname, $dblink);
+			}
+			else
+				$error = "正确格式: u:聊天名称. :是英文半角的";
+
+			if (strlen($error) > 2)
+				$error = "更新错误原因".$error;
+			else
+				$error = "当前名称".$nickname;
+			do_rsp_fid($error, $fid, $username, $passwd);
+			break;
 		default:
 			do_rsp_fid("您需要的功能很快开发", $fid, $username, $passwd);
 			$rspstr = get_content($bizname, 1);

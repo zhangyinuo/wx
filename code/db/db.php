@@ -77,6 +77,20 @@ function insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink, $
 	return true;
 }
 
+function do_update_nick_name($bizname, $fid, $nickname, $dblink)
+{
+	$ret = "";
+	$curtime = date("YmdHis");
+	$sql = "update wx_userinfo set nickname = '$nickname',  modtime = '$curtime' where bizname = '$bizname' and fakeid = '$fid' ;";
+	$result = mysql_query($sql, $dblink);
+	if ($result === false)
+	{
+		runlog("update nickname error ".$fid.":".$bizname.":".$nickname.":".mysql_error());
+		return mysql_error();
+	}
+	return $ret;
+}
+
 function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
 {
 	$status = check_is_exist_wx_username($bizname, $wx_username, $dblink);

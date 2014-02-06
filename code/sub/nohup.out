@@ -1,0 +1,6 @@
+
+
+
+
+sh: line 1:  2244 Terminated              /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 > /tmp/1576855082self_test.wx
+PHP Warning:  Invalid argument supplied for foreach() in /diska/sys_dev/wx/wx/code/getlist/getlist.php on line 19
