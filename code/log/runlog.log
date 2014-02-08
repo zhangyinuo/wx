@@ -358,3 +358,38 @@ p:屏蔽本群聊天.
 Thursday 06th of February 2014 08:26:26 PM
 Thu Feb 6 20:26:28 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1640744702 当前名称nouns
 Thursday 06th of February 2014 08:26:28 PM
+Thu Feb 6 20:36:56 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Thu Feb 6 20:37:04 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 当前名称大春哥
+Thursday 06th of February 2014 08:37:04 PM
+Fri Feb 7 11:51:17 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Fri Feb 7 11:51:21 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 您需要的功能很快开发
+Friday 07th of February 2014 11:51:21 AM
+Fri Feb 7 11:51:23 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 回复相应数字代号，获取相关信息：
+1,今日推荐;
+2,会员服务;
+3,订房服务;
+4,地理信息;
+5,产品信息;
+
+回复以下字母代码，开始和其他人聊天，禁止政治及色情信息，以及其他本国法律禁止信息
+
+u:更新聊天名称(不更新采用本平台分配的用户名，可能不同于微信名称)
+o:群聊(o:发言内容)
+s:私聊(s:其他用户名称:发言内容)
+c:查询自己的聊天名称.
+p:屏蔽本群聊天.
+
+
+以上: 都是英文半角字符
+
+Friday 07th of February 2014 11:51:23 AM
+Fri Feb 7 12:25:17 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Fri Feb 7 12:25:24 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 当前名称天天动听
+Friday 07th of February 2014 12:25:24 PM
+Fri Feb 7 12:26:02 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Fri Feb 7 12:26:11 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 更新错误原因正确格式: u:聊天名称. :是英文半角的
+Friday 07th of February 2014 12:26:11 PM
+Fri Feb 7 12:27:07 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Fri Feb 7 12:27:12 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 当前名称dgjk
+Friday 07th of February 2014 12:27:12 PM
+Sat Feb 8 13:18:58 CST 2014 /diska/sys_dev/wx/wx/code/bridge/bridge.php_56:get_fid_by_bizname_wx_username err: self_test:oMj31t8U3O4exQjj4rsQROfd3-00
