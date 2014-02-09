@@ -996,7 +996,7 @@ class Snoopy
 			$headers[] = "Authorization: BASIC ".base64_encode($this->user.":".$this->pass);
 		if (function_exists('curl_init')) {
 			$ch = curl_init();
-				echo __FILE__.":".__LINE__."\n";
+			echo __FILE__.":".__LINE__."\n";
 			curl_setopt($ch, CURLOPT_URL, $URI);
 			curl_setopt($ch, CURLOPT_HEADER, true); 
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);

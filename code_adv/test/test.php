@@ -3,18 +3,21 @@
 $ROOTDIR=dirname(__FILE__)."/../";
 include "./snoopy.class.php";
 
-$str = file_get_contents("menu");
+$str = file_get_contents("msg");
 
 $pexe = $ROOTDIR."token/phantomjs";
 
-$js = $ROOTDIR."token/weixin_send_c.js";
+$js = $ROOTDIR."token/weixin_sendmsg.js";
 
-$token = "3ogPzSoJBk44LzGN4h7eDDl-WR8jH9NBHBkQbqGzbUQAcrkM2JdnBeZsooLXmGK6ILEY050iwqT6t2v3DRocmzfRD_dxb13NfFpIYoC9Fb2VJh0M-oEB36DOATpIn16_JRnXO7R4JadfIMirTP8Lfg";
+$token = "xwFD3SeGNUpPEuMLH7nJP1ltZmfVyTb9x6wwmyo73qUb6a3oKvDVrLjjABg3UkWLbEh4SNTRj8C9Vx03PeYsKPmuePGgxVx6YMrpbZcNqztDpLSzDxL3nV3fsLSeuyy-1URlbwok8-8pTPtjvUCZEQ";
 
-$send_snoopy = new Snoopy; 
+$sstr = $str;
 
-$submit = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$token;
-$ret = $send_snoopy->submit($submit,$str);
+$url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
+
+$ret = http_post_data($url, $sstr);
 echo $ret;
+
+//popen ("$pexe $js $token '$sstr' > ./result ", "r");
 ?>
 
