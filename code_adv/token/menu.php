@@ -1,17 +1,32 @@
 <?php 
 
 $ROOTDIR=dirname(__FILE__)."/../";
+require_once($ROOTDIR."token/token.php");
 
-$str = file_get_contents("menu");
 
-$token = "xwFD3SeGNUpPEuMLH7nJP1ltZmfVyTb9x6wwmyo73qUb6a3oKvDVrLjjABg3UkWLbEh4SNTRj8C9Vx03PeYsKPmuePGgxVx6YMrpbZcNqztDpLSzDxL3nV3fsLSeuyy-1URlbwok8-8pTPtjvUCZEQ";
+function update_menu($bizname, $dblink)
+{
+	global $ROOTDIR;
+	$menu = $ROOTDIR."/file/menu/$bizname";
+	$str = file_get_contents($menu);
+	if (strlen($str) < 10)
+	{
+		runlog(__FILE__."_".__LINE__.":"."file_get_contents err: ".$menu);
+		return false;
+	}
 
-$sstr = $str;
+	$token = "";
+	if (get_token_by_biz($token, $bizname, $dblink) === false)
+	{
+		runlog(__FILE__."_".__LINE__.":"."get_token_by_biz err: ".$bizname);
+		return false;
+	}
 
-$url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=$token";
+	$url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=$token";
 
-$ret = http_post_data($url, $sstr);
-echo $ret;
+	$ret = http_post_data($url, $str);
+	runlog(__FILE__."_".__LINE__.":".$ret);
+}
 
 ?>
 

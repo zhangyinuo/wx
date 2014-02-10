@@ -12,10 +12,7 @@ $suffix = "}";
 function refresh_token_biz($bizname, $file, $dblink)
 {
 	global $ROOTDIR;
-	$tmpfile = $file.posix_getpid();
 	$lnfile = $file.".tmp";
-	$pexe = $ROOTDIR."/token/phantomjs";
-	$tokenjs = $ROOTDIR."/token/weixin_token.js";
 
 	$id = "";
 	$key = "";
@@ -26,16 +23,18 @@ function refresh_token_biz($bizname, $file, $dblink)
 		return false;
 	}
 
-	$fp = popen("$pexe $tokenjs $id $key > $tmpfile", "r");
-	if ($fp)
-		pclose($fp);
+	$info;
+	$result = http_get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$id&secret=$key", array("timeout"=>5), $info);
+	$pos = strpos($result, "{\"access_token");
+	if ($pos === false)
+	{
+		runlog(__FILE__."_".__LINE__.":"."http_get:".$bizname);
+		return false;
+	}
 
-	$str = file_get_contents($tmpfile);
+	$str = substr($result, $pos);
 
-	$postObj = simplexml_load_string($str, 'SimpleXMLElement', LIBXML_NOCDATA);
-
-	$s = $postObj->body->pre;
-	$r = json_decode($s, true);
+	$r = json_decode($str, true);
 	$a = $r["access_token"];
 	if (strlen($a) < 2)
 	{

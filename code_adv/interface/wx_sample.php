@@ -3,7 +3,7 @@ define("TOKEN", "jingchun_dev_weixin");
 
 function open_log($buf)
 {
-	$logfile = "/home/php/logs/weeixin_dev.log";
+	$logfile = "/home/php/logs/weeixin_dev_adv.log";
 	$logfd = fopen($logfile, "a+");
 	if ($logfd === FALSE)
 	{
