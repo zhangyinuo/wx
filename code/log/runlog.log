@@ -500,3 +500,55 @@ Wed Feb 12 20:21:23 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantom
 请登录以下网址:http://www.baidu.com 开始订房
 
 Wednesday 12th of February 2014 08:21:23 PM
+Sat Feb 15 22:53:45 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_userlist.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 > /diska/sys_dev/wx/wx/code/queue/..//getlist/userlist
+Sat Feb 15 22:53:45 CST 2014 /diska/sys_dev/wx/wx/code/getlist/getlist.php:43
+Sat Feb 15 22:53:45 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1733622200 > /tmp/1733622200self_test.wx
+Sat Feb 15 22:53:52 CST 2014 1392476012 收到
+
+Sat Feb 15 22:53:52 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 > /tmp/1576855082self_test.wx
+Sat Feb 15 22:54:01 CST 2014 1392476012 收到
+
+Sat Feb 15 22:54:01 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_114:get_fid_by_msg:self_test:oMj31t3Tz3vmrRWg-XDouMZnXR9Mfid=1576855082
+Sat Feb 15 22:54:01 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t3Tz3vmrRWg-XDouMZnXR9M
+Sat Feb 15 22:54:08 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 您需要的功能很快开发
+Saturday 15th of February 2014 10:54:08 PM
+Sat Feb 15 22:54:17 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 回复相应数字代号，获取相关信息：
+1,今日推荐;
+2,会员服务;
+3,订房服务;
+4,地理信息;
+5,产品信息;
+
+回复以下字母代码，开始和其他人聊天，禁止政治及色情信息，以及其他本国法律禁止信息
+
+u:更新聊天名称(不更新采用本平台分配的用户名，可能不同于微信名称)
+o:群聊(o:发言内容)
+s:私聊(s:其他用户名称:发言内容)
+c:查询自己的聊天名称.
+p:屏蔽本群聊天.
+
+
+以上: 都是英文半角字符
+
+Saturday 15th of February 2014 10:54:17 PM
+Sat Feb 15 22:54:20 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 您需要的功能很快开发
+Saturday 15th of February 2014 10:54:20 PM
+Sat Feb 15 22:54:24 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1576855082 回复相应数字代号，获取相关信息：
+1,今日推荐;
+2,会员服务;
+3,订房服务;
+4,地理信息;
+5,产品信息;
+
+回复以下字母代码，开始和其他人聊天，禁止政治及色情信息，以及其他本国法律禁止信息
+
+u:更新聊天名称(不更新采用本平台分配的用户名，可能不同于微信名称)
+o:群聊(o:发言内容)
+s:私聊(s:其他用户名称:发言内容)
+c:查询自己的聊天名称.
+p:屏蔽本群聊天.
+
+
+以上: 都是英文半角字符
+
+Saturday 15th of February 2014 10:54:24 PM

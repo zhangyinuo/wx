@@ -2,19 +2,33 @@
 
 $ROOTDIR=dirname(__FILE__)."/../";
 
-require_once($ROOTDIR."log/log.php");
-require_once($ROOTDIR."queue/queue.php");
+require_once($ROOTDIR."db/db.php");
+require_once($ROOTDIR."token/token.php");
 
-$subq = "";
-if (init_q($subq, $sub_queue_file, "p") === false)
+$dblink = get_db();
+
+if ($dblink === false)
 {
-	runlog(__FILE__."_".__LINE__.":"."ERR init_ftok $sub_queue_file !");
+	echo "get db error!\n";
 	exit;
 }
 
-$msg = "self_test&&oMj31t2-QJyDQ8U_Eix5btP3LwYo&&1391347447&&faint";
+$token = "";
+if (get_token_by_biz($token, "self_test", $dblink) === false)
+{
+	echo "get_token_by_biz error!\n";
+	return false;
+}
 
-msg_send($subq, 1, $msg);
+echo "$token\n";
+
+$url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
+
+$data = file_get_contents("./msg");
+
+$ret = http_post_data($url, $data);
+
+echo "$ret\n";
 
 ?>
 

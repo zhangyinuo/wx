@@ -30,12 +30,12 @@
 </div>
 <div class="form-item">
  <label for="edit-money">余额: </label>
- <input type="text" maxlength="6" name="edit[money]" id="edit-money"  size="30" value="" />
- <div class="description">用户余额:默认0.00</div>
+ <input type="text" maxlength="8" name="edit[money]" id="edit-money"  size="30" value="" />
+ <div class="description">用户余额</div>
 </div>
 <div class="form-item">
- <label for="edit-point">积分: </label>
- <input type="text" maxlength="32" name="edit[point]" id="edit-point"  size="30" value="" />
+ <label for="edit-jifen">积分: </label>
+ <input type="text" maxlength="64" name="edit[jifen]" id="edit-jifen"  size="30" value="" />
  <div class="description">用户积分</div>
 </div>
 
