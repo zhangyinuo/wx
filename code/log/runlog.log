@@ -552,3 +552,64 @@ p:屏蔽本群聊天.
 以上: 都是英文半角字符
 
 Saturday 15th of February 2014 10:54:24 PM
+Sun Feb 16 12:07:57 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_userlist.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 > /diska/sys_dev/wx/wx/code/queue/..//getlist/userlist
+Sun Feb 16 12:07:57 CST 2014 /diska/sys_dev/wx/wx/code/getlist/getlist.php:43
+Sun Feb 16 12:07:57 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1733622200 > /tmp/1733622200self_test.wx
+Sun Feb 16 12:08:01 CST 2014 1392523668 不信你了
+
+Sun Feb 16 12:08:01 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2904839921 > /tmp/2904839921self_test.wx
+Sun Feb 16 12:08:05 CST 2014 1392523668 不信你了
+
+Sun Feb 16 12:08:05 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 1813068464 > /tmp/1813068464self_test.wx
+Sun Feb 16 12:08:08 CST 2014 1392523668 不信你了
+
+Sun Feb 16 12:08:08 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 797202561 > /tmp/797202561self_test.wx
+Sun Feb 16 12:08:12 CST 2014 1392523668 不信你了
+
+Sun Feb 16 12:08:12 CST 2014 popen /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_fid.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 924863340 > /tmp/924863340self_test.wx
+Sun Feb 16 12:08:15 CST 2014 1392523668 不信你了
+
+Sun Feb 16 12:08:15 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_114:get_fid_by_msg:self_test:oMj31t4femQ7lZrwxi1nuNP4ZVQMfid=924863340
+Sun Feb 16 12:08:18 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 924863340 您需要的功能很快开发
+Sunday 16th of February 2014 12:08:18 PM
+Sun Feb 16 12:08:20 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 924863340 回复相应数字代号，获取相关信息：
+1,今日推荐;
+2,会员服务;
+3,订房服务;
+4,地理信息;
+5,产品信息;
+
+回复以下字母代码，开始和其他人聊天，禁止政治及色情信息，以及其他本国法律禁止信息
+
+u:更新聊天名称(不更新采用本平台分配的用户名，可能不同于微信名称)
+o:群聊(o:发言内容)
+s:私聊(s:其他用户名称:发言内容)
+c:查询自己的聊天名称.
+p:屏蔽本群聊天.
+
+
+以上: 都是英文半角字符
+
+Sunday 16th of February 2014 12:08:20 PM
+Sun Feb 16 16:41:26 CST 2014 /diska/sys_dev/wx/wx/code/db/db.php_85:check_is_exist_wx_username:self_test:oMj31t2-QJyDQ8U_Eix5btP3LwYo
+Sun Feb 16 16:41:28 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 您需要的功能很快开发
+Sunday 16th of February 2014 04:41:28 PM
+Sun Feb 16 16:41:33 CST 2014 /diska/sys_dev/wx/wx/code/queue/..//getlist/phantomjs /diska/sys_dev/wx/wx/code/queue/..//getlist/weixin_send.js danezhang77@gmail.com f8a4724578222780266930e86a3125b0 2480456500 回复相应数字代号，获取相关信息：
+1,今日推荐;
+2,会员服务;
+3,订房服务;
+4,地理信息;
+5,产品信息;
+
+回复以下字母代码，开始和其他人聊天，禁止政治及色情信息，以及其他本国法律禁止信息
+
+u:更新聊天名称(不更新采用本平台分配的用户名，可能不同于微信名称)
+o:群聊(o:发言内容)
+s:私聊(s:其他用户名称:发言内容)
+c:查询自己的聊天名称.
+p:屏蔽本群聊天.
+
+
+以上: 都是英文半角字符
+
+Sunday 16th of February 2014 04:41:33 PM
