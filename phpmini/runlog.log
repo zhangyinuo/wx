@@ -17,3 +17,7 @@ Mon Feb 17 12:02:47 CST 2014 insert into tel_user  values(NULL, 'jingchun.zhang'
 Mon Feb 17 12:02:54 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang
 Mon Feb 17 12:03:19 CST 2014 insert into tel_user  values(NULL, 'jingchun.zhang', 'wx_13642687101', '13642687101', '0', '888',  '888',  '20140217120319',  '20140217120319') 
 Mon Feb 17 12:03:24 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 16:39:21 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 16:39:35 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 16:44:23 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 16:58:59 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang

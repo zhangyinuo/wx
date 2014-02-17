@@ -2,7 +2,6 @@
 	session_start();
 	include("dbconnect.inc.php");
 	include("functions.inc.php");
-	#如果php配置中，magic_quotes_gpc没有被设置，则执行过滤字符串。
 	$form = check_form($_POST["edit"]);
 	extract($form);
 	if($_POST["id"]!="" && $_SESSION["userid"]==1&& is_numeric($_POST["id"])) {
