@@ -4,3 +4,16 @@ Sat Feb 15 21:18:58 CST 2014 insert into tel_user  values(NULL, '', 'wx_fdsfffff
 Sat Feb 15 21:20:54 CST 2014 insert into tel_user  values(NULL, '', 'wx_11222333', '11222333', '', 'dd',  'fds',  '20140215212054',  '20140215212054') 
 Sat Feb 15 21:22:06 CST 2014 select * from users where 1  limit 20:1:jingchun.zhang
 Sat Feb 15 21:24:42 CST 2014 insert into tel_user  values(NULL, 'jingchun.zhang', 'wx_4566666666', '4566666666', '', '44555',  '2332',  '20140215212442',  '20140215212442') 
+Mon Feb 17 10:51:47 CST 2014 select * from users where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 10:52:14 CST 2014 insert into tel_user  values(NULL, 'jingchun.zhang', 'wx_13751858016', '13751858016', '', '10.8',  '45',  '20140217105214',  '20140217105214') 
+Mon Feb 17 10:59:35 CST 2014 select * from users where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 11:04:03 CST 2014 select * from users where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 11:04:08 CST 2014 select * from users where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 11:04:16 CST 2014 select * from users where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 11:15:27 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 11:20:04 CST 2014 insert into tel_user  values(NULL, 'jingchun.zhang', 'wx_13800000000', '13800000000', '0', '13.89',  '56',  '20140217112004',  '20140217112004') 
+Mon Feb 17 11:20:07 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 12:02:47 CST 2014 insert into tel_user  values(NULL, 'jingchun.zhang', 'wx_13751858016', '13751858016', '0', '456',  '66',  '20140217120247',  '20140217120247') 
+Mon Feb 17 12:02:54 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang
+Mon Feb 17 12:03:19 CST 2014 insert into tel_user  values(NULL, 'jingchun.zhang', 'wx_13642687101', '13642687101', '0', '888',  '888',  '20140217120319',  '20140217120319') 
+Mon Feb 17 12:03:24 CST 2014 select * from tel_user where 1  limit 20:1:jingchun.zhang

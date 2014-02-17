@@ -7,7 +7,7 @@ var page = require('webpage').create(),
 
 	posturl = 'https://mp.weixin.qq.com/cgi-bin/masssend';
 	postref = 'https://mp.weixin.qq.com/cgi-bin/masssendpage?t=mass/send&token=tokenval&lang=zh_CN';
-	postdata = 'type=1&content=msgval&sex=0&groupid=1&synctxweibo=0&synctxnews=0&country=&province=&city=&imgcode=&token=tokenval&lang=zh_CN&random=randval&f=json&ajax=1&t=ajax-response';
+	postdata = 'type=1&content=msgval&sex=0&groupid=0&synctxweibo=0&synctxnews=0&country=&province=&city=&imgcode=&token=tokenval&lang=zh_CN&random=randval&f=json&ajax=1&t=ajax-response';
 
 phantom.cookiesEnabled = true;
 

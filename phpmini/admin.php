@@ -6,9 +6,9 @@
 	include("dbconnect.inc.php");
 	if($_GET["name"] != "") {
 		$name = addslashes($_GET["name"]);
-		$where .= " and username like '%{$name}%' ";
+		$where .= " and tel  = '{$name}' ";
 	}
-	$sql = "select * from users where 1 {$where} limit 20";
+	$sql = "select * from tel_user where 1 {$where} limit 20";
 	runlog($sql.":".$_SESSION["userid"].":".$_SESSION["username"]);
 	$res = mysql_query($sql);
 ?>
@@ -40,33 +40,23 @@
 <form action="admin.php"  method="get" >
 <div><div class="container-inline"><div class="form-item">
  <label >检索用户: </label>
-用户名模糊搜索：<input type="text" name="name"  value="<?php echo $_GET['name']; ?>" /><br />
+输入手机号码<input type="text" name="name"  value="<?php echo $_GET['name']; ?>" /><br />
 </div>
 <input type="submit" value="检    索"  class="form-submit" />
 </div>
 </div></form>
 
 <table>
- <thead><tr><th> </th><th>用户名</th><th >性别</th><th>邮箱</th><th>注册时间</th><th>操作</th> </tr></thead>
+ <thead><tr><th> </th><th>手机号码</th><th >余额</th><th>积分</th><th>注册时间</th><th>修改时间</th><th>操作</th> </tr></thead>
 <tbody>
 <?php
 	while($row = mysql_fetch_array($res)) {
-		switch($row["sex"]) {
-			case	"1"	:
-				$sex = "男";
-				break;
-			case	"2"	:
-				$sex = "女";
-				break;
-			default		:
-				$sex = "保密";
-				break;
-		}
 		echo "<tr ><td></td>";
-		echo "<td>{$row['username']}</td>";
-		echo "<td >{$sex}</td>";
-		echo "<td>{$row['mail']}</td>";
-		echo "<td class='active'>{$row['reg_time']}</td>";
+		echo "<td>{$row['tel']}</td>";
+		echo "<td >{$row['money']}</td>";
+		echo "<td>{$row['point']}</td>";
+		echo "<td class='active'>{$row['regtime']}</td>";
+		echo "<td class='active'>{$row['modtime']}</td>";
 		if($_SESSION["userid"]=="1") {
 			echo "<td><a href='edit_account.php?id={$row['id']}'>编辑</a><br /><a  href='#' onclick='return doDel(\"{$row['username']}\",{$row['id']});'>删除</a> </td> </tr>";
 		}else {
