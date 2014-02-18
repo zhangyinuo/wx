@@ -26,7 +26,7 @@
 </div>
 </div>
 </td>
-   <td id="main">
+   <td id="main" >
 <div class="breadcrumb"><a href="./">主页</a></div><h2>用户列表</h2><div class="help"><p>欢迎来到用户列表。下面是最近20个符合条件的注册会员列表。</p>
 </div><hr />
 <!-- begin content -->
@@ -46,22 +46,18 @@
 </div>
 </div></form>
 
-<table>
+<table width="750">
  <thead><tr><th> </th><th>手机号码</th><th >余额</th><th>积分</th><th>注册时间</th><th>修改时间</th><th>操作</th> </tr></thead>
 <tbody>
 <?php
 	while($row = mysql_fetch_array($res)) {
 		echo "<tr ><td></td>";
-		echo "<td>{$row['tel']}</td>";
+		echo "<td width = \"20%\">{$row['tel']}</td>";
 		echo "<td >{$row['money']}</td>";
 		echo "<td>{$row['point']}</td>";
-		echo "<td class='active'>{$row['regtime']}</td>";
-		echo "<td class='active'>{$row['modtime']}</td>";
-		if($_SESSION["userid"]=="1") {
-			echo "<td><a href='edit_account.php?id={$row['id']}'>编辑</a><br /><a  href='#' onclick='return doDel(\"{$row['username']}\",{$row['id']});'>删除</a> </td> </tr>";
-		}else {
-			echo "<td><a href='detail.php?id={$row['id']}'>查看</a></td> </tr>";
-		}
+		echo "<td width = \"20%\">{$row['regtime']}</td>";
+		echo "<td width = \"20%\">{$row['modtime']}</td>";
+		echo "<td><a href='edit_account.php?id={$row['id']}'>修改余额</a><a>  </a><a  href='#' onclick='return doDel(\"{$row['username']}\",{$row['id']});'>修改积分</a> </td> </tr>";
 	}
 ?>
 </tbody></table>
