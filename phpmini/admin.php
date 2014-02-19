@@ -46,7 +46,7 @@
 </div>
 </div></form>
 
-<table width="750">
+<table width="850">
  <thead><tr><th> </th><th>手机号码</th><th >余额</th><th>积分</th><th>注册时间</th><th>修改时间</th><th>操作</th> </tr></thead>
 <tbody>
 <?php
@@ -57,7 +57,7 @@
 		echo "<td>{$row['point']}</td>";
 		echo "<td width = \"20%\">{$row['regtime']}</td>";
 		echo "<td width = \"20%\">{$row['modtime']}</td>";
-		echo "<td><a href='edit_account.php?id={$row['id']}'>修改余额</a><a>  </a><a  href='#' onclick='return doDel(\"{$row['username']}\",{$row['id']});'>修改积分</a> </td> </tr>";
+		echo "<td><a href='edit_account.php?id={$row['id']}&m=money'>修改余额</a><a>  </a><a a href='edit_account.php?id={$row['id']}&m=point'>修改积分</a>  <a></a> <a  href='#' onclick='return doDel(\"{$row['tel']}\",{$row['id']});'>删除用户</a></td> </tr>";
 	}
 ?>
 </tbody></table>
