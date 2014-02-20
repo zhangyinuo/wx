@@ -1,6 +1,43 @@
 <?php
-	if($_POST["op"] == "更    新") {
-		include("do_edit_account.inc.php");
+session_start();
+include("dbconnect.inc.php");
+include("functions.inc.php");
+require_once("log.php");
+if($_POST["op"] == "更    新") {
+		$m = $_POST['m'];
+		$id = $_POST['id'];
+		$tel = $_POST['tel'];
+		$point = $_POST['point'];
+		$money = $_POST['money'];
+		runlog($_SESSION["username"].":".$id.":".$m.":".$tel.":".$point.":".$money);
+
+		$sql = "update tel_user set ";
+		if (strcmp($m, "money") === 0)
+			if ($money > 0)
+				$sql .= "money = money + $money ";
+			else
+			{
+				$money = abs($money);
+				$sql .= "money = money - $money ";
+			}
+		else
+			if ($point > 0)
+				$sql .= "point = point + $point";
+			else
+			{
+				$point = abs($point);
+				$sql .= "point = point - $point";
+			}
+
+		$sql .= " where id = $id;";
+		runlog($sql);
+		$res = mysql_query($sql);
+		if(!$res) {
+			echo mysql_error();
+			die("数据库出错，请返回重试。");
+		}
+
+		header("Location:msg.php?m=update_success");
 		exit;
 	}
 ?>
@@ -24,35 +61,31 @@
 <li><a href="account.php" class="active" >查看</a></li>
 <li class="active"><a href="edit_account.php" class="active" >编辑</a></li>
 </ul>
-<script>
-	function check_form() {
-		return true;
-	}
-</script>
 <!-- begin content -->
 <form action="edit_account.php"  method="post" id="user_edit">
 
 <div><div class="form-item">
  <label for="edit-name">用户名: </label>
-<span><?php echo $username; ?></span>
+<span><?php echo $_GET['tel']; ?></span>
 </div>
-<div class="form-item">
- <label for="edit-money">余额: </label>
- <input type="text" maxlength="6" name="edit[money]" id="edit-money"  size="30" value="" />
- <div class="description">用户余额:默认0.00</div>
-</div>
-<div class="form-item">
- <label for="edit-point">积分: </label>
- <input type="text" maxlength="32" name="edit[point]" id="edit-point"  size="30" value="" />
- <div class="description">用户积分</div>
-</div>
-
 <?php
-if($_GET["id"]!="" && $_SESSION["userid"]==1) {
-	echo "<input type='hidden' name='id' value='{$_GET['id']}' />";
+ echo "<input type='hidden' name='id' value='{$_GET['id']}' />";
+ echo "<input type='hidden' name='m' value='{$_GET['m']}' />";
+ echo "<input type='hidden' name='tel' value='{$_GET['tel']}' />";
+if (strcmp($_GET['m'], "money") === 0)
+{
+	echo "<div class=\"form-item\">\n";
+	echo "<label for=\"edit-money\">余额: </label>\n";
+	echo "<input type=\"text\" maxlength=\"6\" name=\"money\" id=\"edit-money\"  size=\"30\" value=\"\" />\n</div>\n";
+}
+else
+{
+	echo "<div class=\"form-item\">\n<label for=\"edit-point\">积分: </label>\n";
+	echo "<input type=\"text\" maxlength=\"6\" name=\"point\" id=\"edit-point\"  size=\"30\" value=\"\" />\n</div>\n";
 }
 ?>
-<input type="submit" name="op" value="更    新"  class="form-submit" onclick="return check_form();"  />
+
+<input type="submit" name="op" value="更    新"  class="form-submit" onclick=""  />
 <br /><br />
 </div></form>
 <!-- end content -->

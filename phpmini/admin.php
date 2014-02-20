@@ -57,7 +57,7 @@
 		echo "<td>{$row['point']}</td>";
 		echo "<td width = \"20%\">{$row['regtime']}</td>";
 		echo "<td width = \"20%\">{$row['modtime']}</td>";
-		echo "<td><a href='edit_account.php?id={$row['id']}&m=money'>修改余额</a><a>  </a><a a href='edit_account.php?id={$row['id']}&m=point'>修改积分</a>  <a></a> <a  href='#' onclick='return doDel(\"{$row['tel']}\",{$row['id']});'>删除用户</a></td> </tr>";
+		echo "<td><a href='edit_account.php?id={$row['id']}&m=money&tel={$row['tel']}'>修改余额</a><a>  </a><a a href='edit_account.php?id={$row['id']}&m=point&tel={$row['tel']}'>修改积分</a>  <a></a> <a  href='#' onclick='return doDel(\"{$row['tel']}\",{$row['id']});'>删除用户</a></td> </tr>";
 	}
 ?>
 </tbody></table>
