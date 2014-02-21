@@ -9,6 +9,7 @@ function get_content($bizname, $bfile)
 {
 	global $curdir;
 	$path = $curdir.$bizname."/".$bfile;
+	runlog(__FILE__.":".__LINE__.": file $path prepare open!");
 	if (file_exists($path))
 		return file_get_contents($path);
 	else
@@ -17,4 +18,3 @@ function get_content($bizname, $bfile)
 }
 
 ?>
-
