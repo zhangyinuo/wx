@@ -1,8 +1,8 @@
 <?php 
 
+date_default_timezone_set('Asia/Chongqing');
 function runlog($text){
-	file_put_contents(dirname(__FILE__) .'/runlog.log', date("D M j G:i:s T Y")." ".$text."\n",FILE_APPEND);		
+	$logfile = "/data/app/log/runlog.log".date("Ymd");
+	file_put_contents($logfile, date("D M j G:i:s T Y")." ".$text."\n",FILE_APPEND);		
 };
-
 ?>
-

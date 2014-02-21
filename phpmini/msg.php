@@ -30,7 +30,7 @@
  <table id="content">
   <tr>
    <td id="main">
-<div class="breadcrumb"><a href="/drupal/">主页</a></div><h2>消息</h2>
+<div class="breadcrumb"><a href="/index.php">主页</a></div><h2>消息</h2>
 <!-- begin content -->
 
 <?php echo $msg; ?>
