@@ -1,0 +1,26 @@
+Sat Feb 8 16:31:38 CST 2014 /diska/sys_dev/wx/wx/code_adv/send/send.php_30:parse_msg_from_queue ok: wxfe7bc87fda8bd45d&&ba78461c30ad7340758aa9009bdecec8&&oXcK4tw29Np3jaxso7Q3blLuxbNI&&会员服务:
+1,会员享受折扣价住宿;
+2,定期开展会员活动;
+3,优先向会员推荐新产品;
+4,详细信息请登录以下网址:http://www.google.com.hk;
+
+Mon Feb 10 14:23:11 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/menu.php_14:file_get_contents err: /diska/sys_dev/wx/wx/code_adv/db/..//file/meun/self_test
+Mon Feb 10 14:24:53 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/token.php_42:get token err:self_test
+Mon Feb 10 14:24:53 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/token.php:68refresh_token_biz err
+Mon Feb 10 14:24:53 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/menu.php_21:get_token_by_biz err: self_test
+Mon Feb 10 14:47:04 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/token.php_44:get token err:self_test
+Mon Feb 10 14:47:04 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/token.php:70refresh_token_biz err
+Mon Feb 10 14:47:04 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/menu.php_21:get_token_by_biz err: self_test
+Mon Feb 10 14:48:50 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/token.php_46:get token err:self_test
+Mon Feb 10 14:48:50 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/token.php:72refresh_token_biz err
+Mon Feb 10 14:48:50 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/menu.php_21:get_token_by_biz err: self_test
+Mon Feb 10 14:52:47 CST 2014 /diska/sys_dev/wx/wx/code_adv/token/menu.php_28:HTTP/1.1 200 OK
+Server: nginx/1.4.4
+Date: Mon, 10 Feb 2014 06:52:47 GMT
+Content-Type: application/json; encoding=utf-8
+Content-Length: 27
+Connection: keep-alive
+
+{"errcode":0,"errmsg":"ok"}
+Mon Feb 10 16:02:29 CST 2014 /diska/sys_dev/wx/wx/code_adv/file/file.php:15: file /diska/sys_dev/wx/wx/code_adv/file/self_test/KEY2 not exist!
+Mon Feb 10 16:11:28 CST 2014 /diska/sys_dev/wx/wx/code_adv/file/file.php:15: file /diska/sys_dev/wx/wx/code_adv/file/self_test/KEY32 not exist!
