@@ -39,13 +39,8 @@
 </div>
 </div>
 </td>
-<<<<<<< HEAD
 <?php
 	}	
-=======
-<?php 
-	}
->>>>>>> e2a0f5043fd44a33281989a9a99da7e76d42d21a
 ?>
 	
    <td id="main">
@@ -56,7 +51,6 @@
       <p>本系统主要功能有以下几点：</p>
       <ol>
         <li>
-<<<<<<< HEAD
           <strong>商家登录</strong>
         </li>
         <li>
@@ -67,24 +61,8 @@
         </li>
         <li>
           <strong>公众号运营报表</strong>
-=======
-          <strong>会员注册</strong>
-        </li>
-        <li>
-          <strong>会员信息修改</strong>
-        </li>
-        <li>
-          <strong>会员信息查询</strong>
-        </li>
-        <li>
-          <strong>管理员注册</strong>
-        </li>
-        <li>
-          <strong>管理员登陆及管理</strong>
->>>>>>> e2a0f5043fd44a33281989a9a99da7e76d42d21a
         </li>
       </ol>
-<!-- end content -->
    </td>
   </tr>
  </table>
