@@ -20,6 +20,7 @@
  <input type="password" maxlength="" name="edit[pass]" id="edit-pass"  size="15"  class="form-text required" />
 </div>
 <input type="submit" name="op" value="登录"  class="form-submit" />
+<div class="item-list"><ul><li><a href="register.php" title="建立一个新的用户帐号">注册新帐号</a></li></ul></div>
 </div></form>
 </div>
 </div>
@@ -39,13 +40,8 @@
 </div>
 </div>
 </td>
-<<<<<<< HEAD
-<?php
-	}	
-=======
 <?php 
 	}
->>>>>>> e2a0f5043fd44a33281989a9a99da7e76d42d21a
 ?>
 	
    <td id="main">
@@ -56,18 +52,6 @@
       <p>本系统主要功能有以下几点：</p>
       <ol>
         <li>
-<<<<<<< HEAD
-          <strong>商家登录</strong>
-        </li>
-        <li>
-          <strong>跟粉丝互动消息设置</strong>
-        </li>
-        <li>
-          <strong>粉丝数量查看</strong>
-        </li>
-        <li>
-          <strong>公众号运营报表</strong>
-=======
           <strong>会员注册</strong>
         </li>
         <li>
@@ -81,7 +65,6 @@
         </li>
         <li>
           <strong>管理员登陆及管理</strong>
->>>>>>> e2a0f5043fd44a33281989a9a99da7e76d42d21a
         </li>
       </ol>
 <!-- end content -->
