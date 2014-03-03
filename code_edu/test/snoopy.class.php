@@ -355,7 +355,6 @@ class Snoopy
 				return true;
 				break;
 			case "https":
-				echo __FILE__.":".__LINE__."\n";
 				if (!function_exists('curl_init')) {
 				if(!$this->curl_path)
 					return false;
@@ -375,13 +374,11 @@ class Snoopy
 				{
 					$path = $URI_PARTS["path"].($URI_PARTS["query"] ? "?".$URI_PARTS["query"] : "");
 					// no proxy, send only the path
-				echo __FILE__.":".__LINE__."\n";
 					$this->_httpsrequest($path, $URI, $this->_submit_method, $this->_submit_type, $postdata);
 				}
 
 				if($this->_redirectaddr)
 				{
-				echo __FILE__.":".__LINE__."\n";
 					/* url was redirected, check if we've hit the max depth */
 					if($this->maxredirs > $this->_redirectdepth)
 					{
@@ -996,7 +993,6 @@ class Snoopy
 			$headers[] = "Authorization: BASIC ".base64_encode($this->user.":".$this->pass);
 		if (function_exists('curl_init')) {
 			$ch = curl_init();
-			echo __FILE__.":".__LINE__."\n";
 			curl_setopt($ch, CURLOPT_URL, $URI);
 			curl_setopt($ch, CURLOPT_HEADER, true); 
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);

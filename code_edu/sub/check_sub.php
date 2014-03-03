@@ -6,6 +6,14 @@ require_once($ROOTDIR."bizinfo/bizinfo.php");
 require_once($ROOTDIR."queue/queue.php");
 require_once($ROOTDIR."log/log.php");
 
+$cmdfile = $ROOTDIR."conf/cmd.txt";
+$codefile = $ROOTDIR."conf/code.php";
+
+$parse_array = array();
+$exec_array = array();
+
+
+
 $subq = "";
 if (init_q($subq, $sub_queue_file, "p") === false)
 {
@@ -30,15 +38,11 @@ if ($dblink === false)
 $type = 0;
 while (1)
 {
-	while(msg_receive($subq, 0, $type, 1024, $message, TRUE, MSG_IPC_NOWAIT)) {
-		$bizname = "";
-		$wx_username = "";
-		$time = "";
-		$msg = "";
+	while(msg_receive($subq, 0, $type, 1024, $src, TRUE, MSG_IPC_NOWAIT)) {
 
-		if (parse_msg_from_queue($message, $bizname, $wx_username, $time, $msg) === false)
+		if (parse_msg_from_queue($src, $msg, $wx_username, $time) === false)
 		{
-			runlog(__FILE__."_".__LINE__.":"."parse_msg_from_queue err: ".$message);
+			runlog(__FILE__."_".__LINE__.":"."parse_msg_from_queue err: ".$src);
 			continue;
 		}
 		registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg);

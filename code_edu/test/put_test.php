@@ -21,6 +21,7 @@ if (get_token_by_biz($token, "self_test", $dblink) === false)
 }
 
 echo "$token\n";
+exit;
 
 $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
 
