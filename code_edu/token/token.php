@@ -23,12 +23,21 @@ function refresh_token_biz($bizname, $file, $dblink)
 		return false;
 	}
 
-	$info;
-	$result = http_get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$id&secret=$key", array("timeout"=>5), $info);
+	$cururl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$id&secret=$key";
+	unlink("./tmptoken.txt");
+	$fp = fopen("./tmptoken.txt", "w");
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $cururl);
+	curl_setopt($ch, CURLOPT_HEADER, false);
+	curl_setopt($ch, CURLOPT_FILE, $fp);
+	$cret = curl_exec($ch);
+	fclose($fp);
+	curl_close($ch);
+	$result = file_get_contents("./tmptoken.txt");
 	$pos = strpos($result, "{\"access_token");
 	if ($pos === false)
 	{
-		runlog(__FILE__."_".__LINE__.":"."http_get:".$bizname);
+		runlog(__FILE__."_".__LINE__.":"."http_get:".$bizname."::".$result);
 		return false;
 	}
 

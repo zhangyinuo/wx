@@ -1,2 +1,3 @@
 #cmd|args|parse|exec(last arg must be dblink)
 reg|5|wx_reg_parse|wx_reg_exe
+cx|6|wx_cx_parse|wx_cx_exe
