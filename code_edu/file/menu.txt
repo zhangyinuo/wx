@@ -1,0 +1,34 @@
+{
+	"button":[
+	{	
+		"type":"click",
+		"name":"今日推荐",
+		"key":"KEY1"
+	},
+	{
+		"type":"click",
+		"name":"本店介绍",
+		"key":"KEY2"
+	},
+	{
+		"name":"会员",
+		"sub_button":[
+		{	
+			"type":"click",
+			"name":"积分查询",
+			"key":"KEY31"
+		},
+		{
+			"type":"click",
+			"name":"余额查询",
+			"key":"KEY32"
+		},
+		{
+			"type":"view",
+			"name":"会员充值",
+			"url":"http://www.qq.com"
+		}
+		]
+	}
+	]
+}

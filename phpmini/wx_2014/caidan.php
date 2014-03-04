@@ -42,8 +42,7 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 
 function do_echo($from, $to)
 {
-	$bizname = bizname;
-	$msg = get_content($bizname, "filename");
+	$msg = get_content("filename");
 	$pre = "<xml>
 		<ToUserName><![CDATA[%s]]></ToUserName>
 		<FromUserName><![CDATA[%s]]></FromUserName>
@@ -79,8 +78,7 @@ function do_rsp($c, $from, $to)
 function do_rsp_key($c, $from, $to)
 {
 	wx_log("echo:".__FILE__.":".__LINE__."\n");
-	$bizname = bizname;
-	$msg = get_content($bizname, $c);
+	$msg = get_content($c);
 	$pre = "<xml>
 		<ToUserName><![CDATA[%s]]></ToUserName>
 		<FromUserName><![CDATA[%s]]></FromUserName>

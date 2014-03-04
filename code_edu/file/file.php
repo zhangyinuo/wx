@@ -5,10 +5,10 @@ $curdir=dirname(__FILE__)."/";
 
 require_once($ROOTDIR."log/log.php");
 
-function get_content($bizname, $bfile)
+function get_content($bfile)
 {
 	global $curdir;
-	$path = $curdir.$bizname."/".$bfile;
+	$path = $curdir."file/".$bfile;
 	runlog(__FILE__.":".__LINE__.": file $path prepare!");
 	if (file_exists($path))
 		return file_get_contents($path);
