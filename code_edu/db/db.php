@@ -95,9 +95,12 @@ function do_update_nick_name($bizname, $fid, $nickname, $dblink)
 function registe_user_2_db($wx_username, $dblink)
 {
 	if (check_is_exist_wx_username($wx_username, $dblink))
+	{
+		runlog($wx_username." is ok!");
 		return;
+	}
 
-	insert_replace_fid_wx_username($bizname, $wx_username, $wx_username, $dblink, '1');
+	insert_replace_fid_wx_username($wx_username, $dblink);
 }
 
 function is_exist_fakeid($dblink, $fid, $bizname)

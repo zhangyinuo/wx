@@ -1,6 +1,6 @@
 <?php
 session_start();
-$ROOTDIR=dirname(__FILE__)."/../../code_adv/";
+$ROOTDIR=dirname(__FILE__)."/../../code_edu/";
 $CURDIR=dirname(__FILE__);
 define("TOKEN", "caidan");
 require_once($CURDIR."/wx_sample.php");
@@ -8,21 +8,12 @@ require_once($ROOTDIR."/queue/queue.php");
 require_once($ROOTDIR."/file/file.php");
 header("Content-Type: text/html; charset=gb2312");
 
-define ('bizname', "self_test");
-
-$subq = "";
-if (init_q($subq, $sub_queue_file, "p") === false)
-{
-	wx_log(__FILE__."_".__LINE__.":"."ERR init_ftok $sub_queue_file !");
-	exit;
-}
-
 function intoq(&$content, &$toUsername, &$fromUsername)
 {
 	//get post data, May be due to the different environments
 	$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
 
-	global $subq;
+	global $wx_sub_q;
 	//extract post data
 	if (!empty($postStr)){
 
@@ -41,9 +32,9 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 			wx_log("echo:".__FILE__.":".__LINE__."\n");
 			$content = $postObj->Content;
 		}
-		$bizname = bizname;
-		$msg = $bizname."&&".$fromUsername."&&".$time."&&".$content."&&".$msgType;
-		//msg_send($subq, 1, $msg);
+		$msg = $fromUsername."|".$content."|".$time;
+		if (msg_send($wx_sub_q, 1, $msg) === false)
+			wx_log("ERROR:".__FILE__.":".__LINE__."\n");
 
 		return $msgType;
 	}
@@ -102,7 +93,8 @@ function do_rsp_key($c, $from, $to)
 
 $url = $_SERVER['REQUEST_URI'];
 $wechatObj = new wechatCallbackapiTest();
-if ($wechatObj->valid() === true)
+//if ($wechatObj->valid() === true)
+if (1)
 {
 	wx_log("OK:".$url."\n");
 	$post = $HTTP_RAW_POST_DATA;
@@ -127,4 +119,5 @@ if ($wechatObj->valid() === true)
 }
 else
 	wx_log("ERROR:".$url."\n");
+
 ?>
