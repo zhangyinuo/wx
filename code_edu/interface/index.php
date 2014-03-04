@@ -1,26 +1,14 @@
 <?php
 session_start();
-require_once("/home/jingchun.zhang/svn/sys_dev/net_monitor/weixin/root/wxtest/wx_sample.php");
-require_once("/diska/sys_dev/wx/wx/code_adv/queue/queue.php");
-require_once("/diska/sys_dev/wx/wx/code_adv/file/file.php");
 define('S_ROOT', dirname(__FILE__).DIRECTORY_SEPARATOR);
 header("Content-Type: text/html; charset=gb2312");
-
-define ('bizname', "self_test");
-
-$subq = "";
-if (init_q($subq, $sub_queue_file, "p") === false)
-{
-	open_log(__FILE__."_".__LINE__.":"."ERR init_ftok $sub_queue_file !");
-	exit;
-}
 
 function intoq(&$content, &$toUsername, &$fromUsername)
 {
 	//get post data, May be due to the different environments
 	$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
 
-	global $subq;
+	global $wx_sub_q;
 	//extract post data
 	if (!empty($postStr)){
 
@@ -39,9 +27,8 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 			open_log("echo:".__FILE__.":".__LINE__."\n");
 			$content = $postObj->Content;
 		}
-		$bizname = bizname;
-		$msg = $bizname."&&".$fromUsername."&&".$time."&&".$content."&&".$msgType;
-		msg_send($subq, 1, $msg);
+		$msg = $fromUsername."|".$content."|".$time;
+		msg_send($wx_sub_q, 1, $msg);
 
 		return $msgType;
 	}

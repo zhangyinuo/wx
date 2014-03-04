@@ -11,7 +11,7 @@ function get_db()
 	$dbpasswd = "123456";
 	$dbport = "13306";
 	$dbhost = "127.0.0.1";
-	$dbdb = "wx_adv";
+	$dbdb = "wx_edu_schoolname";
 
 	$dblink = mysql_connect($dbhost.":".$dbport, $dbuser, $dbpasswd);
 	if ($dblink === false)
@@ -45,18 +45,19 @@ function get_db()
 	return $dblink;
 }
 
-function check_is_exist_wx_username($bizname, $wx_username, $dblink)
+function check_is_exist_wx_username($wx_username, $dblink)
 {
-	$result = mysql_query("select status from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
+	$result = mysql_query("select count(1) from t_wx_info where wx_username = '$wx_username' ", $dblink);
 	if ($result === false)
 	{
-		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
-		return $flag;
+		runlog("query wx_username from t_wx_info is null:".$wx_username);
+		return false;
 	}
-	$flag = "";
+	$flag = false;
 	while($row=mysql_fetch_array($result)) 
 	{
-		$flag = $row[0];
+		if ($row[0] > 0)
+			$flag = true;
 		break;
 	}
 	mysql_free_result($result);
@@ -64,14 +65,14 @@ function check_is_exist_wx_username($bizname, $wx_username, $dblink)
 	return $flag;
 }
 
-function insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink, $status)
+function insert_replace_fid_wx_username($wx_username, $dblink)
 {
 	$curtime = date("YmdHis");
-	$sql = "replace into wx_userinfo values(NULL, '$bizname', '$fid', '$wx_username', 'NULL', 'NULL', '$curtime', '$status', '1', '1', '1', NULL, '$wx_username', 'NULL', NULL)";
+	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '0', 'NULL', NULL, NULL, '$curtime');";
 	$result = mysql_query($sql, $dblink);
 	if ($result === false)
 	{
-		runlog("insert error ".$wx_username.":".$bizname.":".mysql_error());
+		runlog("insert error ".$wx_username.":".mysql_error());
 		return false;
 	}
 	return true;
@@ -91,14 +92,10 @@ function do_update_nick_name($bizname, $fid, $nickname, $dblink)
 	return $ret;
 }
 
-function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
+function registe_user_2_db($wx_username, $dblink)
 {
-	$status = check_is_exist_wx_username($bizname, $wx_username, $dblink);
-	if ($status === '1' || $status === '2')
-	{
-		runlog(__FILE__."_".__LINE__.":"."check_is_exist_wx_username:".$bizname.":".$wx_username);
+	if (check_is_exist_wx_username($wx_username, $dblink))
 		return;
-	}
 
 	insert_replace_fid_wx_username($bizname, $wx_username, $wx_username, $dblink, '1');
 }

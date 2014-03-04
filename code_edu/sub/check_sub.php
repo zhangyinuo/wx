@@ -39,25 +39,6 @@ if ($fp)
 	fclose($fp);
 }
 
-print_r($args_array);
-print_r($parse_array);
-print_r($exec_array);
-exit;
-
-$subq = "";
-if (init_q($subq, $sub_queue_file, "p") === false)
-{
-	runlog(__FILE__."_".__LINE__.":"."ERR init_ftok $sub_queue_file !");
-	exit;
-}
-
-$upq = "";
-if (init_q($upq, $up_queue_file, "p") === false)
-{
-	runlog(__FILE__."_".__LINE__.":"."ERR init_ftok $up_queue_file !");
-	exit;
-}
-
 $dblink= get_db();
 if ($dblink === false)
 {
@@ -68,15 +49,15 @@ if ($dblink === false)
 $type = 0;
 while (1)
 {
-	while(msg_receive($subq, 0, $type, 1024, $src, TRUE, MSG_IPC_NOWAIT)) {
+	while(msg_receive($wx_sub_q, 0, $type, 1024, $src, TRUE, MSG_IPC_NOWAIT)) {
 
-		if (parse_msg_from_queue($src, $msg, $wx_username, $time) === false)
+		$retarr = parse_msg_com($src, "|");
+		if (count($retarr) != 3)
 		{
-			runlog(__FILE__."_".__LINE__.":"."parse_msg_from_queue err: ".$src);
+			runlog(__FILE__."_".__LINE__.":"."ERR parse_msg_com $src !");
 			continue;
 		}
-		registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg);
-		msg_send($upq, 1, $message);
+		registe_user_2_db($retarr[0], $dblink);
 	}
 
 	mysql_ping($dblink);
