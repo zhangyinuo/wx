@@ -13,6 +13,7 @@ require_once($ROOTDIR."conf/code.php");
 $parse_array = array();
 $exec_array = array();
 $args_array = array();
+$cb_array = array();
 
 $fp = fopen($cmdfile, "r");
 if ($fp)
@@ -35,6 +36,7 @@ if ($fp)
 		$args_array[$retarr[0]] = $retarr[1];
 		$parse_array[$retarr[0]] = $retarr[2];
 		$exec_array[$retarr[0]] = $retarr[3];
+		array_push($cb_array, $retarr[0]);
 	}
 	fclose($fp);
 }
@@ -58,6 +60,30 @@ while (1)
 			continue;
 		}
 		registe_user_2_db($retarr[0], $dblink);
+
+		$msgarr = parse_msg_com($retarr[1], " ");
+
+		runlog(__FILE__."_".__LINE__.":".$src);
+		if (in_array($msgarr[0], $cb_array)) 
+		{
+			runlog(__FILE__."_".__LINE__.":".$src);
+			$ncount = intval($args_array[$msgarr[0]]);
+			$rcount = intval(count($msgarr));
+			if ($ncount === $rcount)
+			{
+		runlog(__FILE__."_".__LINE__.":".$src);
+				$exc_func = $exec_array[$msgarr[0]];
+				array_shift($msgarr);
+				array_push($msgarr, $dblink);
+				call_user_func_array($exc_func, $msgarr);
+			}
+			else
+				runlog(__FILE__."_".__LINE__.":".$src.":".$ncount.":".$rcount);
+
+		}
+		else
+			runlog(__FILE__."_".__LINE__.":".$src);
+
 	}
 
 	mysql_ping($dblink);
