@@ -9,8 +9,8 @@ function get_db()
 {
 	$dbuser = "root";
 	$dbpasswd = "123456";
-	$dbport = "23306";
-	$dbhost = "14.17.117.32";
+	$dbport = "13306";
+	$dbhost = "127.0.0.1";
 	$dbdb = "wx";
 
 	$dblink = mysql_connect($dbhost.":".$dbport, $dbuser, $dbpasswd);
