@@ -1,74 +1,39 @@
 {
 	"button":[
 	{	
-		"name":"简介",
+		"name":"资讯",
 		"sub_button":[
 		{	
-			"type":"view",
-			"name":"最新动态",
-			"url":"http://a478086.s135.gzonet.com/sch-news.asp?Clid=22&Chid=1"
+			"type":"click",
+			"name":"公司简介",
+			"key":"KEY11"
 		},
 		{
-			"type":"view",
-			"name":"园丁风采",
-			"url":"http://a478086.s135.gzonet.com/teacher-index.asp?Clid=8&Chid=14"
+			"type":"click",
+			"name":"金融资讯",
+			"key":"KEY12"
 		},
 		{
-			"type":"view",
-			"name":"学校简介",
-			"url":"http://a478086.s135.gzonet.com/schj.asp?Clid=2&Chid=12"
+			"type":"click",
+			"name":"时政要闻",
+			"key":"KEY13"
 		}
 		]
 	},
 	{
-		"name":"信息查询",
+		"name":"借贷",
 		"sub_button":[
 		{	
 			"type":"click",
-			"name":"课�表",
+			"name":"抵押贷款",
 			"key":"KEY21"
 		},
 		{
 			"type":"click",
-			"name":"考试成绩查询",
+			"name":"无抵押贷款 ",
 			"key":"KEY22"
-		},
-		{
-			"type":"click",
-			"name":"作业成绩查询",
-			"key":"KEY23"
-		},
-		{
-			"type":"click",
-			"name":"作业查询",
-			"key":"KEY24"
-		},
-		{
-			"type":"click",
-			"name":"最新通知",
-			"key":"KEY25"
 		}
 		]
 	},
-	{
-		"name":"在线学习",
-		"sub_button":[
-		{	
-			"type":"view",
-			"name":"在线课程",
-			"url":"http://a478086.s135.gzonet.com/jygc.asp?Clid=13&Chid=15"
-		},
-		{
-			"type":"view",
-			"name":"练习题库",
-			"url":"http://a478086.s135.gzonet.com/jygc.asp?Clid=13&Chid=15"
-		},
-		{
-			"type":"view",
-			"name":"课外活动",
-			"url":"http://a478086.s135.gzonet.com/jygc.asp?Clid=13&Chid=15"
-		}
-		]
-	}
 	]
 }

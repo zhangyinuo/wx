@@ -8,7 +8,7 @@ require_once($ROOTDIR."log/log.php");
 function get_content($bfile)
 {
 	global $curdir;
-	$path = $curdir."file/".$bfile;
+	$path = $curdir."file/$bfile/okmsg";
 	runlog(__FILE__.":".__LINE__.": file $path prepare!");
 	if (file_exists($path))
 		return file_get_contents($path);

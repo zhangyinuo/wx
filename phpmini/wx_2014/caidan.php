@@ -1,6 +1,6 @@
 <?php
 session_start();
-$ROOTDIR=dirname(__FILE__)."/../../code_edu/";
+$ROOTDIR=dirname(__FILE__)."/../../code_touzi/";
 $CURDIR=dirname(__FILE__);
 define("TOKEN", "caidan");
 require_once($CURDIR."/wx_sample.php");
@@ -40,41 +40,6 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 	}
 }
 
-function do_echo($from, $to)
-{
-	$msg = get_content("filename");
-	$pre = "<xml>
-		<ToUserName><![CDATA[%s]]></ToUserName>
-		<FromUserName><![CDATA[%s]]></FromUserName>
-		<CreateTime>%s</CreateTime>";
-	$premsg = sprintf($pre, $to, $from, time());
-	$msg = $premsg.$msg;
-	wx_log("echo:".$msg."\n");
-	echo $msg;
-}
-
-function do_rsp($c, $from, $to)
-{
-	wx_log("echo:".__FILE__.":".__LINE__."\n");
-	$cmd = substr($c, 0, 1);
-	switch ($cmd)
-	{
-	case '2':
-	case '3':
-	case '4':
-	case '5':
-	case 'u':
-	case 'o':
-	case 's':
-	case 'c':
-	case 'l':
-		return;
-
-	default:
-		do_echo($from, $to);
-	}
-}
-
 function do_rsp_key($c, $from, $to)
 {
 	wx_log("echo:".__FILE__.":".__LINE__."\n");
@@ -106,12 +71,6 @@ if (1)
 		wx_log("echo:".__FILE__.":".__LINE__."\n");
 		if (strlen($content) > 3)
 			do_rsp_key($content, $to, $from);
-	}
-	else
-	{
-		wx_log("echo:".__FILE__.":".__LINE__."\n");
-		if (strlen($content) > 0)
-			do_rsp($content, $to, $from);
 	}
 	exit;
 }

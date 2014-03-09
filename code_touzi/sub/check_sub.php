@@ -61,28 +61,7 @@ while (1)
 		}
 		registe_user_2_db($retarr[0], $dblink);
 
-		$msgarr = parse_msg_com($retarr[1], " ");
-
-		runlog(__FILE__."_".__LINE__.":".$src);
-		if (in_array($msgarr[0], $cb_array)) 
-		{
-			runlog(__FILE__."_".__LINE__.":".$src);
-			$ncount = intval($args_array[$msgarr[0]]);
-			$rcount = intval(count($msgarr));
-			if ($ncount === $rcount)
-			{
-		runlog(__FILE__."_".__LINE__.":".$src);
-				$exc_func = $exec_array[$msgarr[0]];
-				array_shift($msgarr);
-				array_push($msgarr, $dblink);
-				call_user_func_array($exc_func, $msgarr);
-			}
-			else
-				runlog(__FILE__."_".__LINE__.":".$src.":".$ncount.":".$rcount);
-
-		}
-		else
-			runlog(__FILE__."_".__LINE__.":".$src);
+		$path = get_last_path($retarr[0]);
 
 	}
 
