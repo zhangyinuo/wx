@@ -66,12 +66,6 @@ if (1)
 	$from;
 	$to;
 	$type = intoq($content, $to, $from);
-	if (strcmp ($type, "event") === 0)
-	{
-		wx_log("echo:".__FILE__.":".__LINE__."\n");
-		if (strlen($content) > 3)
-			do_rsp_key($content, $to, $from);
-	}
 	exit;
 }
 else
