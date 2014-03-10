@@ -69,7 +69,7 @@ while (1)
 			continue;
 		}
 
-		if (strcasecmp(substr($retarr[1], 0, 3), "KEY"))
+		if (strcasecmp(substr($retarr[1], 0, 3), "KEY") === 0)
 			clear_wx_step($retarr[0], $dblink);
 		$path = "";
 		$ret = get_last_path($retarr[0], $path, $retarr[1], $dblink);
