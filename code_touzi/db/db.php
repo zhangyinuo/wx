@@ -11,7 +11,7 @@ function get_db()
 	$dbpasswd = "123456";
 	$dbport = "13306";
 	$dbhost = "127.0.0.1";
-	$dbdb = "wx_edu_schoolname";
+	$dbdb = "wx_touzi";
 
 	$dblink = mysql_connect($dbhost.":".$dbport, $dbuser, $dbpasswd);
 	if ($dblink === false)
@@ -68,7 +68,7 @@ function check_is_exist_wx_username($wx_username, $dblink)
 function insert_replace_fid_wx_username($wx_username, $dblink)
 {
 	$curtime = date("YmdHis");
-	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '0', 'NULL', NULL, NULL, '$curtime');";
+	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '$curtime', 'NULL', NULL, NULL, 'NULL', NULL, NULL, 0, 0, NULL);";
 	$result = mysql_query($sql, $dblink);
 	if ($result === false)
 	{
@@ -103,7 +103,7 @@ function registe_user_2_db($wx_username, $dblink)
 	insert_replace_fid_wx_username($wx_username, $dblink);
 }
 
-function get_last_path($wx_username, $dblink)
+function get_last_path($wx_username, &$path, $cur, $dblink)
 {
 	$result = mysql_query("select * from t_wx_info where wx_username = '$wx_username' ", $dblink);
 	if ($result === false)
@@ -112,17 +112,72 @@ function get_last_path($wx_username, $dblink)
 		return false;
 	}
 	$path = "";
+
+	$retval = 0;
 	$curtime = time();
 	while($row=mysql_fetch_array($result)) 
 	{
 		if ($curtime - intval($row[10]) < 600)
 		{
+			if ($row[11] <= 0)
+			{
+				runlog(__FILE__.":".__LINE__);
+				$retval = 1;
+			}
+			else
+			{
+				runlog(__FILE__.":".__LINE__);
+				for ($idx = 0; $idx < $row[11]; $idx++)
+				{
+					$path = $path."/".$row[$idx+4];
+				}
+				$path = $path."/".$cur;
+			}
+		}
+		else if ($row[11] == 0)
+		{
+				runlog(__FILE__.":".__LINE__);
+			$path = $cur;
+		}
+		else
+		{
+			runlog(__FILE__.":".__LINE__);
+			$retval = 2;
 		}
 		break;
 	}
 	mysql_free_result($result);
 
-	return $flag;
+	return $retval;
+}
+
+function update_wx_by_step($wx_username, $cur, $dblink)
+{
+	$result = mysql_query("select lastindex from t_wx_info where wx_username = '$wx_username' ", $dblink);
+	if ($result === false)
+	{
+		runlog("update_wx_by_step query wx_username from t_wx_info is null:".$wx_username);
+		return false;
+	}
+	$idx = 0;
+	while($row=mysql_fetch_array($result)) 
+	{
+		$idx = intval($row[0]);
+		break;
+	}
+	mysql_free_result($result);
+
+	if ($idx >= 5)
+		runlog($wx_username." in max depth");
+	else
+	{
+		runlog(__FILE__.":".__LINE__);
+		$idx++;
+		$curtime = time();
+		$idxname = "step".$idx;
+		$sql = "update t_wx_info set lastindex = $idx, $idxname = '$cur', lasttime = $curtime where wx_username = '$wx_username' ";
+		$result = mysql_query($sql, $dblink); 
+	}
 }
 
 function is_exist_fakeid($dblink, $fid, $bizname)

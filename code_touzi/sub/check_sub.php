@@ -6,6 +6,7 @@ require_once($ROOTDIR."db/db.php");
 require_once($ROOTDIR."bizinfo/bizinfo.php");
 require_once($ROOTDIR."queue/queue.php");
 require_once($ROOTDIR."log/log.php");
+require_once($ROOTDIR."file/file.php");
 
 $cmdfile = $ROOTDIR."conf/cmd.txt";
 require_once($ROOTDIR."conf/code.php");
@@ -61,7 +62,11 @@ while (1)
 		}
 		registe_user_2_db($retarr[0], $dblink);
 
-		$path = get_last_path($retarr[0], $dblink);
+		$path = "";
+		$ret = get_last_path($retarr[0], $path, $retarr[1], $dblink);
+		if ($ret == 0)
+			update_wx_by_step($retarr[0], $retarr[1], $dblink);
+		process_request($retarr[0], $path, $ret);
 
 	}
 

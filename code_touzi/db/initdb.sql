@@ -18,7 +18,7 @@ CREATE TABLE t_wx_info (
 	`msisdn` varchar(16) default null,
 	PRIMARY KEY (`id`),
 	unique key(fakeid),
-	unique key(wx_username)
+	unique key(wx_username),
 	key(msisdn)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -29,6 +29,6 @@ CREATE TABLE t_wx_location (
 	`modtime` varchar(16) not null,
 	`x` varchar(16) default null,
 	`y` varchar(16) default null,
-	PRIMARY KEY (`id`),
+	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
