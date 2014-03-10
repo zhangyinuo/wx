@@ -62,11 +62,26 @@ while (1)
 		}
 		registe_user_2_db($retarr[0], $dblink);
 
+		if (strcmp($retarr[1], "h") === 0)
+		{
+			clear_wx_step($retarr[0], $dblink);
+			process_request($retarr[0], $path, 2);
+			continue;
+		}
+
 		$path = "";
 		$ret = get_last_path($retarr[0], $path, $retarr[1], $dblink);
 		if ($ret == 0)
-			update_wx_by_step($retarr[0], $retarr[1], $dblink);
-		process_request($retarr[0], $path, $ret);
+		{
+			if (get_content($path) != false)
+				update_wx_by_step($retarr[0], $retarr[1], $dblink);
+			else
+				$ret = 1;
+		}
+		if ($ret == 2)
+			clear_wx_step($retarr[0], $dblink);
+		if (strcasecmp(substr($retarr[1], 0, 3), "KEY"))
+			process_request($retarr[0], $path, $ret);
 
 	}
 

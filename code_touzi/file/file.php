@@ -22,14 +22,24 @@ function get_content($bfile)
 
 function process_request($fid, $path, $ret)
 {
+	global $wx_down_q;
+	$msg = "";
 	if ($ret != 0)
 	{
 		runlog(__FILE__.":".__LINE__.": $fid prepare!");
+		$f = get_content("bad".$ret."f");
+		$c = get_content("bad".$ret);
+		$msg = sprintf($f, $fid, $c);
 	}
 	else
 	{
 		runlog(__FILE__.":".__LINE__.": $fid prepare!");
+		$f = get_content($path."f");
+		$c = get_content($path);
+		$msg = sprintf($f, $fid, $c);
 	}
+
+	msg_send($wx_down_q, 1, $msg);
 }
 ?>
 

@@ -5,30 +5,42 @@ require_once($ROOTDIR."db/db.php");
 require_once($ROOTDIR."bizinfo/bizinfo.php");
 require_once($ROOTDIR."queue/queue.php");
 require_once($ROOTDIR."log/log.php");
+require_once($ROOTDIR."token/token.php");
 
-$downq = "";
-if (init_q($downq, $down_queue_file, "p") === false)
+$dblink= get_db();
+if ($dblink === false)
 {
-	runlog(__FILE__."_".__LINE__.":"."ERR init_ftok $down_queue_file !");
+	echo "get db error!\n";
 	exit;
 }
 
+init_bizinfo($dblink);
+
+$token = "";
 $type = 0;
 while (1)
 {
-	while(msg_receive($downq, 0, $type, 1024, $message, TRUE, MSG_IPC_NOWAIT)) {
-		$bizname;
-		$fid;
-		$msg;
+	while(msg_receive($wx_down_q, 0, $type, 1024, $message, TRUE, MSG_IPC_NOWAIT)) {
 
-		if (parse_msg_from_queue($message, $bizname, $fid, $msg) === false)
+		runlog(__FILE__."_".__LINE__.":"."try send: ".$message);
+
+		if (get_token_by_biz($token, "self_test", $dblink) === false)
 		{
-			runlog(__FILE__."_".__LINE__.":"."parse_msg_from_queue err: ".$message);
-			continue;
+			echo "get_token_by_biz error!\n";
+			return false;
 		}
-		runlog(__FILE__."_".__LINE__.":"."parse_msg_from_queue ok: ".$message);
-	}
 
-	sleep(5);
+		$url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
+		$response = curl_exec($ch);
+		curl_close($ch);
+	}
+	mysql_ping($dblink);
+	sleep(1);
 }
 ?>

@@ -136,7 +136,7 @@ function get_last_path($wx_username, &$path, $cur, $dblink)
 		}
 		else if ($row[11] == 0)
 		{
-				runlog(__FILE__.":".__LINE__);
+			runlog(__FILE__.":".__LINE__);
 			$path = $cur;
 		}
 		else
@@ -178,6 +178,12 @@ function update_wx_by_step($wx_username, $cur, $dblink)
 		$sql = "update t_wx_info set lastindex = $idx, $idxname = '$cur', lasttime = $curtime where wx_username = '$wx_username' ";
 		$result = mysql_query($sql, $dblink); 
 	}
+}
+
+function clear_wx_step($wx_username, $dblink)
+{
+	$sql = "update t_wx_info set lastindex = 0, lasttime = 0, step1 = NULL, step2 = NULL, step3 = NULL, step4 = NULL, step5 = NULL, step6 = NULL where wx_username = '$wx_username' ";
+	$result = mysql_query($sql, $dblink); 
 }
 
 function is_exist_fakeid($dblink, $fid, $bizname)
