@@ -103,6 +103,28 @@ function registe_user_2_db($wx_username, $dblink)
 	insert_replace_fid_wx_username($wx_username, $dblink);
 }
 
+function get_last_path($wx_username, $dblink)
+{
+	$result = mysql_query("select * from t_wx_info where wx_username = '$wx_username' ", $dblink);
+	if ($result === false)
+	{
+		runlog("query wx_username from t_wx_info is null:".$wx_username);
+		return false;
+	}
+	$path = "";
+	$curtime = time();
+	while($row=mysql_fetch_array($result)) 
+	{
+		if ($curtime - intval($row[10]) < 600)
+		{
+		}
+		break;
+	}
+	mysql_free_result($result);
+
+	return $flag;
+}
+
 function is_exist_fakeid($dblink, $fid, $bizname)
 {
 	$result = mysql_query("select status from wx_userinfo where fakeid = '$fid' and bizname = '$bizname' ", $dblink);

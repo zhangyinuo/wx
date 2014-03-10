@@ -61,7 +61,7 @@ while (1)
 		}
 		registe_user_2_db($retarr[0], $dblink);
 
-		$path = get_last_path($retarr[0]);
+		$path = get_last_path($retarr[0], $dblink);
 
 	}
 
