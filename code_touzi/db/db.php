@@ -180,6 +180,12 @@ function update_wx_by_step($wx_username, $cur, $dblink)
 	}
 }
 
+function update_msisdn($wx_username, $msisdn, $dblink)
+{
+	$sql = "update t_wx_info set msisdn = '$msisdn' where wx_username = '$wx_username' ";
+	$result = mysql_query($sql, $dblink); 
+}
+
 function clear_wx_step($wx_username, $dblink)
 {
 	$sql = "update t_wx_info set lastindex = 0, lasttime = 0, step1 = NULL, step2 = NULL, step3 = NULL, step4 = NULL, step5 = NULL, step6 = NULL where wx_username = '$wx_username' ";

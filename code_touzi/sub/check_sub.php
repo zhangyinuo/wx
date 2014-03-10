@@ -62,6 +62,14 @@ while (1)
 		}
 		registe_user_2_db($retarr[0], $dblink);
 
+		if (strlen($retarr[1]) === 11 && is_numeric($retarr[1]) === true)
+		{
+			update_msisdn($retarr[0], $retarr[1], $dblink);
+			clear_wx_step($retarr[0], $dblink);
+			process_request($retarr[0], "", 3);
+			continue;
+		}
+
 		if (strcmp($retarr[1], "h") === 0)
 		{
 			clear_wx_step($retarr[0], $dblink);
@@ -87,6 +95,6 @@ while (1)
 	}
 
 	mysql_ping($dblink);
-	sleep(5);
+	sleep(1);
 }
 ?>
