@@ -21,19 +21,34 @@
 		]
 	},
 	{
-		"name":"借贷",
+		"name":"我要融资",
 		"sub_button":[
 		{	
 			"type":"click",
-			"name":"抵押贷款",
+			"name":"个人融资",
 			"key":"KEY21"
 		},
 		{
 			"type":"click",
-			"name":"无抵押贷款 ",
+			"name":"企业融资",
 			"key":"KEY22"
 		}
 		]
 	},
+	{
+		"name":"实用工具",
+		"sub_button":[
+		{	
+			"type":"click",
+			"name":"房贷计算",
+			"key":"KEY31"
+		},
+		{
+			"type":"click",
+			"name":"保持联系",
+			"key":"KEY32"
+		}
+		]
+	}
 	]
 }
