@@ -39,9 +39,9 @@
 		"name":"实用工具",
 		"sub_button":[
 		{	
-			"type":"click",
+			"type":"view",
 			"name":"房贷计算",
-			"key":"KEY31"
+			"url":"http://www.qq.com"
 		},
 		{
 			"type":"click",
