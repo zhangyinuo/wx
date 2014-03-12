@@ -55,12 +55,12 @@ while (1)
 	while(msg_receive($wx_sub_q, 0, $type, 1024, $src, TRUE, MSG_IPC_NOWAIT)) {
 
 		$retarr = parse_msg_com($src, "|");
+		registe_user_2_db($retarr[0], $dblink);
 		if (count($retarr) != 3)
 		{
-			runlog(__FILE__."_".__LINE__.":"."ERR parse_msg_com $src !");
+			msg_send($wx_up_q, 1, $src);
 			continue;
 		}
-		registe_user_2_db($retarr[0], $dblink);
 
 		if (strlen($retarr[1]) === 11 && is_numeric($retarr[1]) === true)
 		{

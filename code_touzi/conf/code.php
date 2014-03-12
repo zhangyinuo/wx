@@ -29,6 +29,19 @@ function wx_test_exe($msg, $dblink)
 	runlog(__FILE__."_".__LINE__.":".$msg);
 };
 
+function location_exe($wx_username, $func, $x, $y, $lable, $mtime, $dblink)
+{
+	$sql = "insert into t_wx_location values (NULL, '$wx_username', '$mtime', '$x', '$y', '$lable') ";
+	$result = mysql_query($sql, $dblink);
+	if ($result === false)
+	{
+		runlog("location_exe err ".mysql_error());
+		process_request($wx_username, "", 5);
+		return false;
+	}
+	process_request($wx_username, "", 4);
+};
+
 function wx_test_parse($src)
 {
 	$ret = array ();

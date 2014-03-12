@@ -29,6 +29,7 @@ CREATE TABLE t_wx_location (
 	`modtime` varchar(16) not null,
 	`x` varchar(16) default null,
 	`y` varchar(16) default null,
+	`l` varchar(256) default null,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

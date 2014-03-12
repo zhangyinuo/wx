@@ -3,3 +3,21 @@
 
 
 
+
+
+
+
+
+PHP Warning:  msg_send() expects parameter 1 to be resource, string given in /data/app/wx/code_touzi/sub/check_sub.php on line 60
+PHP Warning:  msg_send() expects parameter 1 to be resource, string given in /data/app/wx/code_touzi/sub/check_sub.php on line 60
+PHP Warning:  msg_send() expects parameter 1 to be resource, string given in /data/app/wx/code_touzi/sub/check_sub.php on line 60
+
+
+
+
+
+
+
+
+
+

@@ -27,6 +27,15 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 			wx_log("echo:".__FILE__.":".__LINE__."\n");
 			$content = $postObj->EventKey;
 		}
+		else if (strcmp ($msgType, "location") === 0)
+		{
+			$X = $postObj->Location_X;
+			$Y = $postObj->Location_Y;
+			$Label = $postObj->Label;
+
+			$content = $msgType."|".$X."|".$Y."|".$Label;
+			wx_log("echo:".__FILE__.":".__LINE__.":".$content."\n");
+		}
 		else
 		{
 			wx_log("echo:".__FILE__.":".__LINE__."\n");

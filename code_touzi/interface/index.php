@@ -27,6 +27,15 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 			wx_log("echo:".__FILE__.":".__LINE__."\n");
 			$content = $postObj->EventKey;
 		}
+		else if (strcmp ($msgType, "location") === 0)
+		{
+			$X = $postObj->Location_X;
+			$Y = $postObj->Location_Y;
+			$Label = $postObj->Label;
+
+			$content = $msgType."|".$X."|".$Y."|".$Label;
+			wx_log("echo:".__FILE__.":".__LINE__.":".$content."\n");
+		}
 		else
 		{
 			wx_log("echo:".__FILE__.":".__LINE__."\n");
@@ -66,12 +75,6 @@ if (1)
 	$from;
 	$to;
 	$type = intoq($content, $to, $from);
-	if (strcmp ($type, "event") === 0)
-	{
-		wx_log("echo:".__FILE__.":".__LINE__."\n");
-		if (strlen($content) > 3)
-			do_rsp_key($content, $to, $from);
-	}
 	exit;
 }
 else

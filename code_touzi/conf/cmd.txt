@@ -2,3 +2,4 @@
 test|2|wx_test_parse|wx_test_exe
 reg|5|wx_reg_parse|wx_reg_exe
 cx|6|wx_cx_parse|wx_cx_exe
+location|7|location_parse|location_exe
