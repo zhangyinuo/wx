@@ -20,7 +20,8 @@
  <div class="content">
 <ul class="menu">
 <li class="leaf"><a href="account.php" class="active">我的帐户</a></li>
-<li class="leaf"><a href="admin.php" >用户列表</a></li>
+<li class="leaf"><a href="admin.php" >用户管理</a></li>
+<li class="leaf"><a href="www.php" >资讯管理</a></li>
 <li class="leaf"><a href="logout.php">注销登录</a></li>
 
 </ul>
