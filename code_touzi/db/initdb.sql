@@ -35,6 +35,14 @@ CREATE TABLE t_wx_location (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE t_wx_data(
+	`id` int(11) NOT NULL AUTO_INCREMENT, 
+	`wx_username` varchar(32) not null,
+	`modtime` varchar(16) not null,
+	`k` varchar(16) default null,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `open_biz` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bizname` varchar(32) DEFAULT NULL,

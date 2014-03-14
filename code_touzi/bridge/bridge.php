@@ -62,7 +62,7 @@ while (1)
 			call_user_func_array($exc_func, $retarr);
 		}
 		else
-			process_request($retarr[0], "", 1);
+			record_select($retarr[0], $retarr[1], $dblink);
 
 	}
 	mysql_ping($dblink);

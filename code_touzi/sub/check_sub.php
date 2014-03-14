@@ -57,11 +57,9 @@ while (1)
 		runlog(__FILE__."_".__LINE__.":".$src);
 		$retarr = parse_msg_com($src, "|");
 		registe_user_2_db($retarr[0], $dblink);
+		msg_send($wx_up_q, 1, $src);
 		if (count($retarr) != 3)
-		{
-			msg_send($wx_up_q, 1, $src);
 			continue;
-		}
 
 		if (strcmp($retarr[1], "unsubscribe") === 0)
 		{

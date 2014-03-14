@@ -42,6 +42,19 @@ function location_exe($wx_username, $func, $x, $y, $lable, $mtime, $dblink)
 	process_request($wx_username, "", 4);
 };
 
+function record_select($wx_username, $k, $dblink)
+{
+	$curtime = date("YmdHis");
+	$sql = "insert into t_wx_data values (NULL, '$wx_username', '$curtime', '$k') ";
+	runlog("record ".$sql);
+	$result = mysql_query($sql, $dblink);
+	if ($result === false)
+	{
+		runlog("record err ".mysql_error());
+		return false;
+	}
+};
+
 function wx_test_parse($src)
 {
 	$ret = array ();
