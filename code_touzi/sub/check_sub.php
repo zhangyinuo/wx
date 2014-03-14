@@ -54,11 +54,26 @@ while (1)
 {
 	while(msg_receive($wx_sub_q, 0, $type, 1024, $src, TRUE, MSG_IPC_NOWAIT)) {
 
+		runlog(__FILE__."_".__LINE__.":".$src);
 		$retarr = parse_msg_com($src, "|");
 		registe_user_2_db($retarr[0], $dblink);
 		if (count($retarr) != 3)
 		{
 			msg_send($wx_up_q, 1, $src);
+			continue;
+		}
+
+		if (strcmp($retarr[1], "unsubscribe") === 0)
+		{
+			unsubscribe_wx($retarr[0], $dblink, 1);
+			continue;
+		}
+
+		if (strcmp($retarr[1], "subscribe") === 0)
+		{
+			unsubscribe_wx($retarr[0], $dblink, 0);
+			clear_wx_step($retarr[0], $dblink);
+			process_request($retarr[0], $retarr[1], 0);
 			continue;
 		}
 

@@ -16,6 +16,8 @@ CREATE TABLE t_wx_info (
 	`lasttime` int ,
 	`lastindex` int default 0,
 	`msisdn` varchar(16) default null,
+	`flag` int default 0,
+	`un_modtime` varchar(16) default null,
 	PRIMARY KEY (`id`),
 	unique key(fakeid),
 	unique key(wx_username),

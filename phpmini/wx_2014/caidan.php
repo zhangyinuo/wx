@@ -26,6 +26,8 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 		{
 			wx_log("echo:".__FILE__.":".__LINE__."\n");
 			$content = $postObj->EventKey;
+			if (strlen($content) < 3)
+				$content = $postObj->Event;
 		}
 		else if (strcmp ($msgType, "location") === 0)
 		{

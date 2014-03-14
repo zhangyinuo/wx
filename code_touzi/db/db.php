@@ -68,7 +68,7 @@ function check_is_exist_wx_username($wx_username, $dblink)
 function insert_replace_fid_wx_username($wx_username, $dblink)
 {
 	$curtime = date("YmdHis");
-	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '$curtime', 'NULL', NULL, NULL, 'NULL', NULL, NULL, 0, 0, NULL);";
+	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '$curtime', 'NULL', NULL, NULL, 'NULL', NULL, NULL, 0, 0, NULL, 0, NULL);";
 	$result = mysql_query($sql, $dblink);
 	if ($result === false)
 	{
@@ -76,6 +76,16 @@ function insert_replace_fid_wx_username($wx_username, $dblink)
 		return false;
 	}
 	return true;
+}
+
+function unsubscribe_wx($wx_username, $dblink, $flag)
+{
+	$curtime = date("YmdHis");
+	if ($flag === 0)
+		$sql = "update t_wx_info set flag = $flag where wx_username = '$wx_username' ";
+	else
+		$sql = "update t_wx_info set flag = $flag, un_modtime = '$curtime' where wx_username = '$wx_username' ";
+	$result = mysql_query($sql, $dblink); 
 }
 
 function do_update_nick_name($bizname, $fid, $nickname, $dblink)
@@ -190,44 +200,6 @@ function clear_wx_step($wx_username, $dblink)
 {
 	$sql = "update t_wx_info set lastindex = 0, lasttime = 0, step1 = NULL, step2 = NULL, step3 = NULL, step4 = NULL, step5 = NULL, step6 = NULL where wx_username = '$wx_username' ";
 	$result = mysql_query($sql, $dblink); 
-}
-
-function is_exist_fakeid($dblink, $fid, $bizname)
-{
-	$result = mysql_query("select status from wx_userinfo where fakeid = '$fid' and bizname = '$bizname' ", $dblink);
-	if ($result === false)
-	{
-		runlog(__FILE__.":".__LINE__."query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
-		return $flag;
-	}
-	$count = -1;
-	while($row=mysql_fetch_array($result)) 
-	{
-		$count = $row[0];
-		break;
-	}
-	mysql_free_result($result);
-
-	return $count;
-}
-
-function get_fid_by_bizname_wx_username($bizname, $wx_username, $dblink)
-{
-	$result = mysql_query("select fakeid from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
-	if ($result === false)
-	{
-		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
-		return $flag;
-	}
-	$flag = "";
-	while($row=mysql_fetch_array($result)) 
-	{
-		$flag = $row[0];
-		break;
-	}
-	mysql_free_result($result);
-
-	return $flag;
 }
 
 ?>
