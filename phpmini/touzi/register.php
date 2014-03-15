@@ -22,22 +22,6 @@
  <input type="text" maxlength="11" name="edit[tel]" id="edit-tel"  size="30" value="" class="form-text required" />
  <div class="description">客户手机号码</div>
 </div>
-<div class="form-item">
-<label for="edit-sex">性别: </label>
-保密 <input type="radio" name="edit[sex]"  value="0"  checked=checked />
-男 <input type="radio" name="edit[sex]"   value="1" />
-女 <input type="radio" name="edit[sex]"  value="2" />
-</div>
-<div class="form-item">
- <label for="edit-money">余额: </label>
- <input type="text" maxlength="6" name="edit[money]" id="edit-money"  size="30" value="" />
- <div class="description">用户余额:默认0.00</div>
-</div>
-<div class="form-item">
- <label for="edit-point">积分: </label>
- <input type="text" maxlength="32" name="edit[point]" id="edit-point"  size="30" value="" />
- <div class="description">用户积分</div>
-</div>
 
 <input type="submit" name="op" value="注册新帐号"  class="form-submit" onclick="return check_form();"  />
 <br /><br />

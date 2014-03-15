@@ -7,40 +7,25 @@
 	$bizname = $_SESSION["username"];
 	$form = check_form($_POST["edit"]);
 	$msisdn = $form["tel"];
-	$sex = $form["sex"];
-	$fakeid = "wx_".$msisdn;
+	$wx_username = "wx_".$msisdn;
 	$curtime = date("YmdHis");
-	$m = $form["money"];
-	if (strlen($m) === 0)
-		$m = "0.00";
-	$p = $form["point"];
-	if (strlen($p) === 0)
-		$p = 0;
-	$sql = "insert into tel_user ";
-	$sql .= " values(NULL, '$bizname', '$fakeid', '$msisdn',";
-	$sql .= " '$sex',";
-	$sql .= " '$m', ";
-	$sql .= " '$p', ";
-	$sql .= " '$curtime', ";
-	$sql .= " '$curtime') ";
 	 
-	runlog($sql);
-
-	$check_sql = "select * from tel_user where bizname = '$bizname' and tel = '$msisdn';";
-
-	$is_exist = false;
-	$check_res = mysql_query($check_sql);
-	while($check_row = mysql_fetch_array($check_res))
+	$result = mysql_query("select count(1) from t_wx_info where msisdn = '$msisdn' ");
+	if ($result === false)
 	{
-		$is_exist = true;
-		break;
-	}	
-	mysql_free_result($check_res);
-	if ($is_exist)
-	{
-		die("手机号码".":$msisdn 已经存在，请先删除再添加");
+		runlog("query wx_username from t_wx_info is err:".$msisdn);
+		die("手机号码".":$msisdn 添加出错");
 	}
+	while($row=mysql_fetch_array($result)) 
+	{
+		if ($row[0] > 0)
+			die("手机号码".":$msisdn 已经存在，请先删除再添加");
+		else
+			break;
+	}
+	mysql_free_result($result);
 
+	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '$curtime', 'NULL', NULL, NULL, 'NULL', NULL, NULL, 0, 0, '$msisdn', 0, NULL, NULL, '$curtime', NULL, NULL);";
 	$res = mysql_query($sql);
 	if(!$res) {
 		die("数据库出错，请返回重试。".":".mysql_error());

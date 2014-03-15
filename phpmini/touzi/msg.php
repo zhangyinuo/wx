@@ -2,7 +2,7 @@
 	include("header.inc.php");
 	switch($_GET["m"]) {
 		case	"register_success"	:
-			$msg = "恭喜，帐号注册成功。<br />现在您可以使用您的用户名和密码登陆本系统了。<br />";
+			$msg = "<br />新增用户成功<br />";
 			$href = "<a href='index.php'>返回</a>";
 			break;
 		case	"update_success"	:

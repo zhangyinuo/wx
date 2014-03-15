@@ -68,7 +68,7 @@ function check_is_exist_wx_username($wx_username, $dblink)
 function insert_replace_fid_wx_username($wx_username, $dblink)
 {
 	$curtime = date("YmdHis");
-	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '$curtime', 'NULL', NULL, NULL, 'NULL', NULL, NULL, 0, 0, NULL, 0, NULL, NULL, '$curtime');";
+	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '$curtime', 'NULL', NULL, NULL, 'NULL', NULL, NULL, 0, 0, NULL, 0, NULL, NULL, '$curtime', NULL, NULL, 0);";
 	$result = mysql_query($sql, $dblink);
 	if ($result === false)
 	{

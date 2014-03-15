@@ -4,4 +4,5 @@
 	$con = mysql_connect($dbhost,$dbuser,$dbpass);
 	if(!$con) die("mysql error:".mysql_error());
 	mysql_select_db($dbname,$con);
+	mysql_query("set names gbk;", $con);
 ?>

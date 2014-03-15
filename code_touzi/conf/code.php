@@ -49,10 +49,9 @@ function record_select($wx_username, $k, $dblink)
 	runlog("record ".$sql);
 	$result = mysql_query($sql, $dblink);
 	if ($result === false)
-	{
 		runlog("record err ".mysql_error());
-		return false;
-	}
+	$sql = "update t_wx_info set atime = '$curtime' where wx_username = '$wx_username' ";
+	$result = mysql_query($sql, $dblink); 
 };
 
 function wx_test_parse($src)

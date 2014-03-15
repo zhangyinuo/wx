@@ -4,32 +4,13 @@ include("dbconnect.inc.php");
 include("functions.inc.php");
 require_once("log.php");
 if($_POST["op"] == "更    新") {
-		$m = $_POST['m'];
-		$id = $_POST['id'];
 		$tel = $_POST['tel'];
-		$point = $_POST['point'];
-		$money = $_POST['money'];
-		runlog($_SESSION["username"].":".$id.":".$m.":".$tel.":".$point.":".$money);
+		$sadmin = $_POST['sadmin'];
+		$role = $_POST['role'];
 
-		$sql = "update tel_user set ";
-		if (strcmp($m, "money") === 0)
-			if ($money > 0)
-				$sql .= "money = money + $money ";
-			else
-			{
-				$money = abs($money);
-				$sql .= "money = money - $money ";
-			}
-		else
-			if ($point > 0)
-				$sql .= "point = point + $point";
-			else
-			{
-				$point = abs($point);
-				$sql .= "point = point - $point";
-			}
+		$sql = "update t_wx_info set sadmin = '$sadmin', role = '$role'";
 
-		$sql .= " where id = $id;";
+		$sql .= " where msisdn = $tel;";
 		runlog($sql);
 		$res = mysql_query($sql);
 		if(!$res) {
@@ -69,21 +50,25 @@ if($_POST["op"] == "更    新") {
 <span><?php echo $_GET['tel']; ?></span>
 </div>
 <?php
- echo "<input type='hidden' name='id' value='{$_GET['id']}' />";
- echo "<input type='hidden' name='m' value='{$_GET['m']}' />";
  echo "<input type='hidden' name='tel' value='{$_GET['tel']}' />";
-if (strcmp($_GET['m'], "money") === 0)
-{
-	echo "<div class=\"form-item\">\n";
-	echo "<label for=\"edit-money\">余额: </label>\n";
-	echo "<input type=\"text\" maxlength=\"6\" name=\"money\" id=\"edit-money\"  size=\"30\" value=\"\" />\n</div>\n";
-}
-else
-{
-	echo "<div class=\"form-item\">\n<label for=\"edit-point\">积分: </label>\n";
-	echo "<input type=\"text\" maxlength=\"6\" name=\"point\" id=\"edit-point\"  size=\"30\" value=\"\" />\n</div>\n";
-}
 ?>
+
+	<div class="form-item">
+	<label for="edit-sadmin">说明: </label>
+	<input type="text" maxlength="256" name="sadmin" id="edit-sadmin"  size="256" />
+	</div>
+
+<br/>
+<br/>
+	<div class="form-item">
+	<label for="edit-role">角色: </label>
+	普通客户<input type="radio" name="role"  value="0"  checked=checked />
+	业务员 <input type="radio" name="role"   value="1" />
+	管理员 <input type="radio" name="role"  value="2" />
+	</div>
+
+<br/>
+<br/>
 
 <input type="submit" name="op" value="更    新"  class="form-submit" onclick=""  />
 <br /><br />
