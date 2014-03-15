@@ -18,6 +18,8 @@ CREATE TABLE t_wx_info (
 	`msisdn` varchar(16) default null,
 	`flag` int default 0,
 	`un_modtime` varchar(16) default null,
+	`sadmin` varchar(16) default null,
+	`atime` varchar(16) default null,
 	PRIMARY KEY (`id`),
 	unique key(fakeid),
 	unique key(wx_username),
