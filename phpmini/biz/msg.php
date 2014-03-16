@@ -11,7 +11,6 @@
 			break;
 		case	"upload_success"	:
 			$msg = "照片上传成功。<br />";
-			$href = "<a href='account.php'>返回</a>";
 			break;
 		case	"del_success"	:
 			$msg = "帐号信息删除成功，请返回。<br />";

@@ -25,7 +25,7 @@
 	}
 	mysql_free_result($result);
 
-	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '$curtime', 'NULL', NULL, NULL, 'NULL', NULL, NULL, 0, 0, '$msisdn', 0, NULL, NULL, '$curtime', NULL, NULL);";
+	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '$curtime', 'NULL', NULL, NULL, 'NULL', NULL, NULL, 0, 0, '$msisdn', 1, NULL, NULL, '$curtime', NULL, NULL, 0, 0);";
 	$res = mysql_query($sql);
 	if(!$res) {
 		die("数据库出错，请返回重试。".":".mysql_error());

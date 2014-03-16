@@ -10,13 +10,13 @@
 		$name = trim($_GET["name"]);
 		$where .= " and msisdn = '{$name}' ";
 	}
-	$sql = "select msisdn, modtime, sadmin, atime from t_wx_info where 1 {$where} and flag = 0 limit 20";
+	$sql = "select msisdn, modtime, flag, atime, dispatch, role from t_wx_info where 1 {$where} order by dispatch limit 20";
 	runlog($sql.":".$_SESSION["userid"].":".$_SESSION["username"]);
 	$res = mysql_query($sql);
 
 	$s = array();
 	while($row = mysql_fetch_array($res)) {
-		$s[$row[0]] = $row[1]."|".$row[2]."|".$row[3];
+		$s[$row[0]] = $row[1]."|".$row[2]."|".$row[3]."|".$row[4]."|".$row[5];
 	}
 	$keys = array_keys($s);
 	mysql_free_result($res);
@@ -41,12 +41,14 @@
 </div><hr />
 <!-- begin content -->
 <script language="javascript">
-	function doDel(title,id) {
-		if(confirm('你确定要删除用户？\n-------------------------\n'+title+'\n-------------------------'))
+	function doDel(id) {
+		if(confirm('你确定要删除用户？\n-------------------------\n'+id+'\n-------------------------'))
 			location.href='del_account.php?id='+id;
 	}
 </script>
+</br>
 <li class="leaf"><a href="register.php" >新增用户</a></li>
+</br>
 <form action="admin.php"  method="get" >
 <div><div class="container-inline"><div class="form-item">
  <label >检索用户: </label>
@@ -57,19 +59,26 @@
 </div></form>
 
 <table width="850">
- <thead><tr><th> </th><th>手机号码</th><th >关注时间</th><th>最新互动时间</th><th>特别说明</th><th>操作</th> </tr></thead>
+ <thead><tr><th> </th><th>手机号码</th><th >关注时间</th><th>最新互动时间</th><th>是否已经关注</th><th>是否已经派发</th><th>操作</th> </tr></thead>
 <tbody>
 <?php
 	foreach ($keys as $k)
 	{
 		$v = $s[$k];
 		$r = parse_msg_com($v, "|");
+		$d = "是";
+		if (intval($r[3]) === 0)
+			$d = "否";
+		$g = "是";
+		if (intval($r[1]) === 1)
+			$g = "否";
 		echo "<tr ><td></td>";
-		echo "<td width = \"20%\">{$k}</td>";
-		echo "<td width = \"20%\">{$r[0]}</td>";
-		echo "<td width = \"20%\">{$r[2]}</td>";
-		echo "<td width = \"20%\">{$r[1]}</td>";
-		echo "<td><a href='edit_account.php?tel={$k}'>修改</a><a></a> <a  href='#' onclick='return doDel(\"{$k}\");'>删除用户</a></td> </tr>";
+		echo "<td width = \"12%\">{$k}</td>";
+		echo "<td width = \"15%\">{$r[0]}</td>";
+		echo "<td width = \"15%\">{$r[2]}</td>";
+		echo "<td width = \"15%\">{$g}</td>";
+		echo "<td width = \"15%\">{$d}</td>";
+		echo "<td><a href='edit_account.php?tel={$k}'>修改</a> <a href='dispatch.php?tel={$k}'>派发</a> <a href='detail.php?tel={$k}'>详细</a> <a  href='#' onclick='return doDel(\"{$k}\");'>删除</a></td> </tr>";
 	}
 ?>
 </tbody></table>

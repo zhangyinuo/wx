@@ -5,6 +5,10 @@
 			$msg = "<br />新增用户成功<br />";
 			$href = "<a href='index.php'>返回</a>";
 			break;
+		case	"dispatch_success"	:
+			$msg = "派发成功<br />";
+			$href = "<a href='account.php'>返回</a>";
+			break;
 		case	"update_success"	:
 			$msg = "帐号信息更新成功。<br />";
 			$href = "<a href='account.php'>返回</a>";

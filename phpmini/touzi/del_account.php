@@ -2,12 +2,8 @@
 	session_start();
 	include("dbconnect.inc.php");
 	include("functions.inc.php");
-	if($_GET["id"]!="" && $_SESSION["userid"]==1 && is_numeric($_GET["id"]) && $_GET["id"]!="1") {
-		$id = $_GET["id"];
-	}else {
-		die("您无权访问该页，请返回或重试。");
-	}
-	$sql = "delete from users where id={$id}";
+	$id = $_GET["id"];
+	$sql = "delete from t_wx_info where msisdn ={$id}";
 	$res = mysql_query($sql);
 	if(!$res) {
 		echo mysql_error();

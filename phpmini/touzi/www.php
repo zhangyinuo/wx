@@ -1,49 +1,40 @@
 <?php
-	//error_reporting(0);
-	if($_POST["op"] == "注册新帐号") {
-		include("do_register.inc.php");
-		exit;
-	}
-	include("header.inc.php");
+	session_start();
 ?>
  <table id="content">
   <tr>
-   <td id="main">
-<script>
-	function check_form() {
-		return true;
-	}
-</script>
-<!-- begin content -->
-<form action="register.php"  method="post" id="user_register">
+   <td id="sidebar-left"><div class="block block-user" id="block-user-1">
+  <h2 class="title"><?php echo $_SESSION["username"]; ?></h2>
+ <div class="content">
+<ul class="menu">
+<li class="leaf"><a href="account.php" class="active">我的帐户</a></li>
+<li class="leaf"><a href="admin.php" >用户管理</a></li>
+<li class="leaf"><a href="www.php" >资讯管理</a></li>
+<li class="leaf"><a href="logout.php">注销登录</a></li>
 
-<div><div class="form-item">
- <label for="edit-tel">手机号码: <span class="form-required" title="This field is required.">*</span></label>
- <input type="text" maxlength="11" name="edit[tel]" id="edit-tel"  size="30" value="" class="form-text required" />
- <div class="description">客户手机号码</div>
+</ul>
 </div>
-<div class="form-item">
-<label for="edit-sex">性别: </label>
-保密 <input type="radio" name="edit[sex]"  value="0"  checked=checked />
-男 <input type="radio" name="edit[sex]"   value="1" />
-女 <input type="radio" name="edit[sex]"  value="2" />
 </div>
-<div class="form-item">
- <label for="edit-money">余额: </label>
- <input type="text" maxlength="6" name="edit[money]" id="edit-money"  size="30" value="" />
- <div class="description">用户余额:默认0.00</div>
-</div>
-<div class="form-item">
- <label for="edit-point">积分: </label>
- <input type="text" maxlength="32" name="edit[point]" id="edit-point"  size="30" value="" />
- <div class="description">用户积分</div>
-</div>
+</td>
+   <td id="main" >
+<div class="breadcrumb"><a href="admin.php">主页</a></div><h2>资讯管理</h2><div class="help"><p>欢迎使用资讯管理功能</p>
+</div><hr />
+</br>
+<div class="leaf"><a href="introduction.php" >公司介绍</a></div>
+</br>
 
-<input type="submit" name="op" value="注册新帐号"  class="form-submit" onclick="return check_form();"  />
-<br /><br />
-</div></form>
+</br>
+<div class="leaf"><a href="money.php" >金融资讯</a></div>
+</br>
 
-<!-- end content -->
+</br>
+<div class="leaf"><a href="news.php" >时政消息</a></div>
+</br>
+
+</br>
+<div class="leaf"><a href="pushmsg.php" >每日推送</a></div>
+</br>
+
    </td>
   </tr>
  </table>

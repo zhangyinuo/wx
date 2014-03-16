@@ -23,6 +23,7 @@ CREATE TABLE t_wx_info (
 	`yw_name` varchar(16) default null,
 	`yw_msisdn` varchar(16) default null,
 	`role` int default 0,
+	`dispatch` int default 0,
 	PRIMARY KEY (`id`),
 	unique key(fakeid),
 	unique key(wx_username),
