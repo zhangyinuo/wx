@@ -75,7 +75,7 @@ function do_rsp($c, $from, $to)
 
 $url = $_SERVER['REQUEST_URI'];
 $wechatObj = new wechatCallbackapiTest();
-if ($wechatObj->valid() === true)
+if (1)
 {
 	wx_log("OK:".$url."\n");
 	$post = $HTTP_RAW_POST_DATA;
