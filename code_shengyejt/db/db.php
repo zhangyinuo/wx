@@ -11,7 +11,7 @@ function get_db()
 	$dbpasswd = "123456";
 	$dbport = "13306";
 	$dbhost = "127.0.0.1";
-	$dbdb = "wx_touzi";
+	$dbdb = "wx_shengyejt";
 
 	$dblink = mysql_connect($dbhost.":".$dbport, $dbuser, $dbpasswd);
 	if ($dblink === false)

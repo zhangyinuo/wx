@@ -7,3 +7,6 @@ Could not query:Lost connection to MySQL server at 'reading initial communicatio
 
 
 PHP Notice:  Undefined index: self_test in /data/app/wx/code/bizinfo/bizinfo.php on line 33
+
+
+

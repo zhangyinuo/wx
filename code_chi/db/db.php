@@ -48,12 +48,12 @@ function get_db()
 function check_is_exist_wx_username($bizname, $wx_username, $dblink)
 {
 	$result = mysql_query("select status from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
+	$flag = "";
 	if ($result === false)
 	{
 		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
 		return $flag;
 	}
-	$flag = "";
 	while($row=mysql_fetch_array($result)) 
 	{
 		$flag = $row[0];

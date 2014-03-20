@@ -15,12 +15,16 @@ function is_match($content, $time, $infile)
 	$result = substr($result, strlen("{\"msg_item\":"), -1);
 	$endpos = stripos($result, "}]}}");
 	$result = substr($result, 0, $endpos+2);
+	runlog ("$result\n");
 	$arr = json_decode($result, 1);
 	foreach ($arr as $subarr)
 	{
+		$c = $subarr["content"];
+		$t = $subarr["date_time"];
+		runlog ("$c $t\n");
 		if (strcmp($subarr["content"], $content))
 			continue;
-		if (strcmp($subarr["date_time"], $time))
+		if (abs(intval($subarr["date_time"]) - $time) > 5)
 			continue;
 		return true;
 	}
@@ -31,7 +35,7 @@ function get_fid_by_msg(&$rfid, $username, $passwd, $content, $time, $dblink, $b
 {
 	global $ROOTDIR;
 	$userlist = $ROOTDIR."/getlist/userlist";
-	$pexe = $ROOTDIR."/getlist/phantomjs";
+	$pexe = "phantomjs";
 	$listjs = $ROOTDIR."/getlist/weixin_userlist.js";
 	$fidjs = $ROOTDIR."/getlist/weixin_fid.js";
 
@@ -78,7 +82,7 @@ function refresh_fid_biz($bizname, $wx_username, $username, $passwd, $dblink)
 {
 	global $ROOTDIR;
 	$userlist = $ROOTDIR."/getlist/userlist";
-	$pexe = $ROOTDIR."/getlist/phantomjs";
+	$pexe = "phantomjs";
 	$listjs = $ROOTDIR."/getlist/weixin_userlist.js";
 
 	$fp = popen("$pexe $listjs $username $passwd > $userlist", "r");
@@ -107,7 +111,7 @@ function refresh_fid_biz($bizname, $wx_username, $username, $passwd, $dblink)
 function send_msg_by_fid($username, $passwd, $fid, $msg)
 {
 	global $ROOTDIR;
-	$pexe = $ROOTDIR."/getlist/phantomjs";
+	$pexe = "phantomjs";
 	$sendjs = $ROOTDIR."/getlist/weixin_send.js";
 
 	$msg = $msg."\n".date('l dS \of F Y h:i:s A');

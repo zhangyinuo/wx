@@ -3,7 +3,9 @@ var page = require('webpage').create(),
     server = 'https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN',
     //userlist = 'https://mp.weixin.qq.com/cgi-bin/contactmanagepage?t=wxm-friend&token=tokenval&lang=zh_CN&pagesize=1000&pageidx=0&type=0&groupid=0',
     userlist = 'https://mp.weixin.qq.com/cgi-bin/contactmanage?t=user/index&pagesize=100&pageidx=0&type=0&groupid=0&token=tokenval&lang=zh_CN',
-    data = 'username=danezhang77@gmail.com&pwd=f8a4724578222780266930e86a3125b0&f=json&imgcode=';
+	//data = 'username=danezhang77@gmail.com&pwd=f8a4724578222780266930e86a3125b0&f=json&imgcode=';
+    data = 'username=ruibaochi@126.com&pwd=f6a7bf07002d6526ff67db94aaaee45d&f=json&imgcode=';
+   //data = 'username=zjc8754@163.com&pwd=f8a4724578222780266930e86a3125b0&f=json&imgcode=';
 
 phantom.cookiesEnabled = true;
 
@@ -14,6 +16,7 @@ page.onConsoleMessage = function(msg) {
 page.open(host, function(r1) {
 	if(r1 !== 'success') {
 		console.log('Unable to open host');
+		console.log(page.content);
 		phantom.exit();
 	} else {
 		//console.log(page.content);
@@ -21,11 +24,12 @@ page.open(host, function(r1) {
 		page.open(server, 'post', data, function (r2) {
 			if (r2 !== 'success') {
 				console.log('Unable to post login!');
+				console.log(page.content);
 				phantom.exit();
 			} else {
-				//console.log(page.content);
+				console.log(page.content);
 				var cnt = page.content;
-				var ptn = /.*token=(\d+).*/;
+				var ptn = /;token=(\d+)"/;
 				var mts = ptn.exec(cnt);
 				if(mts != null) {
 					userlist = userlist.replace(/tokenval/g, mts[1]);
@@ -46,6 +50,7 @@ page.open(host, function(r1) {
 						}
 					});
 				}
+				phantom.exit();
 			}
 		});
 
