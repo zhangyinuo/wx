@@ -31,7 +31,11 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 		$toUsername = $postObj->ToUserName;
 		$fromUsername = $postObj->FromUserName;
 		$time = $postObj->CreateTime;
-		$content = $postObj->Content;
+		$msgType = $postObj->MsgType;
+		if (strcmp ($msgType, "image") === 0)
+			$content = $postObj->PicUrl;
+		else
+			$content = $postObj->Content;
 		$bizname = bizname;
 		$msg = $bizname."&&".$fromUsername."&&".$time."&&".$content;
 		msg_send($subq, 1, $msg);
@@ -84,8 +88,6 @@ if (1)
 	$from;
 	$to;
 	intoq($content, $to, $from);
-	if (strlen($content) > 0)
-		do_rsp($content, $to, $from);
 	exit;
 }
 else

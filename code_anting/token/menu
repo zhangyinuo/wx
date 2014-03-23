@@ -1,0 +1,32 @@
+{
+	"button":[
+	{	
+		"type":"click",
+		"name":"今日推荐",
+		"key":"V1001_TODAY_MUSIC"
+	},
+	{
+		"type":"click",
+		"name":"幼儿天地",
+		"key":"V1001_TODAY_SINGER"
+	},
+	{
+		"name":"total",
+		"sub_button":[
+		{	
+			"type":"view",
+			"name":"search",
+			"url":"http://www.soso.com/"
+		},
+		{
+			"type":"view",
+			"name":"video",
+			"url":"http://v.qq.com/"
+		},
+		{
+			"type":"click",
+			"name":"help",
+			"key":"V1001_GOOD"
+		}]
+	}]
+}

@@ -20,7 +20,7 @@
 <div class="breadcrumb"><a href="admin.php">主页</a></div><h2>资讯管理</h2><div class="help"><p>欢迎使用资讯管理功能</p>
 </div><hr />
 </br>
-<div class="leaf"><a href="introduction.php" >公司介绍</a></div>
+<div class="leaf"><a href="introduction_pic.php" >公司介绍</a></div>
 </br>
 
 </br>

@@ -6,6 +6,7 @@ require_once($ROOTDIR."bizinfo/bizinfo.php");
 require_once($ROOTDIR."queue/queue.php");
 require_once($ROOTDIR."log/log.php");
 require_once($ROOTDIR."file/file.php");
+require_once($ROOTDIR."common/common.php");
 
 $upq = "";
 if (init_q($upq, $up_queue_file, "p") === false)
@@ -50,7 +51,8 @@ while (1)
 			continue;
 		}
 
-		$fid = get_fid_by_bizname_wx_username($bizname, $wx_username, $dblink);
+		$msisdn = "";
+		$fid = get_fid_by_bizname_wx_username($bizname, $wx_username, $msisdn, $dblink);
 		if ($fid === "")
 		{
 			runlog(__FILE__."_".__LINE__.":"."get_fid_by_bizname_wx_username err: ".$bizname.":".$wx_username);
@@ -66,46 +68,88 @@ while (1)
 			continue;
 		}
 
-		$cmd = substr($msg, 0, 1);
-		switch ($cmd)
+		if (strlen($msg) === 11 && is_numeric($msg) === true)
 		{
-		case '1':
-		case '2':
-		case '3':
-		case '4':
-		case '5':
-			$rspstr = get_content($bizname, $cmd);
+			$msisdn = $msg;
+			confirm_insert_replace_fid_wx_username($bizname, $fid, $wx_username, $msisdn, $dblink);
+			$rspstr = get_content($bizname, "DH_OK");
 			do_rsp_fid($rspstr, $fid, $username, $passwd);
-			break;
+			continue;
+		}
 
-		case 'o':
-		case 'O':
-			break;
-		case 'u':
-		case 'U':
-			$nickname= "";
-			$error = "";
-		   	$f = substr($msg, 1, 1);
-			if ($f === ':')
+		if (strncmp($msg, "djzc", 4) === 0)
+		{
+			$retarr = parse_msg_com($msg, " ");
+			if (count($retarr) != 4)
 			{
-				$nickname = substr($msg, 2);
-				$error = do_update_nick_name($bizname, $fid, $nickname, $dblink);
+				$rspstr = get_content($bizname, "djzc_error");
+				do_rsp_fid($rspstr, $fid, $username, $passwd);
+				continue;
+			}
+			if (do_djzc($retarr[1], $retarr[2], $retarr[3], $dblink) === true)
+			{
+				$rspstr = get_content($bizname, "djzc_ok");
+				do_rsp_fid($rspstr, $fid, $username, $passwd);
+				continue;
 			}
 			else
-				$error = "正确格式: u:聊天名称. :是英文半角的";
-
-			if (strlen($error) > 2)
-				$error = "更新错误原因".$error;
-			else
-				$error = "当前名称".$nickname;
-			do_rsp_fid($error, $fid, $username, $passwd);
-			break;
-		default:
-			do_rsp_fid("您需要的功能很快开发", $fid, $username, $passwd);
-			$rspstr = get_content($bizname, 1);
-			do_rsp_fid($rspstr, $fid, $username, $passwd);
-			break;
+			{
+				$rspstr = get_content($bizname, "djzc_unok");
+				do_rsp_fid($rspstr, $fid, $username, $passwd);
+				continue;
+			}
 		}
+
+		if (strncmp($msg, "cdts", 4) === 0)
+		{
+			if ($msisdn === "")
+			{
+				$rspstr = get_content($bizname, "DH_FIRST");
+				do_rsp_fid($rspstr, $fid, $username, $passwd);
+				continue;
+			}
+			$flag = "";
+			$bizid = get_biz_id($msisdn, $flag, $dblink);
+			if ($flag === "")
+			{
+				$rspstr = get_content($bizname, "djzc_first");
+				do_rsp_fid($rspstr, $fid, $username, $passwd);
+				continue;
+			}
+
+			if ($flag === 0)
+			{
+				$rspstr = get_content($bizname, "djzc_xufei");
+				do_rsp_fid($rspstr, $fid, $username, $passwd);
+				continue;
+			}
+			$pos = strpos($msg, "\n");
+			if ($pos === false)
+			{
+				$rspstr = get_content($bizname, "cdts_error");
+				do_rsp_fid($rspstr, $fid, $username, $passwd);
+				continue;
+			}
+			$msg = substr($msg, $pos +1);
+			$idx = 0;
+			do_cdxx($bizid, $idx, $cdxx);
+			$idx++;
+			while (1)
+			{
+				$pos = strpos($msg, "\n");
+				if ($pos === false)
+					break;
+				$submsg = substr($msg, 0, $pos);
+				$cdxx = $submsg;
+				do_cdxx($bizid, $idx, $cdxx);
+				$idx++;
+				$msg = substr($msg, $pos + 1);
+			}
+
+			$cdxx = $msg;
+			do_cdxx($bizid, $idx, $cdxx);
+		}
+
 	}
 
 	mysql_ping($dblink);

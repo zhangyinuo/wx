@@ -77,6 +77,19 @@ function insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink, $
 	return true;
 }
 
+function confirm_insert_replace_fid_wx_username($bizname, $fid, $wx_username, $msisdn, $dblink)
+{
+	$curtime = date("YmdHis");
+	$sql = "replace into wx_userinfo values(NULL, '$bizname', '$fid', '$wx_username', 'NULL', 'NULL', '$curtime', '2', '1', '1', '1', '$msisdn', '$wx_username', 'NULL', NULL)";
+	$result = mysql_query($sql, $dblink);
+	if ($result === false)
+	{
+		runlog("confirm insert error ".$wx_username.":".$bizname.":".mysql_error());
+		return false;
+	}
+	return true;
+}
+
 function do_update_nick_name($bizname, $fid, $nickname, $dblink)
 {
 	$ret = "";
@@ -149,23 +162,73 @@ function is_exist_fakeid($dblink, $fid, $bizname)
 	return $count;
 }
 
-function get_fid_by_bizname_wx_username($bizname, $wx_username, $dblink)
+function do_djzc($user, $pass, $msisdn, $dblink)
 {
-	$result = mysql_query("select fakeid from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
+	$result = mysql_query("select cbizname from t_biz_info where bizname = '$user' and bizpasswd = '$pass' ", $dblink);
+	if ($result === false)
+	{
+		runlog(__FILE__.":".__LINE__."query fakeid from wx_username bizname is null:".mysql_error());
+		return "";
+	}
+	$cbizname = "";
+	while($row=mysql_fetch_array($result)) 
+	{
+		$cbizname = $row[0];
+		break;
+	}
+	mysql_free_result($result);
+
+	if (strlen($cbizname) > 0)
+	{
+		$sql = "update t_biz_info set msisdn = '$msisdn', flag = 1 where  bizname = '$user' and bizpasswd = '$pass' ";
+		mysql_query ($sql, $dblink);
+		return true;
+	}
+
+	return false;
+}
+
+function get_fid_by_bizname_wx_username($bizname, $wx_username, &$msisdn, $dblink)
+{
+	$result = mysql_query("select fakeid, msisdn from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
 	if ($result === false)
 	{
 		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
 		return $flag;
 	}
-	$flag = "";
+	$fid = "";
 	while($row=mysql_fetch_array($result)) 
 	{
-		$flag = $row[0];
+		$fid = $row[0];
+		$msisdn = $row[1];
 		break;
 	}
 	mysql_free_result($result);
 
-	return $flag;
+	return $fid;
+}
+
+function get_biz_id($msisdn, &$flag, $dblink)
+{
+	$result = mysql_query("select id, flag from t_biz_info where msisdn = '$msisdn' ", $dblink);
+	if ($result === false)
+	{
+		runlog(__FILE__.":".__LINE__."query fakeid from wx_username bizname is null:".mysql_error());
+		return $flag;
+	}
+	runlog(__FILE__.":".__LINE__."select id, flag from t_biz_info where msisdn = ".$msisdn);
+	$id = "";
+	while($row=mysql_fetch_array($result)) 
+	{
+		$id = $row[0];
+	runlog(__FILE__.":".__LINE__."select id, flag from t_biz_info where msisdn = ".$msisdn);
+		$flag = $row[1];
+		break;
+	}
+	mysql_free_result($result);
+
+	runlog(__FILE__.":".__LINE__."flag:".$flag);
+	return $id;
 }
 
 ?>

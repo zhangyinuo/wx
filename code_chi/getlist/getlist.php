@@ -24,7 +24,7 @@ function is_match($content, $time, $infile)
 		runlog ("$c $t\n");
 		if (strcmp($subarr["content"], $content))
 			continue;
-		if (abs(intval($subarr["date_time"]) - $time) > 5)
+		if (abs(intval($subarr["date_time"]) - $time) > 2)
 			continue;
 		return true;
 	}

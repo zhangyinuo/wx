@@ -17,4 +17,15 @@ function get_content($bizname, $bfile)
 
 }
 
+function do_cdxx($bizid, $idx, $cdxx)
+{
+	global $curdir;
+	$path = $curdir."self_test/".$bizid;
+	if (file_exists($path) === false)
+		mkdir($path, 0777);
+	$file = $path."/".$idx;
+	file_put_contents($file, $cdxx);
+}
+
+
 ?>
