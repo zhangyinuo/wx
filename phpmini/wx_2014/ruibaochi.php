@@ -36,16 +36,19 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 			$content = $postObj->PicUrl;
 		else
 			$content = $postObj->Content;
+		if (strcmp ($msgType, "event") === 0)
+			return $msgType;
 		$bizname = bizname;
 		$msg = $bizname."&&".$fromUsername."&&".$time."&&".$content;
 		msg_send($subq, 1, $msg);
+		return $msgType;
 	}
 }
 
 function do_echo($from, $to)
 {
 	$bizname = bizname;
-	$msg = get_content($bizname, "filename");
+	$msg = get_content($bizname, "subscribe");
 	$pre = "<xml>
 		<ToUserName><![CDATA[%s]]></ToUserName>
 		<FromUserName><![CDATA[%s]]></FromUserName>
@@ -58,23 +61,7 @@ function do_echo($from, $to)
 
 function do_rsp($c, $from, $to)
 {
-	$cmd = substr($c, 0, 1);
-	switch ($cmd)
-	{
-	case '2':
-	case '3':
-	case '4':
-	case '5':
-	case 'u':
-	case 'o':
-	case 's':
-	case 'c':
-	case 'l':
-		return;
-
-	default:
-		do_echo($from, $to);
-	}
+	do_echo($from, $to);
 }
 
 $url = $_SERVER['REQUEST_URI'];
@@ -87,7 +74,9 @@ if (1)
 	$content;
 	$from;
 	$to;
-	intoq($content, $to, $from);
+	$type = intoq($content, $to, $from);
+	if (strcmp ($type, "event") === 0)
+		do_echo($to, $from);
 	exit;
 }
 else

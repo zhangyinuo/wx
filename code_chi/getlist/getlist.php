@@ -114,7 +114,7 @@ function send_msg_by_fid($username, $passwd, $fid, $msg)
 	$pexe = "phantomjs";
 	$sendjs = $ROOTDIR."/getlist/weixin_send.js";
 
-	$msg = $msg."\n".date('l dS \of F Y h:i:s A');
+	$msg = $msg."\n".date('l dS \of F Y h:i:s A')."\n"."店家合作商务QQ:643969177";
 
 	runlog("$pexe $sendjs $username $passwd $fid $msg");
 	$fp = popen("$pexe $sendjs $username $passwd $fid '$msg'", "r");
