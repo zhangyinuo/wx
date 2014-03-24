@@ -10,17 +10,12 @@ $down_queue_file = $ROOTDIR."ftok/down_queue_self_test";
 
 function init_q(&$q, $file, $p)
 {
-	runlog(__FILE__.":".__LINE__.":".$file);
 	if (touch($file))
 	{
-	runlog(__FILE__.":".__LINE__.":".$file);
 		$key = ftok($file, $p);
-	runlog(__FILE__.":".__LINE__.":".$file);
 		$q = msg_get_queue($key, 0666);
-	runlog(__FILE__.":".__LINE__.":".$file);
 		return true;
 	}
-	runlog(__FILE__.":".__LINE__.":".$file);
 	runlog("ERR to touch $file!");
 	return false;
 }

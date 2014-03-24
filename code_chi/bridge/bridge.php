@@ -132,7 +132,8 @@ while (1)
 			}
 			$msg = substr($msg, $pos +1);
 			$idx = 0;
-			do_cdxx($bizid, $idx, $msg);
+			$rspstr = get_content($bizname, "dc_ts");
+			do_cdxx($bizid, $idx, $msg."\n".$rspstr);
 			$idx++;
 			while (1)
 			{
@@ -148,6 +149,8 @@ while (1)
 
 			$cdxx = $msg;
 			do_cdxx($bizid, $idx, $cdxx);
+			$rspstr = get_content($bizname, "cdts_ok");
+			do_rsp_fid($rspstr, $fid, $username, $passwd);
 			continue;
 		}
 
@@ -167,7 +170,15 @@ while (1)
 		{
 			$idx = -1;
 			$bizid = -1;
-			$path = get_last_path($fid, $idx, $bizid, $dblink);
+			$path = "";
+			$ret = get_last_path($fid, $idx, $bizid, $path, $msg, $dblink);
+			if ($ret != 0)
+			{
+				$rspstr = get_content($bizname, $ret);
+				do_rsp_fid($rspstr, $fid, $username, $passwd);
+				continue;
+			}
+
 			$rspstr = get_content($bizname, $path);
 			if ($rspstr === "")
 			{
@@ -176,21 +187,31 @@ while (1)
 				continue;
 			}
 
-			update_idx_select($fid, $msg, $idx);
+			update_idx_select($fid, $msg, $idx, $dblink);
 			$idx++;
 			if ($idx === 2)
 			{
 				if ($msisdn === "")
 				{
+					clear_wx_step($fid, $dblink);
 					$rspstr = get_content($bizname, "DH_FIRST");
 					do_rsp_fid($rspstr, $fid, $username, $passwd);
 					continue;
 				}
 
-				dispatch_to_biz($msisdn, $bizid, $rspstr);
-				$rspstr = $rspstr.get_content($bizname, "dc_ok");
-				do_rsp_fid($rspstr, $fid, $username, $passwd);
+				if (dispatch_to_biz($msisdn, $bizid, $rspstr, $username, $passwd, $dblink))
+				{
+					$rspstr = $rspstr.get_content($bizname, "dc_cancel");
+					do_rsp_fid($rspstr, $fid, $username, $passwd);
+				}
+				else
+				{
+					$rspstr = $rspstr."\n".get_content($bizname, "dc_ok");
+					do_rsp_fid($rspstr, $fid, $username, $passwd);
+				}
 			}
+			else if ($idx === 1)
+				do_rsp_fid($rspstr, $fid, $username, $passwd);
 		}
 		else
 		{
@@ -200,6 +221,6 @@ while (1)
 	}
 
 	mysql_ping($dblink);
-	sleep(5);
+	sleep(1);
 }
 ?>

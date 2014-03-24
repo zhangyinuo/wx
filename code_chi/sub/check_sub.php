@@ -46,6 +46,6 @@ while (1)
 	}
 
 	mysql_ping($dblink);
-	sleep(5);
+	sleep(1);
 }
 ?>

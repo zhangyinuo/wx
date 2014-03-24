@@ -9,9 +9,12 @@ function get_content($bizname, $bfile)
 {
 	global $curdir;
 	$path = $curdir.$bizname."/".$bfile;
+	$bkpath = $curdir.$bizname."/".$bfile."/"."0";
 	runlog(__FILE__.":".__LINE__.": file $path prepare open!");
-	if (file_exists($path))
+	if (is_file($path))
 		return file_get_contents($path);
+	else if (is_file($bkpath))
+		return file_get_contents($bkpath);
 	else
 		runlog(__FILE__.":".__LINE__.": file $path not exist!");
 	return "";

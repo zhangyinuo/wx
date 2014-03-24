@@ -30,6 +30,6 @@ while (1)
 		send_msg_by_fid($username, $passwd, $fid, $msg);
 	}
 
-	sleep(5);
+	sleep(1);
 }
 ?>
