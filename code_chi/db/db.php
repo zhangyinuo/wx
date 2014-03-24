@@ -2,6 +2,7 @@
 
 $ROOTDIR=dirname(__FILE__)."/../";
 
+require_once($ROOTDIR."file/file.php");
 require_once($ROOTDIR."log/log.php");
 require_once($ROOTDIR."getlist/getlist.php");
 
@@ -229,6 +230,30 @@ function get_biz_id($msisdn, &$flag, $dblink)
 
 	runlog(__FILE__.":".__LINE__."flag:".$flag);
 	return $id;
+}
+
+function clear_wx_step($fid, $dblink)
+{
+	$sql = "update t_select_info set lastindex = 0, lasttime = 0, step1 = NULL, step2 = NULL, step3 = NULL, step4 = NULL, step5 = NULL, step6 = NULL where fakeid = '$fid' ";
+	$result = mysql_query($sql, $dblink); 
+}
+
+function get_all_biz($dblink)
+{
+	$rspstr = "";
+	$result = mysql_query("select id, cbizname from t_biz_info where flag = 1 ", $dblink);
+	if ($result === false)
+	{
+		runlog(__FILE__.":".__LINE__."query fakeid from wx_username bizname is null:".mysql_error());
+		return $rspstr;
+	}
+	while($row=mysql_fetch_array($result)) 
+	{
+		$sub = $row[0].":".$row[1]."\n";
+		$rspstr = $rspstr.$sub;
+	}
+	mysql_free_result($result);
+	return $rspstr;
 }
 
 ?>

@@ -14,6 +14,7 @@ function get_content($bizname, $bfile)
 		return file_get_contents($path);
 	else
 		runlog(__FILE__.":".__LINE__.": file $path not exist!");
+	return "";
 
 }
 
