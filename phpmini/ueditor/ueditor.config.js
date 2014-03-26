@@ -30,8 +30,8 @@
         UEDITOR_HOME_URL : URL
 
         //图片上传配置区
-        ,imageUrl:"http://203.195.190.177:8080/php/imageUp.php"             //图片上传提交地址
-        ,imagePath:"http://203.195.190.177:8080/php/"                     //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
+        ,imageUrl:"http://203.195.190.177/ueditor/php/imageUp.php"             //图片上传提交地址
+        ,imagePath:"http://203.195.190.177/ueditor/php/"                     //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
         //,imageFieldName:"upfile"                  //图片数据的key,若此处修改，需要在后台对应文件修改对应参数
         //,compressSide:0                           //等比压缩的基准，确定maxImageSideLength参数的参照对象。0为按照最长边，1为按照宽度，2为按照高度
         //,maxImageSideLength:900                   //上传图片最大允许的边长，超过会自动等比缩放,不缩放就设置一个比较大的值，更多设置在image.html中
@@ -40,42 +40,42 @@
                                                             //比如： savePath: [ 'upload1', 'upload2' ]
 
         //涂鸦图片配置区
-        ,scrawlUrl:"http://203.195.190.177:8080/php/scrawlUp.php"           //涂鸦上传地址
-        ,scrawlPath:"http://203.195.190.177:8080/php/"                            //图片修正地址，同imagePath
+        ,scrawlUrl:"http://203.195.190.177/ueditor/php/scrawlUp.php"           //涂鸦上传地址
+        ,scrawlPath:"http://203.195.190.177/ueditor/php/"                            //图片修正地址，同imagePath
 
         //附件上传配置区
-        ,fileUrl:"http://203.195.190.177:8080/php/fileUp.php"               //附件上传提交地址
-        ,filePath:"http://203.195.190.177:8080/php/"                   //附件修正地址，同imagePath
+        ,fileUrl:"http://203.195.190.177/ueditor/php/fileUp.php"               //附件上传提交地址
+        ,filePath:"http://203.195.190.177/ueditor/php/"                   //附件修正地址，同imagePath
         //,fileFieldName:"upfile"                    //附件提交的表单名，若此处修改，需要在后台对应文件修改对应参数
 
         //远程抓取配置区
         //,catchRemoteImageEnable:true               //是否开启远程图片抓取,默认开启
-        ,catcherUrl:"http://203.195.190.177:8080/php/getRemoteImage.php"   //处理远程图片抓取的地址
-        ,catcherPath:"http://203.195.190.177:8080/php/"                  //图片修正地址，同imagePath
+        ,catcherUrl:"http://203.195.190.177/ueditor/php/getRemoteImage.php"   //处理远程图片抓取的地址
+        ,catcherPath:"http://203.195.190.177/ueditor/php/"                  //图片修正地址，同imagePath
         //,catchFieldName:"upfile"                   //提交到后台远程图片uri合集，若此处修改，需要在后台对应文件修改对应参数
         //,separater:'ue_separate_ue'               //提交至后台的远程图片地址字符串分隔符
         //,localDomain:[]                            //本地顶级域名，当开启远程图片抓取时，除此之外的所有其它域名下的图片都将被抓取到本地,默认不抓取127.0.0.1和localhost
 
         //图片在线管理配置区
-        ,imageManagerUrl:"http://203.195.190.177:8080/php/imageManager.php"       //图片在线管理的处理地址
-        ,imageManagerPath:"http://203.195.190.177:8080/php/"                                    //图片修正地址，同imagePath
+        ,imageManagerUrl:"http://203.195.190.177/ueditor/php/imageManager.php"       //图片在线管理的处理地址
+        ,imageManagerPath:"http://203.195.190.177/ueditor/php/"                                    //图片修正地址，同imagePath
 
         //屏幕截图配置区
         ,snapscreenHost: location.hostname                                 //屏幕截图的server端文件所在的网站地址或者ip，请不要加http://
-        ,snapscreenServerUrl: "http://203.195.190.177:8080/php/imageUp.php" //屏幕截图的server端保存程序，UEditor的范例代码为“URL +"server/upload/php/snapImgUp.php"”
-        ,snapscreenPath: "http://203.195.190.177:8080/php/"
+        ,snapscreenServerUrl: "http://203.195.190.177/ueditor/php/imageUp.php" //屏幕截图的server端保存程序，UEditor的范例代码为“URL +"server/upload/php/snapImgUp.php"”
+        ,snapscreenPath: "http://203.195.190.177/ueditor/php/"
         ,snapscreenServerPort: location.port                                   //屏幕截图的server端端口
         //,snapscreenImgAlign: ''                                //截图的图片默认的排版方式
 
         //word转存配置区
-        ,wordImageUrl:"http://203.195.190.177:8080/php/imageUp.php"             //word转存提交地址
-        ,wordImagePath:"http://203.195.190.177:8080/php/"                       //
+        ,wordImageUrl:"http://203.195.190.177/ueditor/php/imageUp.php"             //word转存提交地址
+        ,wordImagePath:"http://203.195.190.177/ueditor/php/"                       //
         //,wordImageFieldName:"upfile"                     //word转存表单名若此处修改，需要在后台对应文件修改对应参数
 
         //视频上传配置区
-        ,getMovieUrl:"http://203.195.190.177:8080/php/getMovie.php"                   //视频数据获取地址
-        ,videoUrl:"http://203.195.190.177:8080/php/fileUp.php"               //附件上传提交地址
-        ,videoPath:"http://203.195.190.177:8080/php/"                   //附件修正地址，同imagePath
+        ,getMovieUrl:"http://203.195.190.177/ueditor/php/getMovie.php"                   //视频数据获取地址
+        ,videoUrl:"http://203.195.190.177/ueditor/php/fileUp.php"               //附件上传提交地址
+        ,videoPath:"http://203.195.190.177/ueditor/php/"                   //附件修正地址，同imagePath
         //,videoFieldName:"upfile"                    //附件提交的表单名，若此处修改，需要在后台对应文件修改对应参数
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
@@ -354,10 +354,10 @@
         //注意默认codemirror只能在ie8+和非ie中使用
         //,sourceEditor:"codemirror"
         //如果sourceEditor是codemirror，还用配置一下两个参数
-        //codeMirrorJsUrl js加载的路径，默认是 "http://203.195.190.177:8080/third-party/codemirror/codemirror.js"
-        //,codeMirrorJsUrl:"http://203.195.190.177:8080/third-party/codemirror/codemirror.js"
-        //codeMirrorCssUrl css加载的路径，默认是 "http://203.195.190.177:8080/third-party/codemirror/codemirror.css"
-        //,codeMirrorCssUrl:"http://203.195.190.177:8080/third-party/codemirror/codemirror.css"
+        //codeMirrorJsUrl js加载的路径，默认是 "http://203.195.190.177/ueditor/third-party/codemirror/codemirror.js"
+        //,codeMirrorJsUrl:"http://203.195.190.177/ueditor/third-party/codemirror/codemirror.js"
+        //codeMirrorCssUrl css加载的路径，默认是 "http://203.195.190.177/ueditor/third-party/codemirror/codemirror.css"
+        //,codeMirrorCssUrl:"http://203.195.190.177/ueditor/third-party/codemirror/codemirror.css"
         //编辑器初始化完成后是否进入源码模式，默认为否。
         //,sourceEditorFirst:false
 
