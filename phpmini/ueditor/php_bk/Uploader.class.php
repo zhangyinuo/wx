@@ -55,7 +55,7 @@ class Uploader
     {
         $this->fileField = $fileField;
         $this->config = $config;
-		$this->stateInfo = $this->stateMap[ 0 ];
+        $this->stateInfo = $this->stateMap[ 0 ];
         $this->upFile( $base64 );
     }
 
@@ -158,7 +158,7 @@ class Uploader
      * @return string
      */
     private function getName()
-	{
+    {
         $count = 0;
         $dir = $this->getFolder();
         $timeStamp = time();
