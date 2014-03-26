@@ -1,5 +1,5 @@
 git add *
 
-git commit -m "msg"
+git commit -a -m "msg"
 
 git push origin master
