@@ -18,7 +18,7 @@
 
 <body>
 <form id="myForm" action="../ueditor/php/getContent.php?type=<?php echo $_GET['type'] ?>&id=<?php echo $_GET['id'] ?>" method="post">
-				<script type="text/plain" id="myEditor">这里可以填写一些初始化内容</script>
+				<script type="text/plain" id="myEditor">这里的内容会推送给用户,请对自己编辑的内容负责</script>
 				<input type="submit" value="提交" />
 		</form>
 		<script type="text/javascript">

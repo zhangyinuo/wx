@@ -1,25 +1,9 @@
-<?php
-	session_start();
-	if($_POST["op"] == "上    传") {
-		include("do_introduction.inc.php");
-		exit;
-	}
-	include("header.inc.php");
-?>
  <table id="content">
   <tr>
    <td id="sidebar-left"><div class="block block-user" id="block-user-1">
-  <h2 class="title"><?php echo $_SESSION["username"]; ?></h2>
  <div class="content">
 <ul class="menu">
 <li class="leaf"><a href="account.php" class="active">我的帐户</a></li>
-<?php 
-	if($_SESSION["userid"]=="1") {
-?>
-<li class="leaf"><a href="admin.php" >管理</a></li>
-<?php
-	}
-?>
 <li class="leaf"><a href="logout.php">注销登录</a></li>
 
 </ul>
@@ -30,17 +14,10 @@
 
 <!-- begin content -->
 <div class="profile"><h2 class="title">公司简介管理, 按顺序显示</h2>
-<form name="pic0" method="post" action="introduction.php" enctype="multipart/form-data" >
-	上传照片：
-	<input type="file" name="pic0" size="25" /><br />
-	<input type="submit" name="opic0" value="上    传" />
-</form>
-<br/>
-<form name="html0" method="post" action="introduction.php" enctype="multipart/form-data" >
-	上传详细文件(html):
-	<input type="file" name="html0" size="25" /><br />
-	<input type="submit" name="ohtml0" value="上    传" />
-</form>
+<div class="leaf"><a href="do_www.php?type=1&id=1" >条目1</a></div>
+<div class="leaf"><a href="do_www.php?type=1&id=2" >条目2</a></div>
+<div class="leaf"><a href="do_www.php?type=1&id=3" >条目3</a></div>
+<div class="leaf"><a href="do_www.php?type=1&id=4" >条目4</a></div>
 
 <!-- end content -->
    </td>
