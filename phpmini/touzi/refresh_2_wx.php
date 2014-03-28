@@ -22,6 +22,7 @@ for ( ; $idx < 4; $idx++)
 			continue;
 
 		$title = file_get_contents($titlefile);
+		$title = iconv('GB2312', 'UTF-8', $title);
 		$img = file_get_contents($imgfile);
 
 		$url = "http://203.195.190.177/wwz/wwz.php?type=$keyp$idx&id=$sub";
