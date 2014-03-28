@@ -1,8 +1,20 @@
-			"articles": [
-			{
-				"title":"鍏徃浠嬬粛",
-				"description":"introduction",
-				"url":"http://www.qq.com/",
-				"picurl":"http://img1.gtimg.com/finance/pics/hv1/184/49/1486/96639829_small.jpg"
-			}
-			]
+"articles": [
+{
+"title":"公司介绍1",
+"description":"公司介绍1",
+"url":"http://203.195.190.177/wwz/wwz.php?type=KEY11&id=1",
+"picurl":"http://203.195.190.177/ueditor/php/upload1/20140328/1395988088843669.jpg"
+}
+,{
+"title":"公司介绍2",
+"description":"公司介绍2",
+"url":"http://203.195.190.177/wwz/wwz.php?type=KEY11&id=2",
+"picurl":"http://203.195.190.177/ueditor/php/upload1/20140328/1395988143413425.jpg"
+}
+,{
+"title":"公司介绍3",
+"description":"公司介绍3",
+"url":"http://203.195.190.177/wwz/wwz.php?type=KEY11&id=3",
+"picurl":"http://203.195.190.177/ueditor/php/upload1/20140328/1395988180473555.jpg"
+}
+]

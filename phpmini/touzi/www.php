@@ -35,6 +35,10 @@
 <div class="leaf"><a href="pushmsg.php" >每日推送</a></div>
 </br>
 
+</br>
+<div class="leaf"><a href="refresh_2_wx.php" >刷新内容到微信</a></div>
+</br>
+
    </td>
   </tr>
  </table>

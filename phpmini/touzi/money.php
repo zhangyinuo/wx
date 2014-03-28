@@ -14,10 +14,10 @@
 
 <!-- begin content -->
 <div class="profile"><h2 class="title">金融资讯管理, 按顺序显示</h2>
-<div class="leaf"><a href="do_www.php?type=2&id=1" >条目1</a></div>
-<div class="leaf"><a href="do_www.php?type=2&id=2" >条目2</a></div>
-<div class="leaf"><a href="do_www.php?type=2&id=3" >条目3</a></div>
-<div class="leaf"><a href="do_www.php?type=2&id=4" >条目4</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY12&id=1" >条目1</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY12&id=2" >条目2</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY12&id=3" >条目3</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY12&id=4" >条目4</a></div>
 
 <!-- end content -->
    </td>

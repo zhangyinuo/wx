@@ -15,7 +15,14 @@
 	$id = $_GET['id'];
 
 	$root = "/data/app/wx/phpmini/ueditor/php/html/";
-	$fname = $root.$type.$id.".html";
+	$path = $root.$type;
+	if (file_exists($path) === false)
+	{
+		if (mkdir($path, 0755, true) === false)
+			return;
+	}
+
+	$fname = $path."/".$id.".html";
 	file_put_contents($fname, $_POST['myValue']);
 	$pos = strpos($_POST['myValue'], "img src=\"");
 	if ($pos === false)
@@ -26,10 +33,19 @@
 		return;
 
 	$imgurl = substr($_POST['myValue'], $pos + 9, $epos - $pos - 9);
-	$imgname = $root.$type.$id."img.txt";
+	$imgname = $path."/".$id.".img";
 	file_put_contents($imgname, $imgurl);
 
-    //存入数据库或者其他操作
+	$epos = strpos($_POST['myValue'], "</h1>");
+	if ($epos === false)
+		return;
 
+	$pos = strpos($_POST['myValue'], "\">");
+	if ($pos === false)
+		return;
+
+	$title = substr($_POST['myValue'], $pos + 2, $epos - $pos - 2);
+	$tname = $path."/".$id.".title";
+	file_put_contents($tname, $title);
 
 ?>
