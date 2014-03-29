@@ -92,5 +92,21 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	if (init_body())
+	{
+		fprintf(stderr, "init_body err!\n");
+		return -1;
+	}
+
+	if (gen_body())
+	{
+	}
+
+	if (gen_head_page())
+	{
+	}
+
+	print_bank();
+
 	return 0;
 }
