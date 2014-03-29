@@ -25,6 +25,9 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 		if (strcmp ($msgType, "event") === 0)
 		{
 			wx_log("echo:".__FILE__.":".__LINE__."\n");
+			$event = $postObj->Event;
+			if (strcasecmp($event, "VIEW") === 0)
+				exit;
 			$content = $postObj->EventKey;
 			if (strlen($content) < 3)
 				$content = $postObj->Event;

@@ -32,6 +32,11 @@
 			"type":"click",
 			"name":"企业融资",
 			"key":"KEY22"
+		},
+		{
+			"type":"click",
+			"name":"在线客服",
+			"key":"KEY23"
 		}
 		]
 	},
@@ -41,12 +46,17 @@
 		{	
 			"type":"view",
 			"name":"房贷计算",
-			"url":"http://www.qq.com"
+			"url":"http://www.soufun.com/house/tools.htm"
+		},
+		{
+			"type":"view",
+			"name":"存贷款利率 ",
+			"url":"http://www.ccb.com/cn/personal/interest/rmbdeposit.html"
 		},
 		{
 			"type":"click",
 			"name":"保持联系",
-			"key":"KEY32"
+			"key":"KEY33"
 		}
 		]
 	}
