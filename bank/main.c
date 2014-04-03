@@ -64,6 +64,8 @@ static t_global global;
 
 static t_title_init title;
 
+static t_head_init head;
+
 static int get_item(t_base_item *item, char *v)
 {
 	char *p = strchr(v, ',');
@@ -153,6 +155,20 @@ static int init_title()
 
 static int init_head()
 {
+	memset(&head, 0, sizeof(head));
+	head.linecount = myconfig_get_intval("head_linecount", 4);
+	head.items = (t_base_item *) malloc (sizeof(t_base_item) * head.linecount);
+	if (head.items == NULL)
+		return -1;
+
+	t_base_item * items = head.items;
+
+	int i = 1;
+	for (; i <= head.linecount; i++)
+	{
+		item_init("head", i, &items);
+		items++;
+	}
 	return 0;
 }
 
@@ -210,10 +226,10 @@ static int gen_head_page()
 	return 0;
 }
 
-static int print_title()
+static int print_head()
 {
-	int c = title.linecount;
-	t_base_item *item = title.items;
+	int c = head.linecount;
+	t_base_item *item = head.items;
 	char line[256] = {0x0};
 	int i = 0;
 	for ( ; i < c; i++)
@@ -223,6 +239,8 @@ static int print_title()
 		int idx = 0;
 		while (1)
 		{
+			if(item->msg == NULL)
+				break;
 			s = s + item->spos + idx;
 			int span = 0;
 			int slen = strlen(item->msg);
@@ -241,7 +259,7 @@ static int print_title()
 				break;
 		}
 		line[127] = 0x0;
-		fprintf(stdout, "%s\n\n", line);
+		fprintf(stdout, "line:[%s]\n\n", line);
 		item++;
 	}
 	return 0;
@@ -301,13 +319,13 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	print_title();
-
 	if (init_head())
 	{
 		fprintf(stderr, "init_head err!\n");
 		return -1;
 	}
+
+	print_head();
 
 	if (init_body())
 	{
