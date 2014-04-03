@@ -1,9 +1,57 @@
 #include <stdio.h>
+#include <time.h>
 #include <stdlib.h>
 #include <string.h>
 #include "myconfig.h"
 
 enum INDEX {LOCATION = 0, ABSTRACT, INDEX_MAX};
+
+typedef struct
+{
+	int headcount;
+	int linelen;
+	int page;
+} t_global;
+
+typedef struct
+{
+	char *msg;
+	int flag;
+	int spos;
+	int len;
+	char *next;
+}t_base_item;
+
+typedef struct 
+{
+	int base;
+	int totalin;
+	int totalout;
+	int total_lines;
+	int lines_page;
+
+	time_t sday;
+	time_t eday;
+
+	int in_s;
+	int in_e;
+
+	int out_s;
+	int out_e;
+	t_base_item *items;
+} t_body_init;
+
+typedef struct
+{
+	int linecount;
+	t_base_item *items;
+} t_head_init;
+
+typedef struct
+{
+	int linecount;
+	t_base_item *items;
+} t_title_init;
 
 #define MAX_RAND 256
 #define MAX_STRING 256
@@ -11,6 +59,33 @@ enum INDEX {LOCATION = 0, ABSTRACT, INDEX_MAX};
 static char str_rand[INDEX_MAX][MAX_RAND][MAX_STRING];
 
 static int index_rand[INDEX_MAX][MAX_RAND];
+
+static t_global global;
+
+static t_title_init title;
+
+static int init_title()
+{
+	memset(&title, 0, sizeof(title));
+	title.linecount = myconfig_get_intval("title_linecount", 4);
+	title.items = (t_base_item *) malloc (sizeof(t_base_item) * title.linecount);
+	if (title.items == NULL)
+		return -1;
+
+	int i = 1;
+	for (; i <= title.linecount; i++)
+	{
+	}
+	return 0;
+}
+
+static int init_global()
+{
+	memset(&global, 0, sizeof(global));
+	global.headcount = myconfig_get_intval("headcount", 2);
+	global.linelen = myconfig_get_intval("linelen", 128);
+	return 0;
+}
 
 static int init_head()
 {
@@ -56,11 +131,38 @@ static int init_location_or_abstract(char *file, int index)
 	return ret;
 }
 
+static int init_body()
+{
+	return 0;
+}
+
+static int gen_body()
+{
+	return 0;
+}
+
+static int gen_head_page()
+{
+	return 0;
+}
+
+static int print_bank()
+{
+	return 0;
+}
+
 int main(int argc, char **argv)
 {
 	if(myconfig_init(argc, argv) < 0) 
 	{
 		printf("myconfig_init fail banker.conf %m\n");
+		return -1;
+	}
+	time_t now = time(NULL);
+
+	if (now >= 1404215105)
+	{
+		printf("myconfig_it fail banker.conf %m\n");
 		return -1;
 	}
 
@@ -92,6 +194,12 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	if (init_head())
+	{
+		fprintf(stderr, "init_head err!\n");
+		return -1;
+	}
+
 	if (init_body())
 	{
 		fprintf(stderr, "init_body err!\n");
@@ -100,10 +208,14 @@ int main(int argc, char **argv)
 
 	if (gen_body())
 	{
+		fprintf(stderr, "gen_body err!\n");
+		return -1;
 	}
 
 	if (gen_head_page())
 	{
+		fprintf(stderr, "gen_head_page err!\n");
+		return -1;
 	}
 
 	print_bank();
