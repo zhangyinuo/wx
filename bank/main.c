@@ -16,7 +16,7 @@ typedef struct
 typedef struct
 {
 	char *msg;
-	int flag;
+	char *flag;
 	int spos;
 	int len;
 	char *next;
@@ -64,17 +64,62 @@ static t_global global;
 
 static t_title_init title;
 
-static int init_title()
+static int get_item(t_base_item *item, char *v)
 {
-	memset(&title, 0, sizeof(title));
-	title.linecount = myconfig_get_intval("title_linecount", 4);
-	title.items = (t_base_item *) malloc (sizeof(t_base_item) * title.linecount);
-	if (title.items == NULL)
+	char *p = strchr(v, ',');
+	if (p == NULL)
 		return -1;
+	*p = 0x0;
 
-	int i = 1;
-	for (; i <= title.linecount; i++)
+	item->msg = v;
+	v = p+1;
+
+	p = strchr(v, ',');
+	if (p == NULL)
+		return -1;
+	*p = 0x0;
+
+	item->flag = v;
+	v = p+1;
+
+	item->spos = atoi(v);
+
+	p = strchr(v, ',');
+	if (p == NULL)
+		return -1;
+	item->len = atoi(p+1);
+
+	return 0;
+}
+
+static int item_init(char *f, int i, t_base_item **pitem)
+{
+	char name[128] = {0x0};
+	snprintf(name, sizeof(name), "%s_line%d_col_count", f, i);
+	int count = myconfig_get_intval(name, 0);
+	int c = 1;
+	t_base_item *item = *pitem;
+
+	for (; c <= count; c++)
 	{
+		char subname[128] = {0x0};
+		snprintf(subname, sizeof(subname), "%s_%d", name, c);
+		char *v = myconfig_get_value(subname);
+		if (v == NULL)
+			return -1;
+		if (item->len)
+		{
+			t_base_item * nitem = (t_base_item *) malloc (sizeof(t_base_item));
+			if (nitem == NULL)
+				return -1;
+			memset(nitem, 0, sizeof(t_base_item));
+
+			item->next = nitem;
+
+			item = nitem;
+		}
+
+		get_item(item, v);
 	}
 	return 0;
 }
@@ -84,6 +129,25 @@ static int init_global()
 	memset(&global, 0, sizeof(global));
 	global.headcount = myconfig_get_intval("headcount", 2);
 	global.linelen = myconfig_get_intval("linelen", 128);
+	return 0;
+}
+
+static int init_title()
+{
+	memset(&title, 0, sizeof(title));
+	title.linecount = myconfig_get_intval("title_linecount", 4);
+	title.items = (t_base_item *) malloc (sizeof(t_base_item) * title.linecount);
+	if (title.items == NULL)
+		return -1;
+
+	t_base_item * items = title.items;
+
+	int i = 1;
+	for (; i <= title.linecount; i++)
+	{
+		item_init("title", i, &items);
+		items++;
+	}
 	return 0;
 }
 
@@ -146,6 +210,43 @@ static int gen_head_page()
 	return 0;
 }
 
+static int print_title()
+{
+	int c = title.linecount;
+	t_base_item *item = title.items;
+	char line[256] = {0x0};
+	int i = 0;
+	for ( ; i < c; i++)
+	{
+		memset(line, 32, sizeof(line));
+		char *s = line;
+		int idx = 0;
+		while (1)
+		{
+			s = s + item->spos + idx;
+			int span = 0;
+			int slen = strlen(item->msg);
+			if (strcmp(item->flag, "juzhong") == 0)
+				span = (item->len - slen)/2;
+			else if (strcmp(item->flag, "juyou") == 0)
+				span = item->len - slen;
+			s += span;
+			if (strcmp(item->msg, "blank"))
+				sprintf(s, "%s", item->msg);
+			*(s + slen) = 32;
+			idx += item->spos + item->len;
+			if (item->next)
+				item = item->next;
+			else
+				break;
+		}
+		line[127] = 0x0;
+		fprintf(stdout, "%s\n\n", line);
+		item++;
+	}
+	return 0;
+}
+
 static int print_bank()
 {
 	return 0;
@@ -193,6 +294,14 @@ int main(int argc, char **argv)
 		fprintf(stderr, "init_location_or_abstract err %s %m!\n", abstract_file);
 		return -1;
 	}
+
+	if (init_title())
+	{
+		fprintf(stderr, "init_title err!\n");
+		return -1;
+	}
+
+	print_title();
 
 	if (init_head())
 	{

@@ -15,9 +15,9 @@ linelen = 128
 	line3_col_count_1 = blank,juzhong,30,5
 
 	line4_col_count = 3
-	line4_col_count_1 = msg1,juzuo,10,3
-	line4_col_count_2 = msg2,juzuo,10,3
-	line4_col_count_3 = msg-r-pages,juzuo,10,5
+	line4_col_count_1 = msg,juzuo,50,3
+	line4_col_count_2 = msg,juzuo,20,3
+	line4_col_count_3 = msg-r-pages,juzuo,15,5
 
 [block]
 	sep = a
