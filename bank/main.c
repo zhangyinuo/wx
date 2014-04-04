@@ -91,6 +91,8 @@ static int get_item(t_base_item *item, char *v)
 		return -1;
 	item->len = atoi(p+1);
 
+	fprintf(stdout, "%d %s\n", __LINE__, item->msg);
+
 	return 0;
 }
 
@@ -98,6 +100,7 @@ static int item_init(char *f, int i, t_base_item **pitem)
 {
 	char name[128] = {0x0};
 	snprintf(name, sizeof(name), "%s_line%d_col_count", f, i);
+	fprintf(stdout, "p %d %s\n", __LINE__, name);
 	int count = myconfig_get_intval(name, 0);
 	int c = 1;
 	t_base_item *item = *pitem;
@@ -111,6 +114,7 @@ static int item_init(char *f, int i, t_base_item **pitem)
 			return -1;
 		if (item->len)
 		{
+			fprintf(stdout, "malloc %d %s\n", __LINE__, subname);
 			t_base_item * nitem = (t_base_item *) malloc (sizeof(t_base_item));
 			if (nitem == NULL)
 				return -1;
@@ -169,6 +173,9 @@ static int init_head()
 		item_init("head", i, &items);
 		items++;
 	}
+	items = head.items;
+	items++;
+	fprintf(stdout, "init %s\n", items->msg);
 	return 0;
 }
 
@@ -226,10 +233,9 @@ static int gen_head_page()
 	return 0;
 }
 
-static int print_head()
+static int print_base_item(int c, t_base_item **items)
 {
-	int c = head.linecount;
-	t_base_item *item = head.items;
+	t_base_item *item = *items;
 	char line[256] = {0x0};
 	int i = 0;
 	for ( ; i < c; i++)
@@ -239,6 +245,7 @@ static int print_head()
 		int idx = 0;
 		while (1)
 		{
+			fprintf(stdout, "%d %d addr:%p %p %p %p\n", i, c, &item, &(item->msg), item, item->msg);
 			if(item->msg == NULL)
 				break;
 			s = s + item->spos + idx;
@@ -251,6 +258,7 @@ static int print_head()
 			s += span;
 			if (strcmp(item->msg, "blank"))
 				sprintf(s, "%s", item->msg);
+			fprintf(stdout, "%d %s %s\n", __LINE__, item->msg, s);
 			*(s + slen) = 32;
 			idx += item->spos + item->len;
 			if (item->next)
@@ -319,13 +327,15 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	print_base_item(title.linecount, &(title.items));
+
 	if (init_head())
 	{
 		fprintf(stderr, "init_head err!\n");
 		return -1;
 	}
 
-	print_head();
+	print_base_item(head.linecount, &(head.items));
 
 	if (init_body())
 	{
