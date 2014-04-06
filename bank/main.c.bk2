@@ -44,7 +44,7 @@ typedef struct
 typedef struct
 {
 	int linecount;
-	t_base_item *items;
+	t_base_item items[10][10];
 } t_head_init;
 
 typedef struct
@@ -114,11 +114,11 @@ static int item_init(char *f, int i, t_base_item **pitem)
 			return -1;
 		if (item->len)
 		{
+			fprintf(stdout, "malloc %d %s\n", __LINE__, subname);
 			t_base_item * nitem = (t_base_item *) malloc (sizeof(t_base_item));
 			if (nitem == NULL)
 				return -1;
 			memset(nitem, 0, sizeof(t_base_item));
-			fprintf(stdout, "malloc %d %s %p %p\n", __LINE__, subname, nitem, &nitem);
 
 			item->next = nitem;
 
@@ -161,23 +161,20 @@ static int init_head()
 {
 	memset(&head, 0, sizeof(head));
 	head.linecount = myconfig_get_intval("head_linecount", 4);
-	head.items = (t_base_item *) malloc (sizeof(t_base_item) * head.linecount);
-	if (head.items == NULL)
-		return -1;
+	memset(head.items, 0, sizeof(head.items));
 
-	t_base_item * items = head.items;
 
 	int i = 1;
 	for (; i <= head.linecount; i++)
 	{
-		t_base_item *item = items;
-		item_init("head", i, &items);
+		t_base_item * items = head.items[i];
+		item_init2("head", i, &items);
 		while (1)
 		{
-			fprintf(stdout, "init %s %p %p\n", item->msg, item, &item);
-			if (item->next == NULL)
+			fprintf(stdout, "init %s\n", items->msg);
+			if (items->len == 0)
 				break;
-			item = item->next;
+			items = items->next;
 		}
 		items++;
 	}
@@ -240,12 +237,11 @@ static int gen_head_page()
 
 static int print_base_item(int c, t_base_item **items)
 {
-	t_base_item *pitem = *items;
+	t_base_item *item = *items;
 	char line[256] = {0x0};
 	int i = 0;
 	for ( ; i < c; i++)
 	{
-		t_base_item *item = pitem;
 		memset(line, 32, sizeof(line));
 		char *s = line;
 		int idx = 0;
@@ -274,7 +270,7 @@ static int print_base_item(int c, t_base_item **items)
 		}
 		line[127] = 0x0;
 		fprintf(stdout, "line:[%s]\n\n", line);
-		pitem++;
+		item++;
 	}
 	return 0;
 }
