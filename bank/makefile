@@ -21,3 +21,4 @@ $(TARGET):$(OBJ)
 clean:
 	rm -f $(OBJ)
 	rm -f $(TARGET) 	
+	rm -f core.*
