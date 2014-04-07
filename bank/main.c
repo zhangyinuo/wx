@@ -160,7 +160,7 @@ static int init_title()
 static int init_head()
 {
 	memset(&head, 0, sizeof(head));
-	head.linecount = myconfig_get_intval("head_linecount", 4);
+	head.linecount = myconfig_get_intval("head1_linecount", 4);
 	head.items = (t_base_item *) malloc (sizeof(t_base_item) * head.linecount);
 	if (head.items == NULL)
 		return -1;
@@ -170,15 +170,7 @@ static int init_head()
 	int i = 1;
 	for (; i <= head.linecount; i++)
 	{
-		t_base_item *item = items;
-		item_init("head", i, &items);
-		while (1)
-		{
-			fprintf(stdout, "init %s %p %p\n", item->msg, item, &item);
-			if (item->next == NULL)
-				break;
-			item = item->next;
-		}
+		item_init("head1", i, &items);
 		items++;
 	}
 	return 0;
