@@ -292,12 +292,12 @@ static int gen_body()
 static int print_base_item(int c, t_base_item **items)
 {
 	t_base_item *pitem = *items;
-	char line[256] = {0x0};
+	char *line = (char *) malloc (global.linelen);
 	int i = 0;
 	for ( ; i < c; i++)
 	{
 		t_base_item *item = pitem;
-		memset(line, 32, sizeof(line));
+		memset(line, 32, global.linelen);
 		char *s = line;
 		int idx = 0;
 		while (1)
@@ -321,16 +321,32 @@ static int print_base_item(int c, t_base_item **items)
 			else
 				break;
 		}
-		line[127] = 0x0;
+		*(line + global.linelen - 1) = 0x0;
 		fprintf(stdout, "%s\n", line);
 		pitem++;
 	}
+	free(line);
 	return 0;
+}
+
+static void print_block_line()
+{
+	int i = 0;
+	for (; i < global.linelen; i++)
+		fprintf(stdout, "-");
+	fprintf(stdout, "\n");
 }
 
 static void print_head()
 {
 	print_base_item(title.linecount, &(title.items));
+	print_block_line();
+	print_block_line();
+	print_base_item(head1.linecount, &(head1.items));
+	print_block_line();
+	print_block_line();
+	print_base_item(head2.linecount, &(head2.items));
+	print_block_line();
 }
 
 static int print_body(int index, int r)
@@ -341,6 +357,9 @@ static int print_body(int index, int r)
 
 static void print_tail()
 {
+	print_block_line();
+	print_block_line();
+	fprintf(stdout, "\n");
 }
 
 static void print_end(int in, int in_total, int out, int out_total)
