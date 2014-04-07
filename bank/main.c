@@ -45,12 +45,6 @@ typedef struct
 {
 	int linecount;
 	t_base_item *items;
-} t_head_init;
-
-typedef struct
-{
-	int linecount;
-	t_base_item *items;
 } t_title_init;
 
 #define MAX_RAND 256
@@ -64,7 +58,9 @@ static t_global global;
 
 static t_title_init title;
 
-static t_head_init head;
+static t_title_init head1;
+
+static t_title_init head2;
 
 static int get_item(t_base_item *item, char *v)
 {
@@ -91,8 +87,6 @@ static int get_item(t_base_item *item, char *v)
 		return -1;
 	item->len = atoi(p+1);
 
-	fprintf(stdout, "%d %s\n", __LINE__, item->msg);
-
 	return 0;
 }
 
@@ -100,7 +94,6 @@ static int item_init(char *f, int i, t_base_item **pitem)
 {
 	char name[128] = {0x0};
 	snprintf(name, sizeof(name), "%s_line%d_col_count", f, i);
-	fprintf(stdout, "p %d %s\n", __LINE__, name);
 	int count = myconfig_get_intval(name, 0);
 	int c = 1;
 	t_base_item *item = *pitem;
@@ -118,7 +111,6 @@ static int item_init(char *f, int i, t_base_item **pitem)
 			if (nitem == NULL)
 				return -1;
 			memset(nitem, 0, sizeof(t_base_item));
-			fprintf(stdout, "malloc %d %s %p %p\n", __LINE__, subname, nitem, &nitem);
 
 			item->next = nitem;
 
@@ -138,39 +130,23 @@ static int init_global()
 	return 0;
 }
 
-static int init_title()
+static int init_title(t_title_init *some, char *name)
 {
-	memset(&title, 0, sizeof(title));
-	title.linecount = myconfig_get_intval("title_linecount", 4);
-	title.items = (t_base_item *) malloc (sizeof(t_base_item) * title.linecount);
-	if (title.items == NULL)
+	memset(some, 0, sizeof(t_title_init));
+
+	char subname[128] = {0x0};
+	snprintf(subname, sizeof(subname), "%s_linecount", name);
+	some->linecount = myconfig_get_intval(subname, 4);
+	some->items = (t_base_item *) malloc (sizeof(t_base_item) * some->linecount);
+	if (some->items == NULL)
 		return -1;
 
-	t_base_item * items = title.items;
+	t_base_item * items = some->items;
 
 	int i = 1;
-	for (; i <= title.linecount; i++)
+	for (; i <= some->linecount; i++)
 	{
-		item_init("title", i, &items);
-		items++;
-	}
-	return 0;
-}
-
-static int init_head()
-{
-	memset(&head, 0, sizeof(head));
-	head.linecount = myconfig_get_intval("head1_linecount", 4);
-	head.items = (t_base_item *) malloc (sizeof(t_base_item) * head.linecount);
-	if (head.items == NULL)
-		return -1;
-
-	t_base_item * items = head.items;
-
-	int i = 1;
-	for (; i <= head.linecount; i++)
-	{
-		item_init("head1", i, &items);
+		item_init(name, i, &items);
 		items++;
 	}
 	return 0;
@@ -243,10 +219,9 @@ static int print_base_item(int c, t_base_item **items)
 		int idx = 0;
 		while (1)
 		{
-			fprintf(stdout, "%d %d addr:%p %p %p %p\n", i, c, &item, &(item->msg), item, item->msg);
 			if(item->msg == NULL)
 				break;
-			s = s + item->spos + idx;
+			s = line + item->spos + idx;
 			int span = 0;
 			int slen = strlen(item->msg);
 			if (strcmp(item->flag, "juzhong") == 0)
@@ -256,7 +231,6 @@ static int print_base_item(int c, t_base_item **items)
 			s += span;
 			if (strcmp(item->msg, "blank"))
 				sprintf(s, "%s", item->msg);
-			fprintf(stdout, "%d %s %s\n", __LINE__, item->msg, s);
 			*(s + slen) = 32;
 			idx += item->spos + item->len;
 			if (item->next)
@@ -265,7 +239,7 @@ static int print_base_item(int c, t_base_item **items)
 				break;
 		}
 		line[127] = 0x0;
-		fprintf(stdout, "line:[%s]\n\n", line);
+		fprintf(stdout, "line:[%s]\n", line);
 		pitem++;
 	}
 	return 0;
@@ -319,7 +293,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	if (init_title())
+	if (init_title(&title, "title"))
 	{
 		fprintf(stderr, "init_title err!\n");
 		return -1;
@@ -327,13 +301,21 @@ int main(int argc, char **argv)
 
 	print_base_item(title.linecount, &(title.items));
 
-	if (init_head())
+	if (init_title(&head1, "head1"))
 	{
-		fprintf(stderr, "init_head err!\n");
+		fprintf(stderr, "init_head1 err!\n");
 		return -1;
 	}
 
-	print_base_item(head.linecount, &(head.items));
+	print_base_item(head1.linecount, &(head1.items));
+
+	if (init_title(&head2, "head2"))
+	{
+		fprintf(stderr, "init_head2 err!\n");
+		return -1;
+	}
+
+	print_base_item(head2.linecount, &(head2.items));
 
 	if (init_body())
 	{
