@@ -6,6 +6,14 @@
 
 enum INDEX {LOCATION = 0, ABSTRACT, INDEX_MAX};
 
+static char *body_item[] = {"date", "location", "abstract", "in", "out", "balance"};
+
+enum RANGE {DATE = 0, IN, OUT, LASTR};
+static char *srange[] = {"date", "in", "out"};
+
+static int up[16];
+static int down[16];
+
 typedef struct
 {
 	int headcount;
@@ -21,7 +29,7 @@ typedef struct
 	int page;
 } t_global;
 
-typedef struct
+typedef struct 
 {
 	char *msg;
 	char *flag;
@@ -29,6 +37,13 @@ typedef struct
 	int len;
 	char *next;
 }t_base_item;
+
+typedef struct
+{
+	char *flag;
+	int spos;
+	int len;
+}t_body_item;
 
 typedef struct 
 {
@@ -70,6 +85,8 @@ static t_title_init head1;
 
 static t_title_init head2;
 
+static t_body_item body[8];
+
 static int get_item(t_base_item *item, char *v)
 {
 	char *p = strchr(v, ',');
@@ -81,6 +98,26 @@ static int get_item(t_base_item *item, char *v)
 	v = p+1;
 
 	p = strchr(v, ',');
+	if (p == NULL)
+		return -1;
+	*p = 0x0;
+
+	item->flag = v;
+	v = p+1;
+
+	item->spos = atoi(v);
+
+	p = strchr(v, ',');
+	if (p == NULL)
+		return -1;
+	item->len = atoi(p+1);
+
+	return 0;
+}
+
+static int get_body_format(t_body_item *item, char *v)
+{
+	char *p = strchr(v, ',');
 	if (p == NULL)
 		return -1;
 	*p = 0x0;
@@ -120,7 +157,7 @@ static int item_init(char *f, int i, t_base_item **pitem)
 				return -1;
 			memset(nitem, 0, sizeof(t_base_item));
 
-			item->next = nitem;
+			item->next = (char *)nitem;
 
 			item = nitem;
 		}
@@ -211,17 +248,54 @@ static int init_location_or_abstract(char *file, int index)
 
 static int init_body()
 {
+	memset(body, 0, sizeof(body));
+	t_body_item * tbody = body;
+	int count = sizeof(body_item)/sizeof(char*);
+	int i = 0;
+	for (; i < count; i++)
+	{
+		char subname[128] = {0x0};
+		snprintf(subname, sizeof(subname), "body_%s_format", body_item[i]);
+		char *v = myconfig_get_value(subname);
+		if (v == NULL)
+			return -1;
+		if (get_body_format(tbody, v))
+			return -1;
+		tbody++;
+	}
 	return 0;
 }
 
 static int gen_body()
 {
+	memset(up, 0, sizeof(up));
+	memset(down, 0, sizeof(down));
+	int count = sizeof(srange)/sizeof(char*);
+	int i = 0;
+	for (; i < count; i++)
+	{
+		char subname[128] = {0x0};
+		snprintf(subname, sizeof(subname), "body_%s_range", srange[i]);
+		char *v = myconfig_get_value(subname);
+		if (v == NULL)
+			return -1;
+
+		char *p = strchr(v, ',');
+		if (p == NULL)
+			return -1;
+		up[i] = atoi(v);
+		down[i] = atoi(p+1);
+	}
 	return 0;
 }
 
-static int gen_head_page()
+static void print_bank()
 {
-	return 0;
+	int lines = global.totalout *2 / (up[OUT] + down[OUT]) + global.totalin * 2 /(up[IN] + down[IN]);
+
+	int pages = lines /global.lines_page;
+
+	fprintf(stdout, "%d\n", pages);
 }
 
 static int print_base_item(int c, t_base_item **items)
@@ -252,7 +326,7 @@ static int print_base_item(int c, t_base_item **items)
 			*(s + slen) = 32;
 			idx += item->spos + item->len;
 			if (item->next)
-				item = item->next;
+				item = (t_base_item *)item->next;
 			else
 				break;
 		}
@@ -260,11 +334,6 @@ static int print_base_item(int c, t_base_item **items)
 		fprintf(stdout, "line:[%s]\n", line);
 		pitem++;
 	}
-	return 0;
-}
-
-static int print_bank()
-{
 	return 0;
 }
 
@@ -346,12 +415,6 @@ int main(int argc, char **argv)
 	if (gen_body())
 	{
 		fprintf(stderr, "gen_body err!\n");
-		return -1;
-	}
-
-	if (gen_head_page())
-	{
-		fprintf(stderr, "gen_head_page err!\n");
 		return -1;
 	}
 

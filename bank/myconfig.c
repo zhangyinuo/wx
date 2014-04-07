@@ -224,10 +224,6 @@ static int myconfig_loadfile0(const char *file) {
 						if(!strcmp(k, reload_key[i]))
 							break;			
 					}
-					if(reload_key[i]) {
-						myconfig_delete_value(section, k);
-						myconfig_put_value(section, k, v);
-					}
 				}
 			}
 		}
