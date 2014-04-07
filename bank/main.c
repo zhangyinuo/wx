@@ -10,6 +10,14 @@ typedef struct
 {
 	int headcount;
 	int linelen;
+
+	int lines_page;
+	int total_lines;
+
+	float totalout;
+	float totalin;
+	float balance_base;
+
 	int page;
 } t_global;
 
@@ -127,6 +135,16 @@ static int init_global()
 	memset(&global, 0, sizeof(global));
 	global.headcount = myconfig_get_intval("headcount", 2);
 	global.linelen = myconfig_get_intval("linelen", 128);
+	global.lines_page = myconfig_get_intval("lines_page", 40);
+	global.total_lines = myconfig_get_intval("total_lines", 145);
+	char *v = myconfig_get_value("totalout");
+	global.totalout = atof(v);
+
+	v = myconfig_get_value("totalin");
+	global.totalin = atof(v);
+
+	v = myconfig_get_value("balance_base");
+	global.balance_base = atof(v);
 	return 0;
 }
 
@@ -264,6 +282,8 @@ int main(int argc, char **argv)
 		printf("myconfig_it fail banker.conf %m\n");
 		return -1;
 	}
+
+	init_global();
 
 	memset(index_rand, 0, sizeof(index_rand));
 	memset(str_rand, 0, sizeof(str_rand));
