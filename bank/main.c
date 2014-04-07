@@ -289,15 +289,6 @@ static int gen_body()
 	return 0;
 }
 
-static void print_bank()
-{
-	int lines = global.totalout *2 / (up[OUT] + down[OUT]) + global.totalin * 2 /(up[IN] + down[IN]);
-
-	int pages = lines /global.lines_page;
-
-	fprintf(stdout, "%d\n", pages);
-}
-
 static int print_base_item(int c, t_base_item **items)
 {
 	t_base_item *pitem = *items;
@@ -331,10 +322,61 @@ static int print_base_item(int c, t_base_item **items)
 				break;
 		}
 		line[127] = 0x0;
-		fprintf(stdout, "line:[%s]\n", line);
+		fprintf(stdout, "%s\n", line);
 		pitem++;
 	}
 	return 0;
+}
+
+static void print_head()
+{
+	print_base_item(title.linecount, &(title.items));
+}
+
+static int print_body(int index, int r)
+{
+	int once = 0;
+	return once;
+}
+
+static void print_tail()
+{
+}
+
+static void print_end(int in, int in_total, int out, int out_total)
+{
+}
+
+static void print_bank()
+{
+	int i = 0;
+	int in = 0;
+	int out = 0;
+
+	int in_total = 0;
+	int out_total = 0;
+
+	for (; i < global.total_lines; i++)
+	{
+		if (i % global.lines_page == 0)
+			print_head();
+		srand(time(NULL));
+		int r = rand();
+		if (r % 7 < 5)
+		{
+			in++;
+			in_total += print_body(IN, r);
+		}
+		else
+		{
+			out++;
+			out_total += print_body(OUT, r);
+		}
+		if ((i+1) % global.lines_page == 0)
+			print_tail();
+	}
+
+	print_end(in, in_total, out, out_total);
 }
 
 int main(int argc, char **argv)
