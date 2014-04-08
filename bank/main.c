@@ -13,6 +13,7 @@ static char *srange[] = {"date", "in", "out"};
 
 static int up[16];
 static int down[16];
+static int avg[16];
 
 typedef struct
 {
@@ -351,7 +352,12 @@ static void print_head()
 
 static int print_body(int index, int r)
 {
-	int once = 0;
+	int once = r%avg[index];
+	fprintf(stdout, "once %d\n", once);
+	if (once < up[index])
+		once += up[index];
+	once += once;
+	fprintf(stdout, "after once %d\n", once);
 	return once;
 }
 
@@ -375,13 +381,19 @@ static void print_bank()
 	int in_total = 0;
 	int out_total = 0;
 
+	int in_cfg = global.total_lines *5/7;
+	int out_cfg = global.total_lines - in_cfg;
+
+	avg[IN] = global.totalin / in_cfg;
+	avg[OUT] = global.totalout / out_cfg;
+
 	for (; i < global.total_lines; i++)
 	{
 		if (i % global.lines_page == 0)
 			print_head();
-		srand(time(NULL));
+		srand(time(NULL) + i);
 		int r = rand();
-		if (r % 7 < 5)
+		if ((r%7) < 5)
 		{
 			in++;
 			in_total += print_body(IN, r);
@@ -396,6 +408,9 @@ static void print_bank()
 	}
 
 	print_end(in, in_total, out, out_total);
+
+	fprintf(stdout,"%d %d\n", avg[IN], avg[OUT]);
+	fprintf(stdout,"%f %f %d %d %d %d %d %d\n", global.totalin, global.totalout, in_total, out_total, in, out, in_cfg, out_cfg);
 }
 
 int main(int argc, char **argv)
