@@ -350,14 +350,21 @@ static void print_head()
 	print_block_line();
 }
 
-static int print_body(int index, int r)
+static float print_body(int index, int r)
 {
-	int once = r%avg[index];
-	fprintf(stdout, "once %d\n", once);
+	float once = r%avg[index];
+	fprintf(stdout, "once %f\n", once);
 	if (once < up[index])
 		once += up[index];
 	once += once;
-	fprintf(stdout, "after once %d\n", once);
+	if (index == IN)
+	{
+		float yushu = r%100;
+		yushu = yushu/100;
+		once += yushu;
+		fprintf(stdout, "yushu %0.2f\n", yushu);
+	}
+	fprintf(stdout, "after once %0.2f\n", once);
 	return once;
 }
 
@@ -378,8 +385,8 @@ static void print_bank()
 	int in = 0;
 	int out = 0;
 
-	int in_total = 0;
-	int out_total = 0;
+	float in_total = 0;
+	float out_total = 0;
 
 	int in_cfg = global.total_lines *5/7;
 	int out_cfg = global.total_lines - in_cfg;
@@ -410,7 +417,7 @@ static void print_bank()
 	print_end(in, in_total, out, out_total);
 
 	fprintf(stdout,"%d %d\n", avg[IN], avg[OUT]);
-	fprintf(stdout,"%f %f %d %d %d %d %d %d\n", global.totalin, global.totalout, in_total, out_total, in, out, in_cfg, out_cfg);
+	fprintf(stdout,"%f %f %f %f %d %d %d %d\n", global.totalin, global.totalout, in_total, out_total, in, out, in_cfg, out_cfg);
 }
 
 int main(int argc, char **argv)
