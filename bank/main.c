@@ -357,7 +357,7 @@ static float print_body(int index, int r)
 	if (once < up[index])
 		once += up[index];
 	once += once;
-	if (index == IN)
+	if (index == IN && r%7 == 0)
 	{
 		float yushu = r%100;
 		yushu = yushu/100;

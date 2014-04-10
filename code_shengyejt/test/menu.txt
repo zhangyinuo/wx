@@ -1,52 +1,22 @@
 {
 	"button":[
 	{	
-		"name":"资讯",
+		"name":"集团介绍",
 		"sub_button":[
 		{	
 			"type":"click",
-			"name":"公司简介",
+			"name":"集团介绍",
 			"key":"KEY11"
-		},
-		{
-			"type":"click",
-			"name":"金融资讯",
-			"key":"KEY12"
-		},
-		{
-			"type":"click",
-			"name":"时政要闻",
-			"key":"KEY13"
 		}
 		]
 	},
 	{
-		"name":"我要融资",
+		"name":"属下企业",
 		"sub_button":[
 		{	
 			"type":"click",
-			"name":"个人融资",
+			"name":"子公司介绍 ",
 			"key":"KEY21"
-		},
-		{
-			"type":"click",
-			"name":"企业融资",
-			"key":"KEY22"
-		}
-		]
-	},
-	{
-		"name":"实用工具",
-		"sub_button":[
-		{	
-			"type":"view",
-			"name":"房贷计算",
-			"url":"http://www.qq.com"
-		},
-		{
-			"type":"click",
-			"name":"保持联系",
-			"key":"KEY32"
 		}
 		]
 	}

@@ -9,7 +9,8 @@ ALL:$(TARGET)
 CFLAGS+= -g -O2 -pipe -Wall -fno-strict-aliasing -D_GNU_SOURCE -D_REENTRANT -I../
 
 OBJ= main.o	\
-	myconfig.o
+	myconfig.o \
+	common.o
 
 $(TARGET):$(OBJ)
 	$(CC)	$(CFLAGS) -o $@ $^ $(LIB)
