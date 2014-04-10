@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "myconfig.h"
+#include "common.h"
 
 enum INDEX {LOCATION = 0, ABSTRACT, INDEX_MAX};
 
@@ -87,6 +88,8 @@ static t_title_init head1;
 static t_title_init head2;
 
 static t_body_item body[8];
+
+static int lastday;
 
 static int get_item(t_base_item *item, char *v)
 {
@@ -353,18 +356,38 @@ static void print_head()
 static float print_body(int index, int r)
 {
 	float once = r%avg[index];
-	fprintf(stdout, "once %f\n", once);
 	if (once < up[index])
 		once += up[index];
 	once += once;
-	if (index == IN && r%7 == 0)
+	if (index == IN)
 	{
-		float yushu = r%100;
-		yushu = yushu/100;
-		once += yushu;
-		fprintf(stdout, "yushu %0.2f\n", yushu);
+		if (r%7 == 0)
+		{
+			float yushu = r%100;
+			yushu = yushu/100;
+			once += yushu;
+		}
+		global.balance_base += once;
 	}
-	fprintf(stdout, "after once %0.2f\n", once);
+	else
+		global.balance_base -= once;
+	char lday[16] = {0x0};
+	snprintf(lday, sizeof(lday), "%d", lastday);
+	char sonce[16] = {0x0};
+	snprintf(sonce, sizeof(sonce), "%0.2f", once);
+	char balance[16] = {0x0};
+	snprintf(balance, sizeof(balance), "%0.2f", global.balance_base);
+	t_base_item items[6];
+	memset(items, 0, sizeof(items));
+
+	fprintf(stdout, "after once %0.2f %d %0.2f\n", once, lastday, global.balance_base);
+	strcat(lday, "000000");
+	time_t cur = get_time_t(lday);
+	cur += (r%3) * 86400;
+	get_strtime_by_t(lday, cur);
+	lday[8] = 0x0;
+	lastday = atoi(lday);
+
 	return once;
 }
 
@@ -393,6 +416,7 @@ static void print_bank()
 
 	avg[IN] = global.totalin / in_cfg;
 	avg[OUT] = global.totalout / out_cfg;
+	lastday = up[DATE];
 
 	for (; i < global.total_lines; i++)
 	{
