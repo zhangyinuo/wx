@@ -78,6 +78,7 @@ typedef struct
 static char str_rand[INDEX_MAX][MAX_RAND][MAX_STRING];
 
 static int index_rand[INDEX_MAX][MAX_RAND];
+static int max_rand[INDEX_MAX];
 
 static t_global global;
 
@@ -247,6 +248,7 @@ static int init_location_or_abstract(char *file, int index)
 		memset(buf, 0, sizeof(buf));
 	}
 	fclose(fp);
+	max_rand[index] = sum;
 	return ret;
 }
 
@@ -333,6 +335,37 @@ static int print_base_item(int c, t_base_item **items)
 	return 0;
 }
 
+static int print_base_body(int c, t_base_item **items)
+{
+	t_base_item *pitem = *items;
+	char *line = (char *) malloc (global.linelen);
+	int i = 0;
+	memset(line, 32, global.linelen);
+	char *s = line;
+	int idx = 0;
+	for ( ; i < c; i++)
+	{
+		t_base_item *item = pitem;
+		s = line + item->spos + idx;
+		int span = 0;
+		int slen = strlen(item->msg);
+		if (strcmp(item->flag, "juzhong") == 0)
+			span = (item->len - slen)/2;
+		else if (strcmp(item->flag, "juyou") == 0)
+			span = item->len - slen;
+		s += span;
+		if (strcmp(item->msg, "blank"))
+			sprintf(s, "%s", item->msg);
+		*(s + slen) = 32;
+		idx += item->spos + item->len;
+		pitem++;
+	}
+	*(line + global.linelen - 1) = 0x0;
+	fprintf(stdout, "%s\n", line);
+	free(line);
+	return 0;
+}
+
 static void print_block_line()
 {
 	int i = 0;
@@ -379,8 +412,39 @@ static float print_body(int index, int r)
 	snprintf(balance, sizeof(balance), "%0.2f", global.balance_base);
 	t_base_item items[6];
 	memset(items, 0, sizeof(items));
+	int i = 0;
+	for ( ; i < 6; i++)
+	{
+		items[i].flag = body[i].flag;
+		items[i].len = body[i].len;
+		items[i].spos = body[i].spos;
+	}
 
-	fprintf(stdout, "after once %0.2f %d %0.2f\n", once, lastday, global.balance_base);
+	items[0].msg = lday;
+	int lr = r%max_rand[0];
+	int lindex = index_rand[0][lr];
+	items[1].msg = str_rand[0][lindex];
+
+	int ar = r%max_rand[1];
+	int aindex = index_rand[1][ar];
+	items[2].msg = str_rand[1][aindex];
+
+	if (index == IN)
+	{
+		items[3].msg = sonce;
+		items[4].msg = "blank";
+	}
+	else
+	{
+		items[3].msg = "blank";
+		items[4].msg = sonce;
+	}
+
+	items[5].msg = balance;
+
+	t_base_item *item = items;
+	print_base_body(6, &item);
+
 	strcat(lday, "000000");
 	time_t cur = get_time_t(lday);
 	cur += (r%3) * 86400;
