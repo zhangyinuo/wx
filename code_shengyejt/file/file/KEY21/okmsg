@@ -1,17 +1,59 @@
 <MsgType><![CDATA[news]]></MsgType>
-	<ArticleCount>2</ArticleCount>
+	<ArticleCount>9</ArticleCount>
 	<Articles>
 	<item>
-		<Title><![CDATA[今日推荐]]></Title>
-		<Description><![CDATA[跑车]]></Description>
-		<PicUrl><![CDATA[http://img1.xcarimg.com/PicLib/s/s2355_420.jpg]]></PicUrl>
-		<Url><![CDATA[http://product.auto.163.com/product/000BNaIS.html]]></Url>
+		<Title><![CDATA[名盛装饰设计有限公司]]></Title>
+		<Description><![CDATA[名盛装饰设计有限公司]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY21/r1.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY21&id=1]]></Url>
 		</item>
 	<item>
-		<Title><![CDATA[菜式之一]]></Title>
-		<Description><![CDATA[跑车]]></Description>
-		<PicUrl><![CDATA[http://img1.xcarimg.com/PicLib/s/s2355_420.jpg]]></PicUrl>
-		<Url><![CDATA[http://product.auto.163.com/product/000BNaIS.html]]></Url>
+		<Title><![CDATA[富盛科技有限公司]]></Title>
+		<Description><![CDATA[富盛科技有限公司]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY21/r2.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY21&id=2]]></Url>
+		</item>
+	<item>
+		<Title><![CDATA[星淘建筑设计有限公司]]></Title>
+		<Description><![CDATA[星淘建筑设计有限公司]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY21/r3.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY21&id=3]]></Url>
+		</item>
+	<item>
+		<Title><![CDATA[世盛建筑租赁]]></Title>
+		<Description><![CDATA[世盛建筑租赁]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY21/r4.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY21&id=4]]></Url>
+		</item>
+	<item>
+		<Title><![CDATA[致盛五金建材配送有限公司]]></Title>
+		<Description><![CDATA[致盛五金建材配送有限公司]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY21/r5.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY21&id=5]]></Url>
+		</item>
+	<item>
+		<Title><![CDATA[威士顿教育培训中心 ]]></Title>
+		<Description><![CDATA[威士顿教育培训中心 ]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY21/r6.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY21&id=6]]></Url>
+		</item>
+	<item>
+		<Title><![CDATA[信升项目部 ]]></Title>
+		<Description><![CDATA[信升项目部 ]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY21/r7.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY21&id=7]]></Url>
+		</item>
+	<item>
+		<Title><![CDATA[盛晖投资]]></Title>
+		<Description><![CDATA[盛晖投资]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY21/r8.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY21&id=8]]></Url>
+		</item>
+	<item>
+		<Title><![CDATA[盛誉软件科技有限公司]]></Title>
+		<Description><![CDATA[盛誉软件科技有限公司]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY21/r9.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY21&id=9]]></Url>
 		</item>
 	</Articles>
 	</xml>
