@@ -10,10 +10,12 @@
     //获取数据
     error_reporting(E_ERROR|E_WARNING);
 
+	$name = $_GET['name'];
 	$type = $_GET['type'];
 	$id = $_GET['id'];
 
-	$root = "/data/app/wx/phpmini/ueditor/php/html/";
+	$wwwroot = "/data/app/wx/phpmini/";
+	$root = "/data/app/wx/phpmini/ueditor/php/html/$name/";
 	$path = $root.$type;
 	if (file_exists($path) === false)
 	{
@@ -34,6 +36,14 @@
 	$imgurl = substr($_POST['myValue'], $pos + 9, $epos - $pos - 9);
 	$imgname = $path."/".$id.".img";
 	file_put_contents($imgname, $imgurl);
+	$imgpos = strpos($imgurl, "/ueditor");
+	if ($imgpos === false)
+		return;
+	$imgpath = $wwwroot.substr($imgurl, $imgpos);
+
+	$srimg = $path."/r".$id.".jpg";
+
+	link($imgpath, $srimg);
 
 	$epos = strpos($_POST['myValue'], "</h1>");
 	if ($epos === false)

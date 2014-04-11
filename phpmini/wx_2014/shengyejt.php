@@ -53,7 +53,7 @@ function intoq(&$content, &$toUsername, &$fromUsername)
 
 function do_rsp_key($c, $from, $to)
 {
-	wx_log("echo:".__FILE__.":".__LINE__."\n");
+	wx_log("echo:".__FILE__.":".__LINE__.":$c:$from:$to\n");
 	$msg = get_content($c);
 	$pre = "<xml>
 		<ToUserName><![CDATA[%s]]></ToUserName>
@@ -77,6 +77,7 @@ if (1)
 	$from;
 	$to;
 	$type = intoq($content, $to, $from);
+	do_rsp_key($content, $to, $from);
 	exit;
 }
 else

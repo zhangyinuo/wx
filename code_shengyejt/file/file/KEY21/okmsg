@@ -1,9 +1,17 @@
-个人融资业务:
-1, 信用卡:
-2, 信用贷款:
-3, 抵押贷款:
-4, 购车消费贷款:
-5, 垫资购房、购铺贷款:
-
-请回复对应数字办理相应业务.
-
+<MsgType><![CDATA[news]]></MsgType>
+	<ArticleCount>2</ArticleCount>
+	<Articles>
+	<item>
+		<Title><![CDATA[今日推荐]]></Title>
+		<Description><![CDATA[跑车]]></Description>
+		<PicUrl><![CDATA[http://img1.xcarimg.com/PicLib/s/s2355_420.jpg]]></PicUrl>
+		<Url><![CDATA[http://product.auto.163.com/product/000BNaIS.html]]></Url>
+		</item>
+	<item>
+		<Title><![CDATA[菜式之一]]></Title>
+		<Description><![CDATA[跑车]]></Description>
+		<PicUrl><![CDATA[http://img1.xcarimg.com/PicLib/s/s2355_420.jpg]]></PicUrl>
+		<Url><![CDATA[http://product.auto.163.com/product/000BNaIS.html]]></Url>
+		</item>
+	</Articles>
+	</xml>

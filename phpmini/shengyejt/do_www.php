@@ -1,4 +1,7 @@
 <!DOCTYPE HTML>
+<?php
+	session_start();
+?>
 <html>
 <head>
     <title>信息上传</title>
@@ -17,8 +20,8 @@
 </head>
 
 <body>
-<form id="myForm" action="/ueditor/php/getContent.php?type=<?php echo $_GET['type'] ?>&id=<?php echo $_GET['id'] ?>" method="post">
-				<script type="text/plain" id="myEditor">这里的内容会推送给用户,请对自己编辑的内容负责</script>
+<form id="myForm" action="/ueditor/php/getContent2.php?type=<?php echo $_GET['type'] ?>&id=<?php echo $_GET['id'] ?>&name=<?php echo $_SESSION['username']; ?>" method="post">
+				<script type="text/plain" id="myEditor">的内容会推送给用户,请对自己</script>
 				<input type="submit" value="提交" />
 		</form>
 		<script type="text/javascript">
