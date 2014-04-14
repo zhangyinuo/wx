@@ -25,6 +25,7 @@ typedef struct
 
 	int lines_page;
 	int total_lines;
+	int tail_blank;
 
 	float totalout;
 	float totalin;
@@ -41,6 +42,21 @@ typedef struct
 	int len;
 	char *next;
 }t_base_item;
+
+typedef struct
+{
+	int count_pos;
+	int total_pos;
+
+	char *scount;
+	char *stotal;
+} t_tail_s;
+
+typedef struct
+{
+	int flag;
+	t_tail_s tail[2];
+} t_tail_info;
 
 typedef struct
 {
@@ -91,6 +107,8 @@ static t_title_init head1;
 static t_title_init head2;
 
 static t_body_item body[8];
+
+static t_tail_info tail;
 
 static int lastday;
 
@@ -181,6 +199,7 @@ static int init_global()
 	global.linelen = myconfig_get_intval("linelen", 128);
 	global.lines_page = myconfig_get_intval("lines_page", 40);
 	global.total_lines = myconfig_get_intval("total_lines", 145);
+	global.tail_blank = myconfig_get_intval("tail_blank", 15);
 	char *v = myconfig_get_value("totalout");
 	global.totalout = atof(v);
 
@@ -189,6 +208,24 @@ static int init_global()
 
 	v = myconfig_get_value("balance_base");
 	global.balance_base = atof(v);
+	return 0;
+}
+
+static int init_tail()
+{
+	memset(&tail, 0, sizeof(tail));
+	tail.flag = myconfig_get_intval("tail_flag", 0);
+	tail.tail[0].count_pos = myconfig_get_intval("tail_out_count_pos", 23);
+	tail.tail[1].count_pos = myconfig_get_intval("tail_in_count_pos", 23);
+
+	tail.tail[0].total_pos = myconfig_get_intval("tail_out_total_pos", 53);
+	tail.tail[1].total_pos = myconfig_get_intval("tail_in_total_pos", 53);
+
+	tail.tail[0].stotal = myconfig_get_value("tail_out_stotal");
+	tail.tail[1].stotal = myconfig_get_value("tail_in_stotal");
+
+	tail.tail[0].scount = myconfig_get_value("tail_out_scount");
+	tail.tail[1].scount = myconfig_get_value("tail_in_scount");
 	return 0;
 }
 
@@ -322,7 +359,17 @@ static int print_base_item(int c, t_base_item **items)
 				span = item->len - slen;
 			s += span;
 			if (strcmp(item->msg, "blank"))
-				sprintf(s, "%s", item->msg);
+			{
+				char *t = strstr(item->msg, "rpages");
+				if (t)
+				{
+					*t = 0x0;
+					sprintf(s, "%s%d", item->msg, global.page);
+					*t = 'r';
+				}
+				else
+					sprintf(s, "%s", item->msg);
+			}
 			*(s + slen) = 32;
 			idx += item->spos + item->len;
 			if (item->next)
@@ -331,7 +378,7 @@ static int print_base_item(int c, t_base_item **items)
 				break;
 		}
 		*(line + global.linelen - 1) = 0x0;
-		fprintf(fpout, "%s\n", line);
+		fprintf(fpout, "%s\r\n", line);
 		pitem++;
 	}
 	free(line);
@@ -364,7 +411,7 @@ static int print_base_body(int c, t_base_item **items)
 		pitem++;
 	}
 	*(line + global.linelen - 1) = 0x0;
-	fprintf(fpout, "%s\n", line);
+	fprintf(fpout, "%s\r\n", line);
 	free(line);
 	return 0;
 }
@@ -374,11 +421,12 @@ static void print_block_line()
 	int i = 0;
 	for (; i < global.linelen; i++)
 		fprintf(fpout, "-");
-	fprintf(fpout, "\n");
+	fprintf(fpout, "\r\n");
 }
 
 static void print_head()
 {
+	global.page++;
 	print_base_item(title.linecount, &(title.items));
 	print_block_line();
 	print_block_line();
@@ -462,11 +510,39 @@ static void print_tail()
 {
 	print_block_line();
 	print_block_line();
-	fprintf(fpout, "\n");
+	int i = 0;
+	for (; i < global.tail_blank; i++)
+		fprintf(fpout, "\r\n");
 }
 
-static void print_end(int in, int in_total, int out, int out_total)
+static void print_end(int in, float in_total, int out, float out_total)
 {
+	print_block_line();
+	print_block_line();
+	char *line = (char *) malloc (global.linelen);
+	memset(line, 32, global.linelen);
+
+	char *s = line + tail.tail[0].count_pos;
+	int i = sprintf(s, "%s%d", tail.tail[0].scount, out);
+	*(s + i) = 32;
+
+	s += tail.tail[0].total_pos;
+	i = sprintf(s, "%s%0.2f", tail.tail[0].stotal, out_total);
+	*(s + i) = 32;
+
+	fprintf(fpout, "%s\r\n", line);
+
+	memset(line, 32, global.linelen);
+
+	s = line + tail.tail[1].count_pos;
+	i = sprintf(s, "%s%d", tail.tail[1].scount, in);
+	*(s + i) = 32;
+
+	s += tail.tail[1].total_pos;
+	i = sprintf(s, "%s%0.2f", tail.tail[1].stotal, in_total);
+	*(s + i) = 32;
+
+	fprintf(fpout, "%s\r\n", line);
 }
 
 static void print_bank()
@@ -506,9 +582,6 @@ static void print_bank()
 	}
 
 	print_end(in, in_total, out, out_total);
-
-	fprintf(fpout,"%d %d\n", avg[IN], avg[OUT]);
-	fprintf(fpout,"%f %f %f %f %d %d %d %d\n", global.totalin, global.totalout, in_total, out_total, in, out, in_cfg, out_cfg);
 }
 
 int main(int argc, char **argv)
@@ -535,6 +608,7 @@ int main(int argc, char **argv)
 	}
 
 	init_global();
+	init_tail();
 
 	memset(index_rand, 0, sizeof(index_rand));
 	memset(str_rand, 0, sizeof(str_rand));
@@ -570,7 +644,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	print_base_item(title.linecount, &(title.items));
+//	print_base_item(title.linecount, &(title.items));
 
 	if (init_title(&head1, "head1"))
 	{
@@ -578,7 +652,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	print_base_item(head1.linecount, &(head1.items));
+//	print_base_item(head1.linecount, &(head1.items));
 
 	if (init_title(&head2, "head2"))
 	{
@@ -586,7 +660,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	print_base_item(head2.linecount, &(head2.items));
+//	print_base_item(head2.linecount, &(head2.items));
 
 	if (init_body())
 	{
