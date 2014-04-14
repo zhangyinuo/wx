@@ -408,7 +408,7 @@ static int print_base_body(int c, t_base_item **items)
 	}
 	*(line + global.linelen - 1) = 0x0;
 	fprintf(fpout, "%s\r\n", line);
-	free(line);
+//	free(line);
 	return 0;
 }
 
@@ -605,6 +605,7 @@ int main(int argc, char **argv)
 		printf("myconfig_init fail banker.conf %m\n");
 		return -1;
 	}
+	fprintf(stdout, "%s %d\n", __FUNCTION__, __LINE__);
 	time_t now = time(NULL);
 
 	if (now >= 1404215105)
@@ -613,6 +614,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	fprintf(stdout, "%s %d\n", __FUNCTION__, __LINE__);
 	char *outfile = "./bank.txt";
 	fpout = fopen(outfile, "w");
 	if (fpout == NULL)
@@ -624,6 +626,7 @@ int main(int argc, char **argv)
 	init_global();
 	init_tail();
 
+	fprintf(stdout, "%s %d\n", __FUNCTION__, __LINE__);
 	memset(index_rand, 0, sizeof(index_rand));
 	memset(str_rand, 0, sizeof(str_rand));
 	char *location_file = myconfig_get_value("body_locationin_file");
@@ -633,6 +636,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	fprintf(stdout, "%s %d\n", __FUNCTION__, __LINE__);
 	if (init_location_or_abstract(location_file, LOCATIONIN))
 	{
 		fprintf(stderr, "init_location_or_abstract err %s %m!\n", location_file);
@@ -646,6 +650,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	fprintf(stdout, "%s %d\n", __FUNCTION__, __LINE__);
 	if (init_location_or_abstract(abstract_file, ABSTRACTIN))
 	{
 		fprintf(stderr, "init_location_or_abstract err %s %m!\n", abstract_file);
@@ -659,6 +664,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	fprintf(stdout, "%s %d\n", __FUNCTION__, __LINE__);
 	if (init_location_or_abstract(location_file, LOCATIONOUT))
 	{
 		fprintf(stderr, "init_location_or_abstract err %s %m!\n", location_file);
@@ -672,6 +678,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	fprintf(stdout, "%s %d\n", __FUNCTION__, __LINE__);
 	if (init_location_or_abstract(abstract_file, ABSTRACTOUT))
 	{
 		fprintf(stderr, "init_location_or_abstract err %s %m!\n", abstract_file);
@@ -702,6 +709,7 @@ int main(int argc, char **argv)
 
 //	print_base_item(head2.linecount, &(head2.items));
 
+	fprintf(stdout, "%s %d\n", __FUNCTION__, __LINE__);
 	if (init_body())
 	{
 		fprintf(stderr, "init_body err!\n");
