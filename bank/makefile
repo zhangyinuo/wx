@@ -2,7 +2,7 @@ NS=banker
 CC=gcc
 CXX=g++
 INC+= 
-LIB+= -lpthread -ldl -lrt -rdynamic 
+LIB+= -lpthread -ldl -lrt 
 TARGET=$(NS)
 ALL:$(TARGET)
 

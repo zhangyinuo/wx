@@ -5,6 +5,8 @@
 #include "myconfig.h"
 #include "common.h"
 
+FILE *fpout = NULL;
+
 enum INDEX {LOCATION = 0, ABSTRACT, INDEX_MAX};
 
 static char *body_item[] = {"date", "location", "abstract", "in", "out", "balance"};
@@ -329,7 +331,7 @@ static int print_base_item(int c, t_base_item **items)
 				break;
 		}
 		*(line + global.linelen - 1) = 0x0;
-		fprintf(stdout, "%s\n", line);
+		fprintf(fpout, "%s\n", line);
 		pitem++;
 	}
 	free(line);
@@ -362,7 +364,7 @@ static int print_base_body(int c, t_base_item **items)
 		pitem++;
 	}
 	*(line + global.linelen - 1) = 0x0;
-	fprintf(stdout, "%s\n", line);
+	fprintf(fpout, "%s\n", line);
 	free(line);
 	return 0;
 }
@@ -371,8 +373,8 @@ static void print_block_line()
 {
 	int i = 0;
 	for (; i < global.linelen; i++)
-		fprintf(stdout, "-");
-	fprintf(stdout, "\n");
+		fprintf(fpout, "-");
+	fprintf(fpout, "\n");
 }
 
 static void print_head()
@@ -460,7 +462,7 @@ static void print_tail()
 {
 	print_block_line();
 	print_block_line();
-	fprintf(stdout, "\n");
+	fprintf(fpout, "\n");
 }
 
 static void print_end(int in, int in_total, int out, int out_total)
@@ -505,8 +507,8 @@ static void print_bank()
 
 	print_end(in, in_total, out, out_total);
 
-	fprintf(stdout,"%d %d\n", avg[IN], avg[OUT]);
-	fprintf(stdout,"%f %f %f %f %d %d %d %d\n", global.totalin, global.totalout, in_total, out_total, in, out, in_cfg, out_cfg);
+	fprintf(fpout,"%d %d\n", avg[IN], avg[OUT]);
+	fprintf(fpout,"%f %f %f %f %d %d %d %d\n", global.totalin, global.totalout, in_total, out_total, in, out, in_cfg, out_cfg);
 }
 
 int main(int argc, char **argv)
@@ -521,6 +523,14 @@ int main(int argc, char **argv)
 	if (now >= 1404215105)
 	{
 		printf("myconfig_it fail banker.conf %m\n");
+		return -1;
+	}
+
+	char *outfile = "./bank.txt";
+	fpout = fopen(outfile, "w");
+	if (fpout == NULL)
+	{
+		printf("open %s err %m\n", outfile);
 		return -1;
 	}
 
