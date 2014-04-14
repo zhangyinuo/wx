@@ -200,6 +200,7 @@ static int init_title(t_title_init *some, char *name)
 	some->items = (t_base_item *) malloc (sizeof(t_base_item) * some->linecount);
 	if (some->items == NULL)
 		return -1;
+	memset(some->items, 0, sizeof(t_base_item) * some->linecount);
 
 	t_base_item * items = some->items;
 
