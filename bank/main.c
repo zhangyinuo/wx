@@ -7,7 +7,7 @@
 
 FILE *fpout = NULL;
 
-enum INDEX {LOCATION = 0, ABSTRACT, INDEX_MAX};
+enum INDEX {LOCATIONIN = 0, ABSTRACTIN, LOCATIONOUT, ABSTRACTOUT, INDEX_MAX};
 
 static char *body_item[] = {"date", "location", "abstract", "in", "out", "balance"};
 
@@ -271,11 +271,7 @@ static int init_location_or_abstract(char *file, int index)
 	{
 		char *t = strchr(buf, '|');
 		if (t == NULL)
-		{
-			fprintf(stderr, "error format %s", buf);
-			ret = 1;
-			break;
-		}
+			continue;
 		*t = 0x0;
 		strcpy(base[idx], buf);
 		int i = 0;
@@ -285,10 +281,10 @@ static int init_location_or_abstract(char *file, int index)
 		{
 			index_rand[index][sum++] = idx;
 		}
+		max_rand[index]++;
 		memset(buf, 0, sizeof(buf));
 	}
 	fclose(fp);
-	max_rand[index] = sum;
 	return ret;
 }
 
@@ -439,6 +435,7 @@ static void print_head()
 
 static float print_body(int index, int r)
 {
+	int idx = 0;
 	float once = r%avg[index];
 	if (once < up[index])
 		once += up[index];
@@ -454,7 +451,24 @@ static float print_body(int index, int r)
 		global.balance_base += once;
 	}
 	else
+	{
+		idx = 2;
+		if (r%15)
+		{
+			int k = 0;
+			if (once > 1000)
+			{
+				k = once/1000;
+				once = k * 1000;
+			}
+			else
+			{
+				k = once/100;
+				once = k * 100;
+			}
+		}
 		global.balance_base -= once;
+	}
 	char lday[16] = {0x0};
 	snprintf(lday, sizeof(lday), "%d", lastday);
 	char sonce[16] = {0x0};
@@ -472,13 +486,13 @@ static float print_body(int index, int r)
 	}
 
 	items[0].msg = lday;
-	int lr = r%max_rand[0];
-	int lindex = index_rand[0][lr];
-	items[1].msg = str_rand[0][lindex];
+	int lr = r%max_rand[idx+0];
+	int lindex = index_rand[idx+0][lr];
+	items[1].msg = str_rand[idx+0][lindex];
 
-	int ar = r%max_rand[1];
-	int aindex = index_rand[1][ar];
-	items[2].msg = str_rand[1][aindex];
+	int ar = r%max_rand[idx+1];
+	int aindex = index_rand[idx+1][ar];
+	items[2].msg = str_rand[idx+1][aindex];
 
 	if (index == IN)
 	{
@@ -554,7 +568,7 @@ static void print_bank()
 	float in_total = 0;
 	float out_total = 0;
 
-	int in_cfg = global.total_lines *5/7;
+	int in_cfg = global.total_lines *2/7;
 	int out_cfg = global.total_lines - in_cfg;
 
 	avg[IN] = global.totalin / in_cfg;
@@ -567,7 +581,7 @@ static void print_bank()
 			print_head();
 		srand(time(NULL) + i);
 		int r = rand();
-		if ((r%7) < 5)
+		if ((r%7) < 2)
 		{
 			in++;
 			in_total += print_body(IN, r);
@@ -612,27 +626,53 @@ int main(int argc, char **argv)
 
 	memset(index_rand, 0, sizeof(index_rand));
 	memset(str_rand, 0, sizeof(str_rand));
-	char *location_file = myconfig_get_value("body_location_file");
+	char *location_file = myconfig_get_value("body_locationin_file");
 	if (!location_file)
 	{
-		fprintf(stderr, "need body_location_file!\n");
+		fprintf(stderr, "need body_locationin_file!\n");
 		return -1;
 	}
 
-	if (init_location_or_abstract(location_file, LOCATION))
+	if (init_location_or_abstract(location_file, LOCATIONIN))
 	{
 		fprintf(stderr, "init_location_or_abstract err %s %m!\n", location_file);
 		return -1;
 	}
 
-	char *abstract_file = myconfig_get_value("body_abstract_file");
+	char *abstract_file = myconfig_get_value("body_abstractin_file");
 	if (!abstract_file)
 	{
-		fprintf(stderr, "need body_abstract_file!\n");
+		fprintf(stderr, "need body_abstractin_file!\n");
 		return -1;
 	}
 
-	if (init_location_or_abstract(abstract_file, ABSTRACT))
+	if (init_location_or_abstract(abstract_file, ABSTRACTIN))
+	{
+		fprintf(stderr, "init_location_or_abstract err %s %m!\n", abstract_file);
+		return -1;
+	}
+
+	location_file = myconfig_get_value("body_locationout_file");
+	if (!location_file)
+	{
+		fprintf(stderr, "need body_locationout_file!\n");
+		return -1;
+	}
+
+	if (init_location_or_abstract(location_file, LOCATIONOUT))
+	{
+		fprintf(stderr, "init_location_or_abstract err %s %m!\n", location_file);
+		return -1;
+	}
+
+	abstract_file = myconfig_get_value("body_abstractout_file");
+	if (!abstract_file)
+	{
+		fprintf(stderr, "need body_abstractout_file!\n");
+		return -1;
+	}
+
+	if (init_location_or_abstract(abstract_file, ABSTRACTOUT))
 	{
 		fprintf(stderr, "init_location_or_abstract err %s %m!\n", abstract_file);
 		return -1;
