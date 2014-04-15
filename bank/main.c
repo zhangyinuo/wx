@@ -430,6 +430,7 @@ static int print_base_body(int c, t_base_item **items)
 		if (strcmp(item->msg, "blank"))
 			sprintf(s, "%s", item->msg);
 		*(s + slen) = '|';
+		*(s + slen + 1) = '|';
 		idx += item->spos + item->len;
 		pitem++;
 	}
@@ -620,8 +621,6 @@ static void print_bank()
 
 	for (; i < global.total_lines; i++)
 	{
-		if (i % global.lines_page == 0)
-			print_head();
 		srand(time(NULL) + i);
 		int r = rand();
 		if ((r%7) < 2)
