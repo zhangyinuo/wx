@@ -1,11 +1,28 @@
-<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+i<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
 <script src="../ueditor.parse.js" type="text/javascript"></script>
 <script>
-    uParse('.content',{
+
+uParse('.content',{
         'rootPath': '../'
     })
 
 </script>
+<script type="text/javascript">
+	function customer(){
+		window.location.href="http://www.gzsensoft.com/shengyejt/www.php";
+	
+	}
+	
+</script>
+
+<form id="myForm" action="/ueditor/php/getContent2.php?type=<?php echo $_GET['type'] ?>&id=<?php echo $_GET['id'] ?>" method="post">
+                <script type="text/plain" id="myEditor">?[m</script>  
+                <input type="button" value="返回到咨询管理" onclick="customer()"/>
+        </form>
+
+
+
+
 <?php
     //获取数据
     error_reporting(E_ERROR|E_WARNING);
@@ -17,7 +34,8 @@
 	$wwwroot = "/data/app/wx/phpmini/";
 	$root = "/data/app/wx/phpmini/ueditor/php/html/$name/";
 	$path = $root.$type;
-	if (file_exists($path) === false)
+	if (file_exists($path) === false
+	)
 	{
 		if (mkdir($path, 0755, true) === false)
 			return;
