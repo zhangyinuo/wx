@@ -5,6 +5,7 @@
 	include("header.inc.php");
 	include("dbconnect.inc.php");
 	include("common.php");
+        
 	$where = "";
 	if($_GET["name"] != "") {
 		$name = trim($_GET["name"]);
@@ -78,7 +79,7 @@
 		echo "<td width = \"15%\">{$r[2]}</td>";
 		echo "<td width = \"15%\">{$g}</td>";
 		echo "<td width = \"15%\">{$d}</td>";
-		echo "<td><a href='edit_account.php?tel={$k}'>修改</a> <a href='dispatch.php?tel={$k}'>派发</a> <a href='detail.php?tel={$k}'>详细</a> <a  href='#' onclick='return doDel(\"{$k}\");'>删除</a></td> </tr>";
+		echo "<td><a href='edit_account.php?tel={$k}'>修改</a> <a href='dispatch.php?tel={$k}'>派发</a> <a href='detail.php?tel={$k}'>详细</a> <a  href='#' onclick='return doDel(\"{$k}\");'>删除</a><a href='send_messages.php?tel={$k}'>发送</a></td> </tr>";
 	}
 ?>
 </tbody></table>

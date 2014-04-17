@@ -6,6 +6,27 @@
     })
 
 </script>
+
+<script type="text/javascript">
+	function goinformation(){
+		window.location.href="http://www.gzsensoft.com/touzi/www.php";
+	}
+
+
+</script>
+
+
+
+<form id="myForm" action="/ueditor/php/getContent.php?type=<?php echo $_GET['type'] ?>&id=<?php echo $_GET['id'] ?>" method="post">
+                <script type="text/plain" id="myEditor">这里的内容会推送给用户,请对自己编辑的内容负责</script>
+          	    <input type="button" value="返回资源管理器" onclick="goinformation()"/>
+        </form>
+
+
+
+
+
+
 <?php
     //获取数据
     error_reporting(E_ERROR|E_WARNING);

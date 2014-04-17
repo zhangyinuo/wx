@@ -63,6 +63,7 @@ typedef struct
 	char *flag;
 	int spos;
 	int len;
+	float r;
 	char *next;
 }t_base_item;
 
@@ -86,6 +87,7 @@ typedef struct
 	char *flag;
 	int spos;
 	int len;
+	float r;
 }t_body_item;
 
 typedef struct 
@@ -177,6 +179,12 @@ static int get_body_format(t_body_item *item, char *v)
 	if (p == NULL)
 		return -1;
 	item->len = atoi(p+1);
+
+	v = p+1;
+	p = strchr(v, ',');
+	if (p == NULL)
+		return -1;
+	item->r = atof(p+1);
 
 	return 0;
 }
@@ -301,16 +309,18 @@ static int init_location_or_abstract(char *file, int index)
 			continue;
 		*t = 0x0;
 		strcpy(base[idx], buf);
+		fprintf(stdout, "%s %ld\n", base[idx], strlen(base[idx]));
 		int i = 0;
-		idx++;
 		int c = atoi(t+1);
 		for (i = 0; i < c; i++)
 		{
 			index_rand[index][sum++] = idx;
+			max_rand[index]++;
 		}
-		max_rand[index]++;
+		idx++;
 		memset(buf, 0, sizeof(buf));
 	}
+	fprintf(stdout, "%d\n",  max_rand[index]);
 	fclose(fp);
 	return ret;
 }
@@ -368,18 +378,17 @@ static int print_base_item(int c, t_base_item **items)
 		t_base_item *item = pitem;
 		memset(line, 32, global.linelen);
 		char *s = line;
-		int idx = 0;
 		while (1)
 		{
 			if(item->msg == NULL)
 				break;
-			s = line + item->spos + idx;
+			s = line + item->spos;
 			int span = 0;
 			int slen = strlen(item->msg);
 			if (strcmp(item->flag, "juzhong") == 0)
 				span = (item->len - slen)/2;
 			else if (strcmp(item->flag, "juyou") == 0)
-				span = item->len - slen;
+				span = -slen;
 			s += span;
 			if (strcmp(item->msg, "blank"))
 			{
@@ -394,7 +403,6 @@ static int print_base_item(int c, t_base_item **items)
 					sprintf(s, "%s", item->msg);
 			}
 			*(s + slen) = 32;
-			idx += item->spos + item->len;
 			if (item->next)
 				item = (t_base_item *)item->next;
 			else
@@ -415,22 +423,20 @@ static int print_base_body(int c, t_base_item **items)
 	int i = 0;
 	memset(line, 32, global.linelen);
 	char *s = line;
-	int idx = 0;
 	for ( ; i < c; i++)
 	{
 		t_base_item *item = pitem;
-		s = line + item->spos + idx;
+		s = line + item->spos;
 		int span = 0;
 		int slen = strlen(item->msg);
 		if (strcmp(item->flag, "juzhong") == 0)
 			span = (item->len - slen)/2;
 		else if (strcmp(item->flag, "juyou") == 0)
-			span = item->len - slen;
+			span = -slen;
 		s += span;
 		if (strcmp(item->msg, "blank"))
 			sprintf(s, "%s", item->msg);
 		*(s + slen) = 32;
-		idx += item->spos + item->len;
 		pitem++;
 	}
 	*(line + global.linelen - 1) = 0x0;
@@ -447,15 +453,21 @@ static void print_block_line()
 	fprintf(fpout, "\r\n");
 }
 
+static void print_block_2line()
+{
+	int i = 0;
+	for (; i < global.linelen; i++)
+		fprintf(fpout, "=");
+	fprintf(fpout, "\r\n");
+}
+
 static void print_head()
 {
 	global.page++;
 	print_base_item(title.linecount, &(title.items));
-	print_block_line();
-	print_block_line();
+	print_block_2line();
 	print_base_item(head1.linecount, &(head1.items));
-	print_block_line();
-	print_block_line();
+	print_block_2line();
 	print_base_item(head2.linecount, &(head2.items));
 	print_block_line();
 }
@@ -519,6 +531,7 @@ static float print_body(int index, int r)
 		items[i].flag = body[i].flag;
 		items[i].len = body[i].len;
 		items[i].spos = body[i].spos;
+		items[i].r = body[i].r;
 	}
 
 	items[0].msg = lday;
@@ -565,8 +578,7 @@ static float print_body(int index, int r)
 
 static void print_tail()
 {
-	print_block_line();
-	print_block_line();
+	print_block_2line();
 	int i = 0;
 	for (; i < global.tail_blank; i++)
 		fprintf(fpout, "\r\n");
@@ -574,8 +586,7 @@ static void print_tail()
 
 static void print_end(int in, float in_total, int out, float out_total)
 {
-	print_block_line();
-	print_block_line();
+	print_block_2line();
 	char *line = (char *) malloc (global.linelen);
 	memset(line, 32, global.linelen);
 
