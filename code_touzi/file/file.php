@@ -4,6 +4,7 @@ $ROOTDIR=dirname(__FILE__)."/../";
 $curdir=dirname(__FILE__)."/";
 
 require_once($ROOTDIR."log/log.php");
+require_once($ROOTDIR."queue/queue.php");
 
 function get_content($bfile)
 {

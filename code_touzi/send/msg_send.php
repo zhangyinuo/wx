@@ -20,7 +20,7 @@ $token = "";
 $type = 0;
 while (1)
 {
-	while(msg_receive($wx_down_q, 0, $type, 1024, $message, TRUE, MSG_IPC_NOWAIT)) {
+	while(msg_receive($wx_down_q, 0, $type, 40960, $message, TRUE, MSG_IPC_NOWAIT)) {
 
 		runlog(__FILE__."_".__LINE__.":"."try send: ".$message);
 

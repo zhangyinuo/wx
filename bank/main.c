@@ -29,6 +29,8 @@ typedef struct
 
 	float jx;
 	char *sjx;
+	char *sjx_shui;
+	char *sjxlocation;
 
 	int page;
 } t_global;
@@ -243,6 +245,8 @@ static int init_global()
 	v = myconfig_get_value("lixi_month");
 	global.jx = atof(v) / (float)365;
 	global.sjx = myconfig_get_value("lixi_name");
+	global.sjx_shui = myconfig_get_value("lixi_shui_name");
+	global.sjxlocation = myconfig_get_value("lixi_location");
 	return 0;
 }
 
@@ -386,7 +390,7 @@ static int print_base_item(int c, t_base_item **items)
 			int span = 0;
 			int slen = strlen(item->msg);
 			if (strcmp(item->flag, "juzhong") == 0)
-				span = (item->len - slen)/2;
+				span = (item->len - item->spos - slen)/2;
 			else if (strcmp(item->flag, "juyou") == 0)
 				span = -slen;
 			s += span;
@@ -430,7 +434,7 @@ static int print_base_body(int c, t_base_item **items)
 		int span = 0;
 		int slen = strlen(item->msg);
 		if (strcmp(item->flag, "juzhong") == 0)
-			span = (item->len - slen)/2;
+			span = (item->len - item->spos - slen)/2;
 		else if (strcmp(item->flag, "juyou") == 0)
 			span = -slen;
 		s += span;
@@ -543,7 +547,10 @@ static float print_body(int index, int r)
 	int aindex = index_rand[idx+1][ar];
 	items[2].msg = str_rand[idx+1][aindex];
 	if (flag == 0)
+	{
+		items[1].msg = global.sjxlocation;
 		items[2].msg = global.sjx;
+	}
 
 	if (index == IN)
 	{
@@ -560,6 +567,12 @@ static float print_body(int index, int r)
 
 	t_base_item *item = items;
 	print_base_body(6, &item);
+	if (flag == 0)
+	{
+		items[2].msg = global.sjx_shui;
+		items[3].msg = "blank";
+		print_base_body(6, &item);
+	}
 
 	strcat(lday, "000000");
 	time_t cur = get_time_t(lday);
@@ -589,24 +602,26 @@ static void print_end(int in, float in_total, int out, float out_total)
 	print_block_2line();
 	char *line = (char *) malloc (global.linelen);
 	memset(line, 32, global.linelen);
+	*(line + global.linelen - 1) = 0x0;
 
 	char *s = line + tail.tail[0].count_pos;
 	int i = sprintf(s, "%s%d", tail.tail[0].scount, out);
 	*(s + i) = 32;
 
-	s += tail.tail[0].total_pos;
+	s = line + tail.tail[0].total_pos;
 	i = sprintf(s, "%s%0.2f", tail.tail[0].stotal, out_total);
 	*(s + i) = 32;
 
 	fprintf(fpout, "%s\r\n", line);
 
 	memset(line, 32, global.linelen);
+	*(line + global.linelen - 1) = 0x0;
 
 	s = line + tail.tail[1].count_pos;
 	i = sprintf(s, "%s%d", tail.tail[1].scount, in);
 	*(s + i) = 32;
 
-	s += tail.tail[1].total_pos;
+	s = line + tail.tail[1].total_pos;
 	i = sprintf(s, "%s%0.2f", tail.tail[1].stotal, in_total);
 	*(s + i) = 32;
 
