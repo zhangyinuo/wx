@@ -34,8 +34,7 @@ uParse('.content',{
 	$wwwroot = "/data/app/wx/phpmini/";
 	$root = "/data/app/wx/phpmini/ueditor/php/html/$name/";
 	$path = $root.$type;
-	if (file_exists($path) === false
-	)
+	if (file_exists($path) === false)
 	{
 		if (mkdir($path, 0755, true) === false)
 			return;
@@ -61,6 +60,8 @@ uParse('.content',{
 
 	$srimg = $path."/r".$id.".jpg";
 
+	if (file_exists($srimg) === true)
+		unlink($srimg);
 	link($imgpath, $srimg);
 
 	$epos = strpos($_POST['myValue'], "</h1>");

@@ -509,17 +509,22 @@ static float print_body(int index, int r)
 		idx = 2;
 		if (r%15)
 		{
-			int k = 0;
-			if (once > 1000)
+			if (r%2 == 0)
 			{
-				k = once/1000;
-				once = k * 1000;
+				int k = 0;
+				if (once > 1000)
+				{
+					k = once/1000;
+					once = k * 1000;
+				}
+				else
+				{
+					k = once/100;
+					once = k * 100;
+				}
 			}
 			else
-			{
-				k = once/100;
-				once = k * 100;
-			}
+				once = (int)once;
 		}
 		global.balance_base -= once;
 	}
@@ -546,6 +551,7 @@ static float print_body(int index, int r)
 	int ar = r%max_rand[idx+1];
 	int aindex = index_rand[idx+1][ar];
 	items[2].msg = str_rand[idx+1][aindex];
+	items[2].msg = str_rand[idx+1][lindex];
 	if (flag == 0)
 	{
 		items[1].msg = global.sjxlocation;
