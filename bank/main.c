@@ -507,9 +507,14 @@ static float print_body(int index, int r)
 	else
 	{
 		idx = 2;
-		if (r%15)
+		int llr = r%max_rand[idx+0];
+		int llindex = index_rand[idx+0][llr];
+		int zflag = 0;
+		if (strstr(str_rand[idx+1][llindex], "ÏÖÖ§"))
+			zflag = 1;
+		if (zflag || r%15)
 		{
-			if (r%2 == 0)
+			if (zflag || r%2 == 0)
 			{
 				int k = 0;
 				if (once > 1000)

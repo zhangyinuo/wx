@@ -21,6 +21,18 @@ function get_content($bfile)
 
 }
 
+function process_web_request($fid, $path, $c)
+{
+	global $wx_down_q;
+	$msg = "";
+
+	runlog(__FILE__.":".__LINE__.": $fid prepare!");
+	$f = get_content($path."f");
+	$msg = sprintf($f, $fid, $c);
+
+	msg_send($wx_down_q, 1, $msg);
+}
+
 function process_request($fid, $path, $ret)
 {
 	global $wx_down_q;
