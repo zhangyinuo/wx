@@ -1,4 +1,5 @@
 <?php
+	error_reporting(0);
 	session_start();
 	if(!$_SESSION["userid"]) header("Location:index.php");
 	require_once("log.php");
