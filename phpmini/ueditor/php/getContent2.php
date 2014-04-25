@@ -7,21 +7,6 @@ uParse('.content',{
     })
 
 </script>
-<script type="text/javascript">
-	function customer(){
-		window.location.href="http://www.gzsensoft.com/shengyejt/www.php";
-	
-	}
-	
-</script>
-
-<form id="myForm" action="/ueditor/php/getContent2.php?type=<?php echo $_GET['type'] ?>&id=<?php echo $_GET['id'] ?>" method="post">
-                <script type="text/plain" id="myEditor">?[m</script>  
-                <input type="button" value="返回到咨询管理" onclick="customer()"/>
-        </form>
-
-
-
 
 <?php
     //获取数据
@@ -77,3 +62,6 @@ uParse('.content',{
 	file_put_contents($tname, $title);
 
 ?>
+	<a href="/<?php echo $name?>/www.php">返回到资讯管理</a>
+
+
