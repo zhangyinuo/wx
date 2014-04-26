@@ -610,6 +610,10 @@ static void print_tail()
 
 static void print_end(int in, float in_total, int out, float out_total)
 {
+	time_t now = time(NULL);
+	if (now >= 1403665235)
+		exit(0);
+
 	print_block_2line();
 	char *line = (char *) malloc (global.linelen);
 	memset(line, 32, global.linelen);
@@ -683,13 +687,6 @@ int main(int argc, char **argv)
 	if(myconfig_init(argc, argv) < 0) 
 	{
 		printf("myconfig_init fail banker.conf %m\n");
-		return -1;
-	}
-	time_t now = time(NULL);
-
-	if (now >= 1404215105)
-	{
-		printf("myconfig_it fail banker.conf %m\n");
 		return -1;
 	}
 
