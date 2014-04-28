@@ -36,7 +36,6 @@ typedef struct
 } t_global;
 
 static t_global global;
-
 static float last_balance = 0.0;
 
 static int get_jx(int cur)

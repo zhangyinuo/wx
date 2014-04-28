@@ -1,5 +1,5 @@
 <?php
-	//error_reporting(0);
+	error_reporting(0);
 	if($_POST["op"] == "×¢²áÐÂÕÊºÅ") {
 		include("do_register.inc.php");
 		exit;
