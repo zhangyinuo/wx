@@ -1,0 +1,73 @@
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #ccc;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 18px; 
+	background-color: #0a6298; 
+	background-repeat: no-repeat;
+	}
+.left { float:left }
+.right { float:right }
+.clear { clear: both }
+img { margin: 0; padding: 0; border: 0; }
+.img_border { border: 1px solid #136fa8; background: #001f33; }
+.img_border_s { padding: 3px }
+.img_border_b { padding: 6px }
+ url(images/templatemo_hr_divider.jpg) center bottom no-repeat }
+label { display: block; }
+input { margin-bottom: 10px }
+a:link, a:visited { color:#fff; text-decoration: none}
+a:hover { text-decoration:underline }
+a:hover,a:active { outline:none }
+
+a.more { display: inline-block; text-decoration: none; margin-top: 15px; color: #00385b; width: 106px; height: 24px; 
+line-height: 24px; text-align: center; background: url(images/templatemo_more.png)}
+no-repeat scroll 0 5px  }
+
+.content_wrapper { overflow: hidden; width: 100% }
+.content_mb_30 { margin-bottom: 30px }
+.content_mb_60 { margin-bottom: 60px }
+.col_2 {width:420px;}
+.col_3 {width:260px;}
+.col_4 {width:180px;}
+.col_23 {width:580px;}
+.col_34 {width:660px;}
+.col_2, .col_3, .col_4, .col_23, .col_34 { float:left; margin: 0 60px 0 0 }
+.col_4 .img_fl { margin-right: 15px }
+.col_4 .text { float: right; display: block; width: 130px }
+.col_4 .text h3 { margin-bottom: 10px }
+.left {float:left }
+.right {float:right }
+.no_margin_right {margin-right:0 !important;}
+.margin_bottom { margin-bottom: 30px }
+#templatemo_wrapper {
+	width: 980px;
+	margin: 0 auto;
+	padding: 40px 10px 0;
+}
+#templatemo_middle {
+	position: relative;
+	width: 900px;
+	margin-top: -5px;
+	height: 118px;
+	padding: 30px 40px;
+	background: url(images/templatemo_middle.png);
+	z-index: 1;
+	color: #666;
+}
+#templatemo_main { clear: both; margin: 20px 0; padding: 20px 40px }
+#templatemo_content { width: 580px }
+#templatemo_sidebar { width: 260px }
+#templatemo_footer_wrapper {
+	clear: both;
+	width: 100%;
+	background: #efefef;
+}
+#templatemo_footer {
+	width: 900px;
+	margin: 0 auto;
+	padding: 50px;
+}
