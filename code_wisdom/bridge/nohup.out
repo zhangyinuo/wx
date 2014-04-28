@@ -1,0 +1,22 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+PHP Warning:  mysql_connect(): Lost connection to MySQL server at 'reading initial communication packet', system error: 110 in /data/app/wx/code/db/db.php on line 16
+Could not query:Lost connection to MySQL server at 'reading initial communication packet', system error: 110
+
+
+PHP Notice:  Undefined index: self_test in /data/app/wx/code/bizinfo/bizinfo.php on line 33
+
+
+
+PHP Notice:  Undefined index: self_test in /data/app/wx/code/bizinfo/bizinfo.php on line 33
