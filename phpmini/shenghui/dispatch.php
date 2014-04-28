@@ -2,8 +2,7 @@
 session_start();
 include("dbconnect.inc.php");
 include("functions.inc.php");
-include("/data/app/wx/code_shenghui/queue/queue.php");
-require_once("log.php");
+require_once("/data/app/wx/code_shenghui/file/file.php");
 if($_POST["op"] == "派发任务") {
 		$tel = $_POST['tel'];
 		$yw_name = $_POST['yw_name'];
@@ -34,6 +33,8 @@ if($_POST["op"] == "派发任务") {
 			die("数据库出错，请返回重试。");
 		}
 
+		$msg = "鎮ㄥソ,鎮ㄨ鏂扮殑浠诲姟"." $tel";
+		process_web_request($dstwx, "web", $msg);
 		header("Location:msg.php?m=dispatch_success");
 		exit;
 	}
