@@ -22,12 +22,15 @@
 		 break;
 	 }
 	 mysql_free_result($res);
-	$sql = "select id, msg , modtime from t_wx_voice where wx_username = '$wxname' and flag = 0 ";
+	 $sql = "select id, msg , modtime from t_wx_voice where wx_username = '$wxname' and flag = 0 ";
+	 //$sql = "select id, msg,  modtime from t_wx_voice where wx_username='$wxname' and flag =1 order by msg desc limit 5";
+     
+
 	$res = mysql_query($sql);
 
 	$s = array();
 	while($row = mysql_fetch_array($res)) {
-		$s[$row[0]] = $row[1]."|".$row[2];
+		$s[$row[0]] = $row[1]."|".$row[2]."|".$row[3];
 	}
 	$keys = array_keys($s);
 	mysql_free_result($res);
@@ -63,16 +66,17 @@
 </div></form>
 
 <table width="850">
- <thead><th>留言内容</th><th >留言时间</th><th>处理</th> </tr></thead>
+ <thead><th>留言内容</th><th >留言时间</th><th>处理</th><th><th><a href="lisijilu.php">历史记录</a></th></th></tr></thead>
 <tbody>
 <?php
 	foreach ($keys as $k)
 	{
 		$v = $s[$k];
 		$r = parse_msg_com($v,"|" );
-		 echo "<td width = \"0%\">{$r[0]}</td>";
+		echo "<td width = \"0%\">{$r[0]}</td>";
 		echo "<td>{$r[1]}</td>";
 		echo "<td><a href='p_message.php?id={$k}&tel=$tel'>处理</a> </td> </tr>";
+		 
 	}
 ?>
 </tbody></table>

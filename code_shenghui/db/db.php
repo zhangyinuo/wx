@@ -202,5 +202,18 @@ function clear_wx_step($wx_username, $dblink)
 	$result = mysql_query($sql, $dblink); 
 }
 
+function insert_last_msg($wx_username, $msg, $dblink)
+{
+	$curtime = date("YmdHis");
+	$sql = "replace into t_wx_last values('$wx_username', '$msg', '$curtime');";
+	$result = mysql_query($sql, $dblink);
+	if ($result === false)
+	{
+		runlog("insert error ".$wx_username.":".mysql_error().$sql);
+		return false;
+	}
+	return true;
+}
+
 ?>
 

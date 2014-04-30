@@ -1,0 +1,227 @@
+-- MySQL dump 10.13  Distrib 5.5.20, for Linux (x86_64)
+--
+-- Host: 127.0.0.1    Database: wx_touzi
+-- ------------------------------------------------------
+-- Server version	5.5.20
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `open_biz`
+--
+
+DROP TABLE IF EXISTS `open_biz`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `open_biz` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bizname` varchar(32) DEFAULT NULL,
+  `wxname` varchar(32) DEFAULT NULL,
+  `username` varchar(32) DEFAULT NULL,
+  `passwd` varchar(32) DEFAULT NULL,
+  `filename` varchar(256) DEFAULT NULL,
+  `starttime` varchar(16) DEFAULT NULL,
+  `last_paytime` varchar(16) DEFAULT NULL,
+  `pushmsg_file` varchar(256) DEFAULT NULL,
+  `status` varchar(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `bizname` (`bizname`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `open_biz`
+--
+
+LOCK TABLES `open_biz` WRITE;
+/*!40000 ALTER TABLE `open_biz` DISABLE KEYS */;
+INSERT INTO `open_biz` VALUES (1,'self_test','gh_8884f4eb3560','wxfe7bc87fda8bd45d','ba78461c30ad7340758aa9009bdecec8','filename','20140101000000','20140101000000','pushmsg_file','1');
+/*!40000 ALTER TABLE `open_biz` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_wx_data`
+--
+
+DROP TABLE IF EXISTS `t_wx_data`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_wx_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `wx_username` varchar(32) NOT NULL,
+  `modtime` varchar(16) NOT NULL,
+  `k` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_wx_data`
+--
+
+LOCK TABLES `t_wx_data` WRITE;
+/*!40000 ALTER TABLE `t_wx_data` DISABLE KEYS */;
+INSERT INTO `t_wx_data` VALUES (1,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140314112350','KEY12'),(2,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140314112419','KEY32'),(3,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140314112517','KEY22'),(4,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140314112532','3'),(5,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140314112551','2'),(6,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140314195123','KEY21'),(7,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140314195127','KEY22'),(8,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140314195303','KEY32'),(9,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140315202730','KEY21'),(10,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140315203416','1'),(11,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140315203436','13751858016'),(12,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140315203742','KEY12'),(13,'oXcK4t_Yss3rJKTJCUTfJxD52uNQ','20140316211955','13642680000'),(14,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140316212027','13751858016'),(15,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140317100556','KEY32'),(16,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140317100805','KEY21'),(17,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140318201528',''),(18,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140318201647',''),(19,'oXcK4t_Yss3rJKTJCUTfJxD52uNQ','20140318201748',''),(20,'oXcK4t_Yss3rJKTJCUTfJxD52uNQ','20140318201826',''),(21,'oXcK4t_Yss3rJKTJCUTfJxD52uNQ','20140318201848',''),(22,'oXcK4t_Yss3rJKTJCUTfJxD52uNQ','20140318201906',''),(23,'oXcK4t_Yss3rJKTJCUTfJxD52uNQ','20140318201953',''),(24,'oXcK4t_Yss3rJKTJCUTfJxD52uNQ','20140318202015',''),(25,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140318202042',''),(26,'oXcK4t_Yss3rJKTJCUTfJxD52uNQ','20140318202101',''),(27,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140320170753',''),(28,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140321113409','KEY11'),(29,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140321113414','KEY12'),(30,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140321113418','KEY13'),(31,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140321113425','KEY21'),(32,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140321113429','KEY22'),(33,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140321113434','http://www.qq.co'),(34,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140321113440','KEY32'),(35,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140322142747','KEY21'),(36,'oXcK4t_98b2KI6Dcf6xHMUepfIjI','20140328144105','KEY21'),(37,'oXcK4t_98b2KI6Dcf6xHMUepfIjI','20140328144105','KEY21'),(38,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140328144105','KEY21'),(39,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140328144105','KEY22'),(40,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140328144105','KEY21'),(41,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140328144105','KEY21'),(42,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140328144105','KEY22'),(43,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140328144105','KEY21'),(44,'oXcK4t8WKp7nVLITLCAonpo0KVBs','20140328144105','1'),(45,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144105','KEY11'),(46,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140328144144','KEY11'),(47,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144245','KEY21'),(48,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144255','KEY22'),(49,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144305','1'),(50,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144312','1'),(51,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140328144320','KEY11'),(52,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144348','KEY11'),(53,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144348','KEY11'),(54,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144358','http://www.qq.co'),(55,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144408','KEY32'),(56,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140328145151','KEY11'),(57,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140328212321','KEY21'),(58,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140328212334','5'),(59,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140328212347','13751858016'),(60,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329093950','unsubscribe'),(61,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329094005','subscribe'),(62,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329094023','KEY23'),(63,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329094039','http://www.soufu'),(64,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329094106','http://www.ccb.c'),(65,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329094343','KEY23'),(66,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329095548','http://www.soufu'),(67,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329095604','http://www.ccb.c'),(68,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329095616','KEY33'),(69,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329095624','http://www.ccb.c'),(70,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329100118','KEY33'),(71,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140329100124','KEY23'),(72,'oXcK4t0FqapO5K70qXvCSjzmhzH0','20140329143226','subscribe'),(73,'oXcK4t0FqapO5K70qXvCSjzmhzH0','20140329143304','h'),(74,'oXcK4t0FqapO5K70qXvCSjzmhzH0','20140329143353','KEY11'),(75,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401094618','KEY21'),(76,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401094627','KEY22'),(77,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401094734','KEY33'),(78,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401094937','KEY21'),(79,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401094948','2'),(80,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401101214','3'),(81,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401101223','1'),(82,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401101230','3'),(83,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401101242','1'),(84,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401101256','13688888338'),(85,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401101320','2'),(86,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401101327','1'),(87,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401101334','1'),(88,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401101342','2'),(89,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401125437','KEY11'),(90,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401125502','KEY22'),(91,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401125526','2'),(92,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401125537','2'),(93,'oXcK4twyJLNlpOrXD36XSB7BKA7g','20140401125543','1'),(94,'oXcK4t_98b2KI6Dcf6xHMUepfIjI','20140404102704','KEY33'),(95,'oXcK4t_98b2KI6Dcf6xHMUepfIjI','20140404102720','KEY21'),(96,'oXcK4t_98b2KI6Dcf6xHMUepfIjI','20140404102739','KEY22'),(97,'oXcK4t_98b2KI6Dcf6xHMUepfIjI','20140404102808','KEY11'),(98,'oXcK4t_98b2KI6Dcf6xHMUepfIjI','20140404102833','KEY23'),(99,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140412095952','KEY11'),(100,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140412100006','KEY13'),(101,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140414114244','KEY12'),(102,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140414114245','subscribe'),(103,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140414114253','KEY13'),(104,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140414114317','h'),(105,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140414154057','KEY11'),(106,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415110455','LOCATION'),(107,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415110500','KEY11'),(108,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415110512','KEY11'),(109,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140415111349','KEY11'),(110,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415114250','LOCATION'),(111,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415114301','KEY11'),(112,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415152120','LOCATION'),(113,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415152122','KEY11'),(114,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415152239','KEY11'),(115,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415152259','KEY12'),(116,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415152314','KEY11'),(117,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415152409','KEY11'),(118,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415152419','KEY11'),(119,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415152440','KEY13'),(120,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140415152952','KEY11'),(121,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140415154517','KEY21'),(122,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140415154535','1'),(123,'oXcK4tw29Np3jaxso7Q3blLuxbNI','20140415155654','13751858016');
+/*!40000 ALTER TABLE `t_wx_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_wx_info`
+--
+
+DROP TABLE IF EXISTS `t_wx_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_wx_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fakeid` varchar(32) NOT NULL,
+  `wx_username` varchar(32) NOT NULL,
+  `modtime` varchar(16) NOT NULL,
+  `step1` varchar(16) DEFAULT NULL,
+  `step2` varchar(16) DEFAULT NULL,
+  `step3` varchar(16) DEFAULT NULL,
+  `step4` varchar(16) DEFAULT NULL,
+  `step5` varchar(16) DEFAULT NULL,
+  `step6` varchar(16) DEFAULT NULL,
+  `lasttime` int(11) DEFAULT NULL,
+  `lastindex` int(11) DEFAULT '0',
+  `msisdn` varchar(16) DEFAULT NULL,
+  `flag` int(11) DEFAULT '0',
+  `un_modtime` varchar(16) DEFAULT NULL,
+  `sadmin` varchar(16) DEFAULT 'nothing',
+  `atime` varchar(256) DEFAULT NULL,
+  `yw_name` varchar(16) DEFAULT NULL,
+  `yw_msisdn` varchar(16) DEFAULT NULL,
+  `role` int(11) DEFAULT '0',
+  `dispatch` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fakeid` (`fakeid`),
+  UNIQUE KEY `wx_username` (`wx_username`),
+  KEY `msisdn` (`msisdn`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_wx_info`
+--
+
+LOCK TABLES `t_wx_info` WRITE;
+/*!40000 ALTER TABLE `t_wx_info` DISABLE KEYS */;
+INSERT INTO `t_wx_info` VALUES (4,'oXcK4t_Yss3rJKTJCUTfJxD52uNQ','oXcK4t_Yss3rJKTJCUTfJxD52uNQ','20140316211954',NULL,NULL,NULL,NULL,NULL,NULL,0,0,'13642680000',0,NULL,NULL,'20140318202101','chun','13751858016',0,1),(5,'oXcK4tw29Np3jaxso7Q3blLuxbNI','oXcK4tw29Np3jaxso7Q3blLuxbNI','20140316212027',NULL,NULL,NULL,NULL,NULL,NULL,0,0,'13751858016',0,'20140329093949',NULL,'20140415155654',NULL,NULL,0,0),(6,'oXcK4twyJLNlpOrXD36XSB7BKA7g','oXcK4twyJLNlpOrXD36XSB7BKA7g','20140317100555','KEY22','2','2','1',NULL,NULL,1396328143,4,'13688888338',0,NULL,NULL,'20140401125543',NULL,NULL,0,0),(7,'oEhfKt8xVjWhnvUm5-sicds2cU7k','oEhfKt8xVjWhnvUm5-sicds2cU7k','20140319215517','NULL',NULL,NULL,'NULL',NULL,NULL,0,0,NULL,0,NULL,NULL,'20140319215517',NULL,NULL,0,0),(8,'oXcK4t8WKp7nVLITLCAonpo0KVBs','oXcK4t8WKp7nVLITLCAonpo0KVBs','20140321113408','KEY21','1',NULL,NULL,NULL,NULL,1395988854,2,NULL,0,NULL,NULL,'20140328144105',NULL,NULL,0,0),(9,'oXcK4t_98b2KI6Dcf6xHMUepfIjI','oXcK4t_98b2KI6Dcf6xHMUepfIjI','20140328144054','KEY23',NULL,NULL,NULL,NULL,NULL,1396578512,1,NULL,0,NULL,NULL,'20140404102833',NULL,NULL,0,0),(10,'oXcK4t98iSVf9HeOKDe2rbVJj7AI','oXcK4t98iSVf9HeOKDe2rbVJj7AI','20140328144054','KEY32',NULL,NULL,NULL,NULL,NULL,1395989048,1,NULL,0,NULL,NULL,'20140328144408',NULL,NULL,0,0),(11,'oXcK4t0FqapO5K70qXvCSjzmhzH0','oXcK4t0FqapO5K70qXvCSjzmhzH0','20140329143226','KEY11',NULL,NULL,NULL,NULL,NULL,1396074833,1,NULL,0,NULL,NULL,'20140329143353',NULL,NULL,0,0),(12,'oXcK4t7cT4Hc9OfHzASU1qxwAvHo','oXcK4t7cT4Hc9OfHzASU1qxwAvHo','20140414114245','KEY11',NULL,NULL,NULL,NULL,NULL,1397546992,1,NULL,0,NULL,NULL,'20140415152952',NULL,NULL,0,0),(13,'wx_','wx_','20140415150522','NULL',NULL,NULL,'NULL',NULL,NULL,0,0,'',1,NULL,NULL,'20140415150522',NULL,NULL,0,0);
+/*!40000 ALTER TABLE `t_wx_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_wx_location`
+--
+
+DROP TABLE IF EXISTS `t_wx_location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_wx_location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `wx_username` varchar(32) NOT NULL,
+  `modtime` varchar(16) NOT NULL,
+  `x` varchar(16) DEFAULT NULL,
+  `y` varchar(16) DEFAULT NULL,
+  `l` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_wx_location`
+--
+
+LOCK TABLES `t_wx_location` WRITE;
+/*!40000 ALTER TABLE `t_wx_location` DISABLE KEYS */;
+INSERT INTO `t_wx_location` VALUES (1,'oXcK4tw29Np3jaxso7Q3blLuxbNI','1394608780','23.125179','113.370911',''),(2,'oXcK4tw29Np3jaxso7Q3blLuxbNI','1394608885','23.126928','113.372719','广东省广州市天河区建中路3号'),(3,'oXcK4tw29Np3jaxso7Q3blLuxbNI','1394610314','23.124376','113.371503',''),(4,'oXcK4tw29Np3jaxso7Q3blLuxbNI','1394681593','23.125181','113.370903',''),(5,'oXcK4twyJLNlpOrXD36XSB7BKA7g','1394764664','23.403208','113.226753',''),(6,'oXcK4tw29Np3jaxso7Q3blLuxbNI','1394767479','23.067495','113.294060','中国广东省广州市海珠区宝丰街2号 邮政编码: 510290');
+/*!40000 ALTER TABLE `t_wx_location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tel_user`
+--
+
+DROP TABLE IF EXISTS `tel_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tel_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `bizname` varchar(64) NOT NULL DEFAULT 'test',
+  `fakeid` varchar(32) DEFAULT NULL,
+  `tel` varchar(16) DEFAULT NULL,
+  `sex` char(1) NOT NULL DEFAULT '0',
+  `money` float DEFAULT '0',
+  `point` int(10) unsigned DEFAULT '0',
+  `regtime` varchar(16) NOT NULL DEFAULT '',
+  `modtime` varchar(16) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `telkey` (`bizname`,`tel`),
+  UNIQUE KEY `wxkey` (`bizname`,`fakeid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tel_user`
+--
+
+LOCK TABLES `tel_user` WRITE;
+/*!40000 ALTER TABLE `tel_user` DISABLE KEYS */;
+INSERT INTO `tel_user` VALUES (1,'jingchun.zhang','wx_13751858016','13751858016','',25.4,45,'20140217105214','20140217105214'),(2,'jingchun.zhang','wx_13800000000','13800000000','0',13.89,56,'20140217112004','20140217112004'),(3,'jingchun.zhang','wx_13642687101','13642687101','0',800,888,'20140217120319','20140217120319');
+/*!40000 ALTER TABLE `tel_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL DEFAULT '',
+  `password` varchar(45) NOT NULL DEFAULT '',
+  `sex` char(1) NOT NULL DEFAULT '',
+  `mail` varchar(255) NOT NULL DEFAULT '',
+  `photo` varchar(255) DEFAULT NULL,
+  `tel` varchar(45) DEFAULT NULL,
+  `web` varchar(255) DEFAULT NULL,
+  `birthday` varchar(255) DEFAULT NULL,
+  `inter` text,
+  `intro` text,
+  `reg_time` varchar(19) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'jingchun.zhang','e10adc3949ba59abbe56e057f20f883e','0','jczhang@126.com','./upload/jingchun.zhang.jpg','','','','','','2014-02-12 14:01:04'),(2,'shengyejt','23ce94d6a416f9362f6b2560a6b0d628','0','jczhang@126.com','./upload/jingchun.zhang.jpg','','','','','','2014-02-12 14:01:04'),(3,'manhui.yuan','66075f7f815d78b802c36e8a38f9f04e','','','',NULL,NULL,NULL,NULL,NULL,' 2014-02-12 14:01:0'),(4,'hualiang.zeng','02541f8a1af9f936fd9dc664954911a4','','','',NULL,NULL,NULL,NULL,NULL,' 2014-02-12 14:01:0');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-04-15 16:28:19

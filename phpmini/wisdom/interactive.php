@@ -13,11 +13,13 @@
    <td id="main">
 
 <!-- begin content -->
-<div class="profile"><h2 class="title">时政新闻管理, 按顺序显示</h2>
-<div class="leaf"><a href="do_www.php?type=KEY13&id=1" >条目1</a></div>
-<div class="leaf"><a href="do_www.php?type=KEY13&id=2" >条目2</a></div>
-<div class="leaf"><a href="do_www.php?type=KEY13&id=3" >条目3</a></div>
-<div class="leaf"><a href="do_www.php?type=KEY13&id=4" >条目4</a></div>
+<div class="profile"><h2 class="title">交流互动管理, 按顺序显示</h2>
+<div class="leaf"><a href="do_www.php?type=KEY3&id=1">互动社区</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY3&id=2" >QQ空间</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY3&id=3" >新浪微博</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY3&id=4" >参与活动</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY3&id=5" >家长学堂</a></div>
+<!--<div class="leaf"><a href="do_www.php?type=KEY3&id=5">交流互动</a></div>-->
 
 <!-- end content -->
    </td>

@@ -39,6 +39,9 @@ for ( ; $idx < 4; $idx++)
 		$infile = $indir.$keyp.$idx."/$sub.html";
 		$outfile = $outdir.$keyp.$idx."/$sub.html";
 
+		if (file_exists($infile) === false)
+			continue;
+
 		if (file_exists($outfile))
 			unlink($outfile);
 		link($infile, $outfile);

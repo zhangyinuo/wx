@@ -12,7 +12,7 @@
 		$name = trim($_GET["name"]);
 		$where .= " and msisdn = '{$name}' ";
 	}
-	$sql = "select msisdn, modtime, flag, atime, dispatch, role from t_wx_info where 1 {$where} order by dispatch limit 20";
+	$sql = " select msisdn, modtime, flag, atime, dispatch, role from t_wx_info where 1 and length(msisdn)=11 {$where} order by dispatch limit 20";
 	runlog($sql.":".$_SESSION["userid"].":".$_SESSION["username"]);
 	$res = mysql_query($sql);
 

@@ -90,13 +90,18 @@ while (1)
 			continue;
 		}
 
+		$lastmsg = 0;
 		if (strcasecmp(substr($retarr[1], 0, 3), "KEY") === 0)
 			clear_wx_step($retarr[0], $dblink);
+		else
+			$lastmsg = 1;
 		$path = "";
+		$insertmsg = "";
 		$ret = get_last_path($retarr[0], $path, $retarr[1], $dblink);
 		if ($ret == 0)
 		{
-			if (get_content($path) != false)
+			$insertmsg = get_content($path);
+			if ($insertmsg != false)
 				update_wx_by_step($retarr[0], $retarr[1], $dblink);
 			else
 				$ret = 1;
@@ -104,6 +109,10 @@ while (1)
 		if ($ret == 2)
 			clear_wx_step($retarr[0], $dblink);
 		process_request($retarr[0], $path, $ret);
+
+		runlog(__FILE__."_".__LINE__.":".$lastmsg.":".$ret.":".$insertmsg);
+		if ($lastmsg === 1 && $ret === 0)
+			insert_last_msg($retarr[0], $insertmsg, $dblink);
 
 	}
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html> 
 <html>
 		<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 				<title>shengyu</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 				<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />

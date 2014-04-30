@@ -3,7 +3,7 @@
 $ROOTDIR=dirname(__FILE__)."/../";
 
 require_once($ROOTDIR."log/log.php");
-require_once($ROOTDIR."getlist/getlist.php");
+require_once($ROOTDIR."token/token.php");
 
 function get_db()
 {
@@ -45,18 +45,19 @@ function get_db()
 	return $dblink;
 }
 
-function check_is_exist_wx_username($bizname, $wx_username, $dblink)
+function check_is_exist_wx_username($wx_username, $dblink)
 {
-	$result = mysql_query("select status from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
+	$result = mysql_query("select count(1) from t_wx_info where wx_username = '$wx_username' ", $dblink);
 	if ($result === false)
 	{
-		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
-		return $flag;
+		runlog("query wx_username from t_wx_info is null:".$wx_username);
+		return false;
 	}
-	$flag = "";
+	$flag = false;
 	while($row=mysql_fetch_array($result)) 
 	{
-		$flag = $row[0];
+		if ($row[0] > 0)
+			$flag = true;
 		break;
 	}
 	mysql_free_result($result);
@@ -64,17 +65,27 @@ function check_is_exist_wx_username($bizname, $wx_username, $dblink)
 	return $flag;
 }
 
-function insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink, $status)
+function insert_replace_fid_wx_username($wx_username, $dblink)
 {
 	$curtime = date("YmdHis");
-	$sql = "replace into wx_userinfo values(NULL, '$bizname', '$fid', '$wx_username', 'NULL', 'NULL', '$curtime', '$status', '1', '1', '1', NULL, '$wx_username', 'NULL', NULL)";
+	$sql = "insert into t_wx_info values(NULL, '$wx_username', '$wx_username', '$curtime', 'NULL', NULL, NULL, 'NULL', NULL, NULL, 0, 0, NULL, 0, NULL, NULL, '$curtime', NULL, NULL, 0, 0);";
 	$result = mysql_query($sql, $dblink);
 	if ($result === false)
 	{
-		runlog("insert error ".$wx_username.":".$bizname.":".mysql_error());
+		runlog("insert error ".$wx_username.":".mysql_error());
 		return false;
 	}
 	return true;
+}
+
+function unsubscribe_wx($wx_username, $dblink, $flag)
+{
+	$curtime = date("YmdHis");
+	if ($flag === 0)
+		$sql = "update t_wx_info set flag = $flag where wx_username = '$wx_username' ";
+	else
+		$sql = "update t_wx_info set flag = $flag, un_modtime = '$curtime' where wx_username = '$wx_username' ";
+	$result = mysql_query($sql, $dblink); 
 }
 
 function do_update_nick_name($bizname, $fid, $nickname, $dblink)
@@ -91,81 +102,104 @@ function do_update_nick_name($bizname, $fid, $nickname, $dblink)
 	return $ret;
 }
 
-function registe_user_2_db($bizname, $wx_username, $time, $dblink, $msg)
+function registe_user_2_db($wx_username, $dblink)
 {
-	$status = check_is_exist_wx_username($bizname, $wx_username, $dblink);
-	if ($status === '1' || $status === '2')
+	if (check_is_exist_wx_username($wx_username, $dblink))
 	{
-		runlog(__FILE__."_".__LINE__.":"."check_is_exist_wx_username:".$bizname.":".$wx_username);
+		runlog($wx_username." is ok!");
 		return;
 	}
 
-	$username = "";
-	$passwd = "";
-
-	if (get_biz_info($bizname, $username, $passwd, $dblink) === false)
-	{
-		runlog(__FILE__."_".__LINE__.":"."get_biz_info:".$bizname.":".$wx_username);
-		return;
-	}
-
-	if (strlen($msg) === 0)
-	{
-		if ($status === '0')
-			return;
-		if (refresh_fid_biz($bizname, $wx_username, $username, $passwd, $dblink) === false)
-			runlog(__FILE__."_".__LINE__.":"."refresh_fid_biz err:".$bizname.":".$wx_username);
-		return;
-	}
-
-	$fid = "";
-
-	if (get_fid_by_msg($fid, $username, $passwd, $msg, $time, $dblink, $bizname) === false)
-	{
-		runlog(__FILE__."_".__LINE__.":"."get_fid_by_msg:".$bizname.":".$wx_username);
-		return;
-	}
-	runlog(__FILE__."_".__LINE__.":"."get_fid_by_msg:".$bizname.":".$wx_username."fid=".$fid);
-
-	insert_replace_fid_wx_username($bizname, $fid, $wx_username, $dblink, '1');
+	insert_replace_fid_wx_username($wx_username, $dblink);
 }
 
-function is_exist_fakeid($dblink, $fid, $bizname)
+function get_last_path($wx_username, &$path, $cur, $dblink)
 {
-	$result = mysql_query("select status from wx_userinfo where fakeid = '$fid' and bizname = '$bizname' ", $dblink);
+	$result = mysql_query("select * from t_wx_info where wx_username = '$wx_username' ", $dblink);
 	if ($result === false)
 	{
-		runlog(__FILE__.":".__LINE__."query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
-		return $flag;
+		runlog("query wx_username from t_wx_info is null:".$wx_username);
+		return false;
 	}
-	$count = -1;
+	$path = "";
+
+	$retval = 0;
+	$curtime = time();
 	while($row=mysql_fetch_array($result)) 
 	{
-		$count = $row[0];
+		if ($curtime - intval($row[10]) < 600)
+		{
+			if ($row[11] <= 0)
+			{
+				runlog(__FILE__.":".__LINE__);
+				$retval = 1;
+			}
+			else
+			{
+				runlog(__FILE__.":".__LINE__);
+				for ($idx = 0; $idx < $row[11]; $idx++)
+				{
+					$path = $path."/".$row[$idx+4];
+				}
+				$path = $path."/".$cur;
+			}
+		}
+		else if ($row[11] == 0)
+		{
+			runlog(__FILE__.":".__LINE__);
+			$path = $cur;
+		}
+		else
+		{
+			runlog(__FILE__.":".__LINE__);
+			$retval = 2;
+		}
 		break;
 	}
 	mysql_free_result($result);
 
-	return $count;
+	return $retval;
 }
 
-function get_fid_by_bizname_wx_username($bizname, $wx_username, $dblink)
+function update_wx_by_step($wx_username, $cur, $dblink)
 {
-	$result = mysql_query("select fakeid from wx_userinfo where wx_username = '$wx_username' and bizname = '$bizname' ", $dblink);
+	$result = mysql_query("select lastindex from t_wx_info where wx_username = '$wx_username' ", $dblink);
 	if ($result === false)
 	{
-		runlog("query fakeid from wx_username bizname is null:".$wx_username.":".$bizname);
-		return $flag;
+		runlog("update_wx_by_step query wx_username from t_wx_info is null:".$wx_username);
+		return false;
 	}
-	$flag = "";
+	$idx = 0;
 	while($row=mysql_fetch_array($result)) 
 	{
-		$flag = $row[0];
+		$idx = intval($row[0]);
 		break;
 	}
 	mysql_free_result($result);
 
-	return $flag;
+	if ($idx >= 5)
+		runlog($wx_username." in max depth");
+	else
+	{
+		runlog(__FILE__.":".__LINE__);
+		$idx++;
+		$curtime = time();
+		$idxname = "step".$idx;
+		$sql = "update t_wx_info set lastindex = $idx, $idxname = '$cur', lasttime = $curtime where wx_username = '$wx_username' ";
+		$result = mysql_query($sql, $dblink); 
+	}
+}
+
+function update_msisdn($wx_username, $msisdn, $dblink)
+{
+	$sql = "update t_wx_info set msisdn = '$msisdn' where wx_username = '$wx_username' ";
+	$result = mysql_query($sql, $dblink); 
+}
+
+function clear_wx_step($wx_username, $dblink)
+{
+	$sql = "update t_wx_info set lastindex = 0, lasttime = 0, step1 = NULL, step2 = NULL, step3 = NULL, step4 = NULL, step5 = NULL, step6 = NULL where wx_username = '$wx_username' ";
+	$result = mysql_query($sql, $dblink); 
 }
 
 ?>

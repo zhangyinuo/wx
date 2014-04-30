@@ -1,24 +1,45 @@
 <?php 
 $ROOTDIR=dirname(__FILE__)."/../";
 
+require_once($ROOTDIR."common/common.php");
 require_once($ROOTDIR."db/db.php");
 require_once($ROOTDIR."bizinfo/bizinfo.php");
 require_once($ROOTDIR."queue/queue.php");
 require_once($ROOTDIR."log/log.php");
 require_once($ROOTDIR."file/file.php");
 
-$upq = "";
-if (init_q($upq, $up_queue_file, "p") === false)
-{
-	runlog(__FILE__."_".__LINE__.":"."ERR init_ftok $up_queue_file !");
-	exit;
-}
+$cmdfile = $ROOTDIR."conf/cmd.txt";
+require_once($ROOTDIR."conf/code.php");
 
-$downq = "";
-if (init_q($downq, $down_queue_file, "p") === false)
+$parse_array = array();
+$exec_array = array();
+$args_array = array();
+$cb_array = array();
+
+$fp = fopen($cmdfile, "r");
+if ($fp)
 {
-	runlog(__FILE__."_".__LINE__.":"."ERR init_ftok $down_queue_file !");
-	exit;
+	while (!feof($fp))
+	{
+		$bufs = fgets($fp);
+		if (substr($bufs, 0, 1) === "#")
+			continue;
+		if (strlen($bufs) < 5)
+			continue;
+		$bufs = str_replace(PHP_EOL, '', $bufs);
+
+		$retarr = parse_msg_com($bufs, "|");
+		if (count($retarr) != 4)
+		{
+			runlog(__FILE__."_".__LINE__.":"."ERR parse_msg_com $bufs !");
+			exit;
+		}
+		$args_array[$retarr[0]] = $retarr[1];
+		$parse_array[$retarr[0]] = $retarr[2];
+		$exec_array[$retarr[0]] = $retarr[3];
+		array_push($cb_array, $retarr[0]);
+	}
+	fclose($fp);
 }
 
 $dblink= get_db();
@@ -28,87 +49,23 @@ if ($dblink === false)
 	die("Could not query:" . mysql_error());
 }
 
-function do_rsp_fid($msg, $fid, $username, $passwd)
-{
-	global $downq;
-	$retmsg = $username."&&".$passwd."&&".$fid."&&".$msg;
-	msg_send($downq, 1, $retmsg);
-}
-
 $type = 0;
 while (1)
 {
-	while(msg_receive($upq, 0, $type, 1024, $message, TRUE, MSG_IPC_NOWAIT)) {
-		$bizname = "";
-		$wx_username = "";
-		$time = "";
-		$msg = "";
+	while(msg_receive($wx_up_q, 0, $type, 1024, $src, TRUE, MSG_IPC_NOWAIT)) {
+		$retarr = parse_msg_com($src, "|");
 
-		if (parse_msg_from_queue($message, $bizname, $wx_username, $time, $msg) === false)
+		if (in_array($retarr[1], $cb_array))
 		{
-			runlog(__FILE__."_".__LINE__.":"."parse_msg_from_queue err: ".$message);
-			continue;
+			$exc_func = $exec_array[$retarr[1]];
+			array_push($retarr, $dblink);
+			call_user_func_array($exc_func, $retarr);
 		}
+		else
+			record_select($retarr[0], $retarr[1], $dblink);
 
-		$fid = get_fid_by_bizname_wx_username($bizname, $wx_username, $dblink);
-		if ($fid === "")
-		{
-			runlog(__FILE__."_".__LINE__.":"."get_fid_by_bizname_wx_username err: ".$bizname.":".$wx_username);
-			continue;
-		}
-
-		$username = "";
-		$passwd = "";
-
-		if (get_biz_info($bizname, $username, $passwd, $dblink) === false)
-		{
-			runlog(__FILE__."_".__LINE__.":"."get_biz_info:".$bizname.":".$wx_username);
-			continue;
-		}
-
-		$cmd = substr($msg, 0, 1);
-		switch ($cmd)
-		{
-		case '1':
-		case '2':
-		case '3':
-		case '4':
-		case '5':
-			$rspstr = get_content($bizname, $cmd);
-			do_rsp_fid($rspstr, $fid, $username, $passwd);
-			break;
-
-		case 'o':
-		case 'O':
-			break;
-		case 'u':
-		case 'U':
-			$nickname= "";
-			$error = "";
-		   	$f = substr($msg, 1, 1);
-			if ($f === ':')
-			{
-				$nickname = substr($msg, 2);
-				$error = do_update_nick_name($bizname, $fid, $nickname, $dblink);
-			}
-			else
-				$error = "正确格式: u:聊天名称. :是英文半角的";
-
-			if (strlen($error) > 2)
-				$error = "更新错误原因".$error;
-			else
-				$error = "当前名称".$nickname;
-			do_rsp_fid($error, $fid, $username, $passwd);
-			break;
-		default:
-			do_rsp_fid("您需要的功能很快开发", $fid, $username, $passwd);
-			$rspstr = get_content($bizname, 1);
-			do_rsp_fid($rspstr, $fid, $username, $passwd);
-			break;
-		}
 	}
-
 	mysql_ping($dblink);
-	sleep(5);
+	sleep(1);
 }
 ?>

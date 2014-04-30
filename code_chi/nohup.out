@@ -1,0 +1,34 @@
+Could not open input file: ./send/msg_send.php
+
+
+
+
+
+
+
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Notice:  Undefined index: self_test in /data/app/wx/code_chi/bizinfo/bizinfo.php on line 33
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+
+
+
+
+
+
+
+
+
+
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6
+PHP Warning:  file_put_contents(/data/app/applog/applog.log20140429): failed to open stream: Permission denied in /data/app/wx/code_chi/log/log.php on line 6

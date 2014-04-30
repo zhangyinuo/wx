@@ -13,11 +13,11 @@
    <td id="main">
 
 <!-- begin content -->
-<div class="profile"><h2 class="title">金融资讯管理, 按顺序显示</h2>
-<div class="leaf"><a href="do_www.php?type=KEY12&id=1" >条目1</a></div>
-<div class="leaf"><a href="do_www.php?type=KEY12&id=2" >条目2</a></div>
-<div class="leaf"><a href="do_www.php?type=KEY12&id=3" >条目3</a></div>
-<div class="leaf"><a href="do_www.php?type=KEY12&id=4" >条目4</a></div>
+<div class="profile"><h2 class="title">课程咨询管理, 按顺序显示</h2>
+<div class="leaf"><a href="do_www.php?type=KEY2&id=1" >课程简介</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY2&id=2" >教学展示</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY2&id=3" >学员风采</a></div>
+<div class="leaf"><a href="do_www.php?type=KEY2&id=4" >预约报名</a></div>
 
 <!-- end content -->
    </td>

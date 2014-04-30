@@ -5,6 +5,15 @@
 	include("header.inc.php");
 	include("dbconnect.inc.php");
 	include("common.php");
+	$name = trim($_GET["tel"]);
+	$sql = "select lastmsg from t_wx_last where wx_username = (select wx_username from t_wx_info where msisdn = '$name') ";
+	$res = mysql_query($sql);
+	$lastmsg = "";
+	while($row = mysql_fetch_array($res)) {
+		$lastmsg = $row[0];
+		break;
+	}
+	mysql_free_result($res);
 	$where = "";
 	if($_GET["tel"] != "") {
 		$name = trim($_GET["tel"]);
@@ -16,7 +25,7 @@
 
 	$s = array();
 	while($row = mysql_fetch_array($res)) {
-		$s[$row[0]] = $row[1]."|".$row[2]."|".$row[3];
+		$s[$row[0]] = $row[1]."|".$row[2]."|".$row[3]."|".$lastmsg;
 	}
 	$keys = array_keys($s);
 	mysql_free_result($res);
@@ -42,7 +51,7 @@
 <!-- begin content -->
 
 <table width="850">
- <thead><tr><th> </th><th>手机号码</th><th >关注时间</th><th>最新互动时间</th><th>特别说明</th><th>操作</th> </tr></thead>
+ <thead><tr><th> </th><th>手机号码</th><th >关注时间</th><th>最新互动时间</th><th>特别说明</th><th>用户历史记录</th> </tr></thead>
 <tbody>
 <?php
 	foreach ($keys as $k)
@@ -54,7 +63,7 @@
 		echo "<td width = \"20%\">{$r[0]}</td>";
 		echo "<td width = \"20%\">{$r[2]}</td>";
 		echo "<td width = \"20%\">{$r[1]}</td>";
-		echo "<td><a href='edit_account.php?tel={$k}'>修改</a> <a href='detail.php?tel={$k}'>详细</a> <a  href='#' onclick='return doDel(\"{$k}\");'>删除</a></td> </tr>";
+		echo "<td width = \"20%\">{$r[3]}</td>";
 	}
 ?>
 </tbody></table>

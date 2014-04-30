@@ -1,9 +1,68 @@
 
 
 
-PHP Warning:  mysql_connect(): Lost connection to MySQL server at 'reading initial communication packet', system error: 110 in /data/app/wx/code/db/db.php on line 16
-Could not query:Lost connection to MySQL server at 'reading initial communication packet', system error: 110Could not open input file: send.php
 
 
 
-PHP Notice:  Undefined index: self_test in /data/app/wx/code/bizinfo/bizinfo.php on line 33
+
+
+
+
+PHP Warning:  msg_send() expects parameter 1 to be resource, string given in /data/app/wx/code_touzi/sub/check_sub.php on line 60
+PHP Warning:  msg_send() expects parameter 1 to be resource, string given in /data/app/wx/code_touzi/sub/check_sub.php on line 60
+PHP Warning:  msg_send() expects parameter 1 to be resource, string given in /data/app/wx/code_touzi/sub/check_sub.php on line 60
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
