@@ -1,0 +1,3 @@
+args 5
+parse_func wx_reg_parse
+exe_func wx_reg_exe

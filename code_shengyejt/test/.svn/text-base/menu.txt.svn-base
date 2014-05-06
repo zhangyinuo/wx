@@ -1,0 +1,24 @@
+{
+	"button":[
+	{	
+		"name":"集团介绍",
+		"sub_button":[
+		{	
+			"type":"click",
+			"name":"集团介绍",
+			"key":"KEY11"
+		}
+		]
+	},
+	{
+		"name":"属下企业",
+		"sub_button":[
+		{	
+			"type":"click",
+			"name":"子公司介绍 ",
+			"key":"KEY21"
+		}
+		]
+	}
+	]
+}

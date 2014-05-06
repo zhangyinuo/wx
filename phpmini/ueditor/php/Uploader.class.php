@@ -92,10 +92,12 @@ class Uploader
         $this->fileSize = $file[ 'size' ];
         $this->fileType = $this->getFileExt();
 
+		/*
         if ( !$this->checkSize() ) {
             $this->stateInfo = $this->getStateInfo( "SIZE" );
             return;
-        }
+		}
+		 */
         if ( !$this->checkType() ) {
             $this->stateInfo = $this->getStateInfo( "TYPE" );
             return;

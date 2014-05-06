@@ -6,6 +6,8 @@ $curdir=dirname(__FILE__)."/";
 require_once($ROOTDIR."log/log.php");
 require_once($ROOTDIR."queue/queue.php");
 
+define
+
 function get_content($bfile)
 {
 	global $curdir;

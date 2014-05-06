@@ -1,0 +1,26 @@
+"articles": [
+{
+"title":"公司简介",
+"description":"公司简介",
+"url":"http://www.gzsensoft.com/wwz/wwz_shenghui.php?type=KEY11&id=1",
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload1/20140430/1398827842223627.jpg"
+}
+,{
+"title":"hello",
+"description":"hello",
+"url":"http://www.gzsensoft.com/wwz/wwz_shenghui.php?type=KEY11&id=2",
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload1//shengyejt/KEY11_2.jpg"
+}
+,{
+"title":"hello",
+"description":"hello",
+"url":"http://www.gzsensoft.com/wwz/wwz_shenghui.php?type=KEY11&id=3",
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload1//20140427/1398588575583751.jpg"
+}
+,{
+"title":"hello4",
+"description":"hello4",
+"url":"http://www.gzsensoft.com/wwz/wwz_shenghui.php?type=KEY11&id=4",
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload1//20140426/1398503342340515.jpg"
+}
+]

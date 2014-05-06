@@ -1,0 +1,7 @@
+{
+	"touser":"%s",
+		"msgtype":"news",
+		"news":{
+			%s
+		}
+}

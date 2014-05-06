@@ -37,7 +37,7 @@ require_once("/data/app/wx/code_shenghui/file/file.php");
    exit; 
  }
 ?>
-<form id="myForm" action="/shenghui/send_messages.php?type=<?php echo $_GET['type'] ?>&id=<?php echo $_GET['id'] ?>&name=<?php echo $_SESSION['username']; ?>" method="post">
+<form id="myForm" action="/wisdom/send_messages.php?type=<?php echo $_GET['type'] ?>&id=<?php echo $_GET['id'] ?>&name=<?php echo $_SESSION['username']; ?>" method="post">
 <script type="text/plain" id="myEditor"></script>
 
 <div>

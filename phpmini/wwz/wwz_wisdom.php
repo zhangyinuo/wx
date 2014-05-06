@@ -8,6 +8,16 @@
 				<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 				<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 		</head>
+<script>
+function viewProfile(){    
+	if (typeof WeixinJSBridge != "undefined" && WeixinJSBridge.invoke){    
+		WeixinJSBridge.invoke('profile',{    
+			'username':'gh_4a8c72a3f21a',    /* 你的公众号原始ID */
+				'scene':'57'    
+		});    
+	}    
+}
+</script>
 
 		<body>
 <?php

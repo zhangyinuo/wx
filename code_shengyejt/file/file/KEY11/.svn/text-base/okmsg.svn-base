@@ -1,0 +1,17 @@
+<MsgType><![CDATA[news]]></MsgType>
+	<ArticleCount>2</ArticleCount>
+	<Articles>
+	<item>
+		<Title><![CDATA[集团介绍]]></Title>
+		<Description><![CDATA[集团介绍]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY11/r1.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY11&id=1]]></Url>
+		</item>
+	<item>
+		<Title><![CDATA[集团荣誉]]></Title>
+		<Description><![CDATA[集团荣誉]]></Description>
+		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY11/r2.jpg]]></PicUrl>
+		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY11&id=2]]></Url>
+		</item>
+	</Articles>
+	</xml>
