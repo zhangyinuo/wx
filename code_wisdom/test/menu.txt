@@ -5,7 +5,7 @@
 			"sub_button":[
 			{	
 				"type":"view",
-				"name":"官方网站",
+				"name":"龙珠社区少年宫 ",
 				"url":"http://www.gzsensoft.com/wwz/wwz_wisdom.php?type=KEY1&id=1"
 			},
 			{

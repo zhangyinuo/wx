@@ -35,23 +35,59 @@ typedef struct
 	int page;
 } t_global;
 
+typedef struct 
+{
+	int flag;
+	int count;
+	int last;
+	unsigned char jx[1224];
+	float jxf;
+} t_soft_global;
+
+static t_soft_global s_global;
+
 static t_global global;
 static float last_balance = 0.0;
 
-static int get_jx(int cur)
+static int get_jx(int cur, int next)
 {
-	last_balance = (last_balance + global.balance_base)/(float)2;
+	if (cur == 321 || cur == 621 || cur == 921 || cur == 1221)
+	{
+		if (s_global.jx[cur])
+		{
+			if (s_global.jx[cur] <= 0)
+				return 0;
+			s_global.jx[cur]--;
+			return cur;
+		}
+	}
+
+	if (next == 321 || next == 621 || next == 921 || next == 1221)
+	{
+		if (s_global.jx[next])
+		{
+			if (s_global.jx[next] < 0)
+				return 0;
+			s_global.jx[next]--;
+			return next;
+		}
+	}
+
 	int base = 321;
-	int t = -1;
 	for (; base < 1222; base += 300)
 	{
-		t = base - cur;
-		if (t > 0 && t < 3)
-			return t;
-		else if (t == 0)
+		if (base > cur && base < next)
+		{
+			if (s_global.jx[base] > 0)
+			{
+				s_global.jx[base]--;
+				return base;
+			}
 			return 0;
+		}
 	}
-	return t;
+
+	return 0;
 }
 
 static int up[16];
@@ -320,6 +356,48 @@ static int init_global()
 	return 0;
 }
 
+static int init_s_global()
+{
+	memset(&s_global, 0, sizeof(s_global));
+	char sday[16] = {0x0};
+	snprintf(sday, sizeof(sday), "%d000000", up[DATE]);
+	char eday[16] = {0x0};
+	snprintf(eday, sizeof(eday), "%d000000", down[DATE]);
+
+	time_t stday = get_time_t(sday);
+	time_t etday = get_time_t(eday);
+
+	s_global.last = 0;
+	int span = (etday - stday)/86400;
+	if (span > global.total_lines)
+	{
+		s_global.count = span/global.total_lines;
+		s_global.flag = 1;
+	}
+	else
+	{
+		s_global.count = global.total_lines/span;
+		s_global.flag = 0;
+	}
+
+	for ( ; stday <= etday; stday += 86400)
+	{
+		char sbuf[16] = {0x0};
+		get_strtime_by_t(sbuf, stday);
+		sbuf[8] = 0x0;
+		int idx = atoi(sbuf+4);
+		if (idx == 321 || idx == 621 || idx == 921 || idx == 1221)
+			s_global.jx[idx]++;
+	}
+	int i = 0;
+	for (; i < 1224; i++)
+	{
+		if (s_global.jx[i])
+			fprintf(stdout, "%d %d\n", i, s_global.jx[i]);
+	}
+	return 0;
+}
+
 static int init_tail()
 {
 	memset(&tail, 0, sizeof(tail));
@@ -553,20 +631,49 @@ static void print_head()
 	print_block_line();
 }
 
+static void print_jx(char *jxday)
+{
+	t_base_item items[6];
+	memset(items, 0, sizeof(items));
+	int i = 0;
+	for ( ; i < 6; i++)
+	{
+		items[i].flag = body[i].flag;
+		items[i].len = body[i].len;
+		items[i].spos = body[i].spos;
+		items[i].r = body[i].r;
+	}
+	char sonce[16] = {0x0};
+	snprintf(sonce, sizeof(sonce), "%0.2f", s_global.jxf);
+	global.balance_base += s_global.jxf;
+	s_global.jxf = 0.0;
+	char balance[16] = {0x0};
+	snprintf(balance, sizeof(balance), "%0.2f", global.balance_base);
+	items[0].msg = jxday;
+	items[1].msg = global.sjxlocation;
+	items[2].msg = global.sjx;
+	items[3].msg = sonce;
+	items[4].msg = "blank";
+	items[5].msg = balance;
+	t_base_item *item = items;
+	print_base_body(6, &item);
+	items[2].msg = global.sjx_shui;
+	items[3].msg = "blank";
+	print_base_body(6, &item);
+}
+
 static float print_body(int index, int r)
 {
 	char lday[16] = {0x0};
 	snprintf(lday, sizeof(lday), "%d", lastday);
 	int jxday = atoi(lday+4);
-	int flag = get_jx(jxday);
+	s_global.jxf +=  global.jx * global.balance_base;
 	int idx = 0;
 	int sxf = 0;
 	float once = r%avg[index];
 	if (once < up[index])
 		once += up[index];
 	once += once;
-	if (flag == 0)
-		index = IN;
 	if (index == IN)
 	{
 		if (r%7 == 0)
@@ -574,11 +681,6 @@ static float print_body(int index, int r)
 			float yushu = r%100;
 			yushu = yushu/100;
 			once += yushu;
-		}
-		if (flag == 0)
-		{
-			once = (float)90 * global.jx * last_balance;
-			last_balance =  global.balance_base;
 		}
 		global.balance_base += once;
 	}
@@ -637,11 +739,13 @@ static float print_body(int index, int r)
 	int aindex = index_rand[idx+1][ar];
 	items[2].msg = str_rand[idx+1][aindex];
 	items[2].msg = str_rand[idx+1][lindex];
-	if (flag == 0)
-	{
-		items[1].msg = global.sjxlocation;
-		items[2].msg = global.sjx;
-	}
+	/*
+	   if (flag == 0)
+	   {
+	   items[1].msg = global.sjxlocation;
+	   items[2].msg = global.sjx;
+	   }
+	   */
 
 	if (index == IN)
 	{
@@ -658,12 +762,43 @@ static float print_body(int index, int r)
 
 	t_base_item *item = items;
 	print_base_body(6, &item);
-	if (flag == 0)
+
+	if (lastday < down[DATE] + 3)
 	{
-		items[2].msg = global.sjx_shui;
-		items[3].msg = "blank";
-		print_base_body(6, &item);
+		char llday[16] = {0x0};
+		snprintf(llday, sizeof(llday), "%d000000", lastday);
+		time_t cur = get_time_t(llday);
+		if (s_global.flag)
+			cur += ((r%3) + s_global.count - 1) * 86400;
+		else
+		{
+			if (s_global.last < (s_global.count - 1))
+				s_global.last++;
+			else
+			{
+				s_global.last = 0;
+				cur += 86400;
+			}
+		}
+		get_strtime_by_t(llday, cur);
+		llday[8] = 0x0;
+		lastday = atoi(llday);
+		int njxday = atoi(llday+4);
+		int flag = get_jx(jxday, njxday);
+		if (flag > 0)
+		{
+			snprintf(llday + 4, sizeof(llday) - 4, "%04d", flag);
+			print_jx(llday);
+		}
 	}
+	/*
+	   if (flag == 0)
+	   {
+	   items[2].msg = global.sjx_shui;
+	   items[3].msg = "blank";
+	   print_base_body(6, &item);
+	   }
+	   */
 
 	if (sxf == 1)
 	{
@@ -683,18 +818,6 @@ static float print_body(int index, int r)
 			print_base_body(6, &item);
 		}
 	}
-
-	strcat(lday, "000000");
-	time_t cur = get_time_t(lday);
-	if (flag > 0 && flag < 3)
-		cur += flag * 86400;
-	else if (flag == 0)
-		cur += 86400;
-	else
-		cur += (r%3) * 86400;
-	get_strtime_by_t(lday, cur);
-	lday[8] = 0x0;
-	lastday = atoi(lday);
 
 	return once;
 }
@@ -754,8 +877,11 @@ static void print_bank()
 	avg[OUT] = global.totalout / out_cfg;
 	lastday = up[DATE];
 
-	for (; i < global.total_lines; i++)
+	//for (; i < global.total_lines; i++)
+	for (; lastday < down[DATE] + 3; i++)
 	{
+		if (i > (2*global.total_lines))
+			break;
 		if (i % global.lines_page == 0)
 			print_head();
 		srand(time(NULL) + i);
@@ -892,6 +1018,7 @@ int main(int argc, char **argv)
 		fprintf(stderr, "gen_body err!\n");
 		return -1;
 	}
+	init_s_global();
 
 	print_bank();
 

@@ -2,7 +2,7 @@
 session_start();
 include("dbconnect.inc.php");
 include("functions.inc.php");
-require_once("/data/app/wx/code_shenghui/file/file.php");
+require_once("/data/app/wx/code_wisdom/file/file.php");
 if($_POST["op"] == "≈…∑¢»ŒŒÒ") {
 		$tel = $_POST['tel'];
 		$yw_name = $_POST['yw_name'];
