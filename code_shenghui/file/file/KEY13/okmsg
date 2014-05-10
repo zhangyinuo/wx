@@ -1,26 +1,26 @@
 "articles": [
 {
-"title":"shizheng<br/>",
-"description":"shizheng<br/>",
+"title":"<span style="font-size: 14pt; font-family: 宋体;">瑞士承诺将交出外国人银行账户资料</span><span style="font-size: 14pt; font-family: Arial;"> </span><span style="font-size: 14pt; font-family: 宋体;">不再保密</span>",
+"description":"<span style="font-size: 14pt; font-family: 宋体;">瑞士承诺将交出外国人银行账户资料</span><span style="font-size: 14pt; font-family: Arial;"> </span><span style="font-size: 14pt; font-family: 宋体;">不再保密</span>",
 "url":"http://www.gzsensoft.com/wwz/wwz_shenghui.php?type=KEY13&id=1",
-"picurl":"http://www.gzsensoft.com/ueditor/php/upload1//20140426/1398498993338201.jpg"
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload/59361399702950.jpg"
 }
 ,{
-"title":"hello2<br/>",
-"description":"hello2<br/>",
+"title":"时政要闻2",
+"description":"时政要闻2",
 "url":"http://www.gzsensoft.com/wwz/wwz_shenghui.php?type=KEY13&id=2",
-"picurl":"http://www.gzsensoft.com/ueditor/php/upload1//20140421/1398065763566329.jpg"
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload1//20140509/1399616366894665.jpg"
 }
 ,{
-"title":"这里的内容会推送给用户,请对自己编辑的内容负责",
-"description":"这里的内容会推送给用户,请对自己编辑的内容负责",
+"title":"时政要闻3",
+"description":"时政要闻3",
 "url":"http://www.gzsensoft.com/wwz/wwz_shenghui.php?type=KEY13&id=3",
-"picurl":"http://www.gzsensoft.com/ueditor/php/upload1/20140426/1398503309195188.jpg"
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload1//20140509/1399616366894665.jpg"
 }
 ,{
-"title":"时政消息last",
-"description":"时政消息last",
+"title":"时政4",
+"description":"时政4",
 "url":"http://www.gzsensoft.com/wwz/wwz_shenghui.php?type=KEY13&id=4",
-"picurl":"http://www.gzsensoft.com/ueditor/php/upload1/20140426/1398503342340515.jpg"
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload1//20140509/1399616366894665.jpg"
 }
 ]

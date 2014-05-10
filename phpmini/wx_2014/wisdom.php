@@ -86,6 +86,7 @@ if (1)
 	$from;
 	$to;
 	$type = intoq($content, $to, $from);
+	do_rsp_key($content, $to, $from);
 	exit;
 }
 else

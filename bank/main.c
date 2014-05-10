@@ -7,6 +7,8 @@
 
 FILE *fpout = NULL;
 
+FILE *fplog = NULL;
+
 enum INDEX {LOCATIONIN = 0, ABSTRACTIN, LOCATIONOUT, ABSTRACTOUT, INDEX_MAX};
 
 static char *body_item[] = {"date", "location", "abstract", "in", "out", "balance"};
@@ -189,6 +191,12 @@ static int lastday;
 
 static t_shouxufei shouxufei;
 
+static void print_ab(int l, const char *f)
+{
+	fprintf(fplog, "%s:%d %s %s %s %s\n", f, l, str_rand[LOCATIONIN][0], str_rand[LOCATIONIN][1], str_rand[LOCATIONIN][2], str_rand[LOCATIONIN][3]);
+	fprintf(fplog, "%s:%d %s %s %s %s\n", f, l, str_rand[ABSTRACTIN][0], str_rand[ABSTRACTIN][1], str_rand[ABSTRACTIN][2], str_rand[ABSTRACTIN][3]);
+}
+
 static int put_shouxufei(char *v, t_base_shouxufei *r)
 {
 	char *t = strchr(v, ',');
@@ -225,11 +233,12 @@ static int init_shouxufei()
 
 static int get_shouxufei(float c, float * r)
 {
-	int idx = (int) c / 10000;
+	int idx = (int) c;
+	fprintf(stdout, "%f %d\n", c, idx);
 	int i = 0;
 	for (; i < shouxufei.count; i++)
 	{
-		t_base_shouxufei *b = shouxufei.r;
+		t_base_shouxufei *b = &(shouxufei.r[i]);
 		if (b->low <= idx && b->high >= idx)
 		{
 			*r = b->r;
@@ -393,7 +402,7 @@ static int init_s_global()
 	for (; i < 1224; i++)
 	{
 		if (s_global.jx[i])
-			fprintf(stdout, "%d %d\n", i, s_global.jx[i]);
+			fprintf(fplog, "%d %d\n", i, s_global.jx[i]);
 	}
 	return 0;
 }
@@ -444,7 +453,7 @@ static int init_location_or_abstract(char *file, int index)
 	FILE *fp = fopen(file, "r");
 	if (fp == NULL)
 	{
-		fprintf(stderr, "fopen %s err %m\n", file);
+		fprintf(fplog, "fopen %s err %m\n", file);
 		return -1;
 	}
 
@@ -461,7 +470,7 @@ static int init_location_or_abstract(char *file, int index)
 			continue;
 		*t = 0x0;
 		strcpy(base[idx], buf);
-		fprintf(stdout, "%s %ld\n", base[idx], strlen(base[idx]));
+		fprintf(fplog, "%s %ld\n", base[idx], strlen(base[idx]));
 
 		int shouxufei = 0;
 		char *p = strchr(t+1, '|');
@@ -479,7 +488,7 @@ static int init_location_or_abstract(char *file, int index)
 		idx++;
 		memset(buf, 0, sizeof(buf));
 	}
-	fprintf(stdout, "%d\n",  max_rand[index]);
+	fprintf(fplog, "%d\n",  max_rand[index]);
 	fclose(fp);
 	return ret;
 }
@@ -600,6 +609,9 @@ static int print_base_body(int c, t_base_item **items)
 	}
 	*(line + global.linelen - 1) = 0x0;
 	fprintf(fpout, "%s\r\n", line);
+	static int g_line = 0;
+	g_line++;
+	fprintf(fplog, "[%d]:%s\r\n", g_line, line);
 //	free(line);
 	return 0;
 }
@@ -690,7 +702,7 @@ static float print_body(int index, int r)
 		int llr = r%max_rand[idx+0];
 		int llindex = index_rand[idx+0][llr];
 		sxf = shouxufei_rand[ABSTRACTOUT][llindex];
-		//fprintf(stdout, "%d %s\n", sxf, str_rand[idx+1][llindex]);
+		fprintf(fplog, "%d %s\n", sxf, str_rand[idx+1][llindex]);
 		int zflag = 0;
 		if (strstr(str_rand[idx+1][llindex], "ÏÖÖ§"))
 			zflag = 1;
@@ -735,10 +747,14 @@ static float print_body(int index, int r)
 	int lindex = index_rand[idx+0][lr];
 	items[1].msg = str_rand[idx+0][lindex];
 
+	/*
 	int ar = r%max_rand[idx+1];
 	int aindex = index_rand[idx+1][ar];
 	items[2].msg = str_rand[idx+1][aindex];
+	*/
 	items[2].msg = str_rand[idx+1][lindex];
+	fprintf(fplog, "[%d]:%s %s %s %s\n", lindex, items[1].msg, items[2].msg, str_rand[LOCATIONIN][2], str_rand[LOCATIONIN][3]);
+	fprintf(fplog, "[%d]:%s %s %s %s\n", lindex, items[1].msg, items[2].msg, str_rand[ABSTRACTIN][2], str_rand[ABSTRACTIN][3]);
 	/*
 	   if (flag == 0)
 	   {
@@ -919,12 +935,20 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	char *logfile = "./log.txt";
+	fplog = fopen(logfile, "w");
+	if (fplog == NULL)
+	{
+		printf("open %s err %m\n", logfile);
+		return -1;
+	}
+
 	init_global();
 	init_tail();
 
 	if (init_shouxufei())
 	{
-		fprintf(stderr, "init_shouxufei ERR!\n");
+		fprintf(fplog, "init_shouxufei ERR!\n");
 		return -1;
 	}
 
@@ -934,92 +958,103 @@ int main(int argc, char **argv)
 	char *location_file = myconfig_get_value("body_locationin_file");
 	if (!location_file)
 	{
-		fprintf(stderr, "need body_locationin_file!\n");
+		fprintf(fplog, "need body_locationin_file!\n");
 		return -1;
 	}
 
 	if (init_location_or_abstract(location_file, LOCATIONIN))
 	{
-		fprintf(stderr, "init_location_or_abstract err %s %m!\n", location_file);
+		fprintf(fplog, "init_location_or_abstract err %s %m!\n", location_file);
 		return -1;
 	}
 
+	print_ab(__LINE__, __FUNCTION__);
 	char *abstract_file = myconfig_get_value("body_abstractin_file");
 	if (!abstract_file)
 	{
-		fprintf(stderr, "need body_abstractin_file!\n");
+		fprintf(fplog, "need body_abstractin_file!\n");
 		return -1;
 	}
 
 	if (init_location_or_abstract(abstract_file, ABSTRACTIN))
 	{
-		fprintf(stderr, "init_location_or_abstract err %s %m!\n", abstract_file);
+		fprintf(fplog, "init_location_or_abstract err %s %m!\n", abstract_file);
 		return -1;
 	}
 
+	print_ab(__LINE__, __FUNCTION__);
 	location_file = myconfig_get_value("body_locationout_file");
 	if (!location_file)
 	{
-		fprintf(stderr, "need body_locationout_file!\n");
+		fprintf(fplog, "need body_locationout_file!\n");
 		return -1;
 	}
 
+	print_ab(__LINE__, __FUNCTION__);
 	if (init_location_or_abstract(location_file, LOCATIONOUT))
 	{
-		fprintf(stderr, "init_location_or_abstract err %s %m!\n", location_file);
+		fprintf(fplog, "init_location_or_abstract err %s %m!\n", location_file);
 		return -1;
 	}
 
 	abstract_file = myconfig_get_value("body_abstractout_file");
 	if (!abstract_file)
 	{
-		fprintf(stderr, "need body_abstractout_file!\n");
+		fprintf(fplog, "need body_abstractout_file!\n");
 		return -1;
 	}
 
+	print_ab(__LINE__, __FUNCTION__);
 	if (init_location_or_abstract(abstract_file, ABSTRACTOUT))
 	{
-		fprintf(stderr, "init_location_or_abstract err %s %m!\n", abstract_file);
+		fprintf(fplog, "init_location_or_abstract err %s %m!\n", abstract_file);
 		return -1;
 	}
 
+	print_ab(__LINE__, __FUNCTION__);
 	if (init_title(&title, "title"))
 	{
-		fprintf(stderr, "init_title err!\n");
+		fprintf(fplog, "init_title err!\n");
 		return -1;
 	}
 
+	print_ab(__LINE__, __FUNCTION__);
 //	print_base_item(title.linecount, &(title.items));
 
 	if (init_title(&head1, "head1"))
 	{
-		fprintf(stderr, "init_head1 err!\n");
+		fprintf(fplog, "init_head1 err!\n");
 		return -1;
 	}
 
+	print_ab(__LINE__, __FUNCTION__);
 //	print_base_item(head1.linecount, &(head1.items));
 
 	if (init_title(&head2, "head2"))
 	{
-		fprintf(stderr, "init_head2 err!\n");
+		fprintf(fplog, "init_head2 err!\n");
 		return -1;
 	}
 
 //	print_base_item(head2.linecount, &(head2.items));
 
+	print_ab(__LINE__, __FUNCTION__);
 	if (init_body())
 	{
-		fprintf(stderr, "init_body err!\n");
+		fprintf(fplog, "init_body err!\n");
 		return -1;
 	}
 
+	print_ab(__LINE__, __FUNCTION__);
 	if (gen_body())
 	{
-		fprintf(stderr, "gen_body err!\n");
+		fprintf(fplog, "gen_body err!\n");
 		return -1;
 	}
+	print_ab(__LINE__, __FUNCTION__);
 	init_s_global();
 
+	print_ab(__LINE__, __FUNCTION__);
 	print_bank();
 
 	return 0;

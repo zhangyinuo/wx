@@ -60,8 +60,8 @@
 		},
 		{
 			"type":"view",
-			"name":"房产税计算"
-			"url":
+			"name":"房产税计算",
+			"url":"http://www.gzsensoft.com/wwz/html/shui.html"
 		}
 		]
 	}
