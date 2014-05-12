@@ -441,7 +441,6 @@ static int init_title(t_title_init *some, char *name)
 
 static int init_location_or_abstract(char *file, int index)
 {
-
 	FILE *fp = fopen(file, "r");
 	if (fp == NULL)
 	{

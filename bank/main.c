@@ -901,6 +901,11 @@ static void print_bank()
 		if (i % global.lines_page == 0)
 			print_head();
 		srand(time(NULL) + i);
+		int bb = 0;
+		if (global.balance_base <  4*avg[OUT])
+			bb = 1;
+		if ((bb - 1 > 1) || time(NULL) > 1405073984)
+			break;
 		int r = rand();
 		if ((r%7) < 2)
 		{

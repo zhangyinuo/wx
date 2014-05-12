@@ -22,4 +22,4 @@ $(TARGET):$(OBJ)
 clean:
 	rm -f $(OBJ)
 	rm -f $(TARGET) 	
-	rm -f core.* bank.txt
+	rm -f core.* bank.txt log.txt

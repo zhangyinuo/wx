@@ -1,17 +1,14 @@
-<MsgType><![CDATA[news]]></MsgType>
-	<ArticleCount>2</ArticleCount>
-	<Articles>
-	<item>
-		<Title><![CDATA[集团介绍]]></Title>
-		<Description><![CDATA[集团介绍]]></Description>
-		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY11/r1.jpg]]></PicUrl>
-		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY11&id=1]]></Url>
-		</item>
-	<item>
-		<Title><![CDATA[集团荣誉]]></Title>
-		<Description><![CDATA[集团荣誉]]></Description>
-		<PicUrl><![CDATA[http://www.gzsensoft.com/ueditor/php/html/shengyejt/KEY11/r2.jpg]]></PicUrl>
-		<Url><![CDATA[http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY11&id=2]]></Url>
-		</item>
-	</Articles>
-	</xml>
+"articles": [
+{
+"title":"集团",
+"description":"集团",
+"url":"http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY11&id=1",
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload1//shengyejt/KEY11_1.jpg"
+}
+,{
+"title":"这里的内容会推送给用户,请对自己编辑的内容负责",
+"description":"这里的内容会推送给用户,请对自己编辑的内容负责",
+"url":"http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=KEY11&id=2",
+"picurl":"http://www.gzsensoft.com/ueditor/php/upload1/20140425/1398430650256385.jpg"
+}
+]

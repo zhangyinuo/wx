@@ -57,6 +57,11 @@
 			"type":"click",
 			"name":"保持联系",
 			"key":"KEY33"
+		},
+		{
+			"type":"view",
+			"name":"房产税计算",
+			"url":"http://www.gzsensoft.com/wwz/html/shui.html"
 		}
 		]
 	}

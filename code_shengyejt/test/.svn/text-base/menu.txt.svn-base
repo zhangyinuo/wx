@@ -11,13 +11,34 @@
 		]
 	},
 	{
-		"name":"属下企业",
+		"name":"子公司介绍",
 		"sub_button":[
 		{	
 			"type":"click",
-			"name":"子公司介绍 ",
+			"name":"盛晖投资公司",
 			"key":"KEY21"
-		}
+		},
+		{
+			"type":"click",
+			"name":"建筑装修总公司",
+			"key":"KEY22"
+		},
+		{
+			"type":"click",
+			"name":"昱盛物业公司",
+			"key":"KEY23"
+		},
+		{
+			"type":"click",
+			"name":"银荣实业公司",
+			"key":"KEY24"
+		},
+		{
+			"type":"click",
+			"name":"威士顿少年宫",
+			"key":"KEY25"
+		},
+
 		]
 	}
 	]

@@ -31,7 +31,6 @@ $outdir = "/data/app/wx/code_shengyejt/file/file/";
 
 $idx = 1;
 $sub = 1;
-
 for ( ; $idx < 4; $idx++)
 {
 	$outfile = $outdir.$keyp.$idx."/okmsg";
@@ -43,20 +42,15 @@ for ( ; $idx < 4; $idx++)
 		$htmlfile = $indir.$keyp.$idx."/$sub.html";
 		$titlefile = $indir.$keyp.$idx."/$sub.title";
 		$imgfile = $indir.$keyp.$idx."/$sub.img";
-
 		if (is_file($htmlfile) == false || is_file($titlefile) == false || is_file($imgfile) == false )
 			continue;
-
 		$title = file_get_contents($titlefile);
 		$title = iconv('GB2312', 'UTF-8', $title);
 		$img = file_get_contents($imgfile);
-
 		$url = "http://www.gzsensoft.com/wwz/wwz_shengyejt.php?type=$keyp$idx&id=$sub";
-
 		$valid++;
 		if ($valid > 1)
 			$subc = $subc.",";
-
 		$subc = $subc."{\n\"title\":\"$title\",\n\"description\":\"$title\",\n\"url\":\"$url\",\n\"picurl\":\"$img\"\n}\n";
 	}
 	if ($valid >= 1)
@@ -65,5 +59,4 @@ for ( ; $idx < 4; $idx++)
 		file_put_contents($outfile, $c);
 	}
 }
-
 ?>

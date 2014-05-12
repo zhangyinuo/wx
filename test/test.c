@@ -1,10 +1,9 @@
 #include <stdio.h>
+#include <time.h>
 
 int main()
 {
-	char buf[8] = {0x0};
-	int i = 921;
-	snprintf(buf, sizeof(buf), "%04d", i);
-	fprintf(stderr, "%s\n", buf);
+	time_t now = time(NULL);
+	fprintf(stdout, "%ld\n", now);
 	return 0;
 }
